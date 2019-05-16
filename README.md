@@ -1,6 +1,15 @@
 # zUI
 An upcoming UI for Classic World of Warcraft. Built on the 1.12.1 client but will later be modified to be compatible with 1.13 and beyond!
 This addon aims to preserve the blizzard look/design but with a modern touch and with some nice features added.
+<img src="https://i.imgur.com/R2FI64k.png" align="right" width="28%">
+## Third-Party Addon Support
+
+- Healcomm support, https://github.com/Aviana/HealComm --->
+- MobHealth support, http://addons.us.to/addon/mobhealth
+- 
+
+
+
 ## Older Screenshots
 <img src="https://i.imgur.com/4TwwTnP.png" align="right" width="48%">
 <img src="https://i.imgur.com/hSGbk0m.png" width="48%">
