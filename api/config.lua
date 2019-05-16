@@ -102,7 +102,7 @@ zUI:UpdateConfig( "minimap", nil, "square", "0")
 zUI:UpdateConfig( "minimap", nil, "height", "140")
 zUI:UpdateConfig( "minimap", nil, "width", "140")
 zUI:UpdateConfig( "minimap", nil, "scale", "1")
-zUI:UpdateConfig( "minimap", nil, "button_pos", "310")
+zUI:UpdateConfig( "minimap", nil, "button_pos", "328")
 zUI:UpdateConfig( "minimap", nil, "button_hide", "0")
 zUI:UpdateConfig( "minimap", nil, "hide_clock", "0")
 

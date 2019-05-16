@@ -1,10 +1,11 @@
 
 
 zUI:RegisterComponent("zUnitframes", function ()
-	
-
-	
 	zUI.zUnitframes = CreateFrame("Frame", "zUnitframes", UIParent);
+	--setfenv(0, zUI:GetEnvironment())
+	--local _G = getfenv(0)
+
+	--local C = zUI_config
 
 	for _, v in pairs({ PlayerFrame, TargetFrame, PartyMemberFrame1 }) do
         v:SetUserPlaced(true) v:SetMovable(true) v:EnableMouse(true)
@@ -482,16 +483,12 @@ zUI:RegisterComponent("zUnitframes", function ()
 	local uValue = 1
 
 	function zUI.MobHealth:HealthUpdate()
-        --local v, max  = MobHealth3:GetUnitHealth('target', UnitHealth'target', UnitHealthMax'target')
-		local v, max;
-		--if unit.label == "target" and (MobHealth3 or MobHealthFrame) and MobHealth_GetTargetCurHP() then
-		if (MobHealth3 or MobHealthFrame or MobHealth) and MobHealth_GetTargetCurHP() then
-			--hp, hpmax = MobHealth_GetTargetCurHP(), MobHealth_GetTargetMaxHP()
-			v, max  = MobHealth_GetTargetCurHP(), MobHealth_GetTargetMaxHP();
-		else
-			v, max = UnitHealth("target"), UnitHealthMax("target");
+		local v, max = UnitHealth("target"), UnitHealthMax("target");
+
+		if (MobHealth3 or MobHealthFrame) then
+			v, max  = MobHealth3:GetUnitHealth("target", UnitHealth("target"), UnitHealthMax("target"))
 		end
-		--local v, max  = MobHealth_GetTargetMaxHP();
+
         local percent = math.floor(v/max*100)
         local string  = zTargetHealthText
         --Initialize()

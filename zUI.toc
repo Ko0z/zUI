@@ -28,6 +28,7 @@ libs\libdebuff.lua
 libs\libunitscan.lua
 
 # components
+--components\zMobHealth.lua
 components\zOptions.lua
 components\zActionbars.lua
 components\zKeybind.lua
