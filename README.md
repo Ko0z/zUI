@@ -1,24 +1,22 @@
 # zUI
 An upcoming UI for Classic World of Warcraft. Built on the 1.12.1 client but will later be modified to be compatible with 1.13 and beyond!
 This addon aims to preserve the blizzard look/design but with a modern touch and with some nice features added.
-
-## Sneak Peek Screenshots
-<img src="https://i.imgur.com/4TwwTnP.png" align="right" width="48.87%">
-<img src="https://i.imgur.com/hSGbk0m.png" width="48.87%">
-<img src="https://i.imgur.com/scZmqWO.png" align="right" width="48.87%">
-<img src="https://i.imgur.com/sFAAYis.png" width="48.87%">
+## Older Screenshots
+<img src="https://i.imgur.com/4TwwTnP.png" align="right" width="48%">
+<img src="https://i.imgur.com/hSGbk0m.png" width="48%">
+<img src="https://i.imgur.com/scZmqWO.png" align="right" width="48%">
+<img src="https://i.imgur.com/sFAAYis.png" width="48%">
 
 ## More Screenshots
-<img src="https://i.imgur.com/s3PJ4Z4.png" align="right" width="48.87%">
-<img src="https://i.imgur.com/7wnHxOw.png" width="48.87%">
-<img src="https://i.imgur.com/CvA4p9c.png" align="right" width="48.87%">
-<img src="https://i.imgur.com/Pa58jJI.png" width="48.87%">
+<img src="https://i.imgur.com/s3PJ4Z4.png" align="right" width="48%">
+<img src="https://i.imgur.com/7wnHxOw.png" width="48%">
+<img src="https://i.imgur.com/CvA4p9c.png" align="right" width="48%">
+<img src="https://i.imgur.com/Pa58jJI.png" width="48%">
 
-<img src="https://i.imgur.com/xhJFI08.png" align="right" width="48.87%">
-<img src="https://i.imgur.com/MhNVPyl.png" width="48.87%">
-<img src="https://i.imgur.com/AQ86XrM.png" align="right" width="48.87%">
-<img src="https://i.imgur.com/K0Pv46b.png" width="48.87%">
-
+<img src="https://i.imgur.com/xhJFI08.png" align="right" width="48%">
+<img src="https://i.imgur.com/MhNVPyl.png" width="48%">
+<img src="https://i.imgur.com/AQ86XrM.png" align="right" width="48%">
+<img src="https://i.imgur.com/K0Pv46b.png" width="48%">
 
 ## Features
 There are a lot of different features in this UI and the user can choose to disable any component that they dont want to use without 
