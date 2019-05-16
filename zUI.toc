@@ -1,0 +1,68 @@
+## Interface: 11200
+## Title: |cffffd200z|cff808080UI 
+## Author: Ko0zi, Special thanks to: Shagu, Modernist, Shirsig and Road-block
+## Notes: A UI that aims to preserve the blizzard look/design but with a modern touch and with some nice features added.
+## Version: 0.0.1
+## SavedVariables: zUI_profiles, zUI_addon_profiles, zUI_cache
+## SavedVariablesPerCharacter: zUI_config, zUI_init, zUI_playerDB
+
+# main
+zUI.lua
+
+# locales
+env\locales_enUS.lua
+
+# environment
+env\tables.lua
+env\profiles.lua
+
+# api
+api\config.lua
+api\api.lua
+
+# libs
+libs\libtipscan.lua
+libs\libspell.lua
+libs\libcast.lua
+libs\libdebuff.lua
+libs\libunitscan.lua
+
+# components
+components\zOptions.lua
+components\zActionbars.lua
+components\zKeybind.lua
+components\zCooldowns.lua
+components\zCastbar.lua
+components\zCalc.lua
+--components\zTicTac.lua
+components\zInstaCast.lua
+components\zMiniMap.lua
+components\zRingMenu.lua
+components\zMap.lua
+components\zMapPin.lua
+components\zMapReveal.lua
+components\zNameplates.lua
+components\zTroubleSeeker.lua
+components\zEasyLife.lua
+components\zChat.lua
+components\zLoseControl.lua
+components\zRange.lua
+components\zHotkeys.lua
+components\zUnitframes.lua
+components\zAura.lua
+components\zEqcompare.lua
+components\zSellValue.lua
+components\zSwingTimer.lua
+components\zLoot.lua
+components\zRoll.lua
+components\zRaid.lua
+components\zEnergy.lua
+
+# skins
+skins\actionbuttons.lua
+skins\bag.lua
+skins\tip.lua
+--skins\chatballoon.lua
+skins\theme.lua
+
+

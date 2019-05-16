@@ -1,0 +1,76 @@
+<Bindings>
+	<Binding name="XC_TOGGLEWINDOW" header="zUI.xcalc">
+		zUI.xcalc.windowdisplay();
+	</Binding>
+
+	<Binding name="RINGMENU_TOGGLE" header="RINGMENU">
+		RingMenu_Toggle();
+		<!-- zUI.RingMenuFrame.RingMenu_Toggle();  -->
+	</Binding>
+
+	<Binding name="XC_NUMLOCK" hidden="true"/>
+
+
+	<Binding name="XC_CLEAR" hidden="true">
+		zUI.xcalc.buttoninput("CL");
+	</Binding>
+	<Binding name="XC_BACKSPACE" hidden="true">
+		zUI.xcalc.buttoninput("BS")
+	</Binding>
+
+	<Binding name="XC_DIV" hidden="true">
+		zUI.xcalc.buttoninput("/");
+	</Binding>
+	<Binding name="XC_MUL" hidden="true">
+		zUI.xcalc.buttoninput("*");
+	</Binding>
+	<Binding name="XC_SUB" hidden="true">
+		zUI.xcalc.buttoninput("-");
+	</Binding>
+	<Binding name="XC_ADD" hidden="true">
+		zUI.xcalc.buttoninput("+");
+	</Binding>
+	<Binding name="XC_EQ" hidden="true">
+		zUI.xcalc.buttoninput("=");
+	</Binding>
+  <!--
+  <Binding name="XC_ESC" hidden="true">
+    zUI.xcalc.windowdisplay();
+  </Binding>
+  -->
+	<Binding name="XC_0" hidden="true">
+		zUI.xcalc.buttoninput("0");
+	</Binding>
+	<Binding name="XC_1" hidden="true">
+		zUI.xcalc.buttoninput("1");
+	</Binding>
+	<Binding name="XC_2" hidden="true">
+		zUI.xcalc.buttoninput("2");
+	</Binding>
+	<Binding name="XC_3" hidden="true">
+		zUI.xcalc.buttoninput("3");
+	</Binding>
+	<Binding name="XC_4" hidden="true">
+		zUI.xcalc.buttoninput("4");
+	</Binding>
+	<Binding name="XC_5" hidden="true">
+		zUI.xcalc.buttoninput("5");
+	</Binding>
+	<Binding name="XC_6" hidden="true">
+		zUI.xcalc.buttoninput("6");
+	</Binding>
+	<Binding name="XC_7" hidden="true">
+		zUI.xcalc.buttoninput("7");
+	</Binding>
+	<Binding name="XC_8" hidden="true">
+		zUI.xcalc.buttoninput("8");
+	</Binding>
+	<Binding name="XC_9" hidden="true">
+		zUI.xcalc.buttoninput("9");
+	</Binding>
+
+	<Binding name="XC_DEC" hidden="true">
+		zUI.xcalc.buttoninput(".");
+	</Binding>
+
+</Bindings>
