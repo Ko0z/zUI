@@ -21,7 +21,6 @@ BINDING_NAME_RINGMENU_TOGGLE = "Open / Close RingMenu"
 	RingMenuTextureShadow:SetPoint("BOTTOMLEFT", 0, 0);
 
 	--hooksecurefunc("ActionButton_GetPagedID", function(button)
-	--	--zPrint("AJKSHDJAHS")
 	--	--if button.isRingMenu then
 	--	--	return RingMenu_settings.startPageID + button:GetID() - 1
 	--	----else
@@ -137,7 +136,6 @@ BINDING_NAME_RINGMENU_TOGGLE = "Open / Close RingMenu"
 				local hotkey = getglobal(buttonName .. "HotKey")
 				hotkey:Hide()
 
-				--zPrint("Created Button " .. buttonName)
 				-- Hook individual button callbacks
 				--HookScript(button, "OnClick", RingMenuButton_OnClick)
 				--HookScript(button, "OnEnter", RingMenuButton_OnEnter)
@@ -147,7 +145,6 @@ BINDING_NAME_RINGMENU_TOGGLE = "Open / Close RingMenu"
 				button.oldScriptOnEnter = button:GetScript("OnEnter")
 				button:SetScript("OnEnter", RingMenuButton_OnEnter)
 			end
-			--zPrint(button:GetName())
 			button:SetID(i)
 			button:SetPoint("CENTER", RingMenuFrame, "CENTER", 0, 0)
 			button.isRingMenu = true
@@ -232,7 +229,6 @@ BINDING_NAME_RINGMENU_TOGGLE = "Open / Close RingMenu"
 	end
 
 	function RingMenu_Toggle()
-		zPrint("Toggle")
 		if RingMenu_isOpen then
 			RingMenu_Close()
 		else
@@ -293,7 +289,6 @@ BINDING_NAME_RINGMENU_TOGGLE = "Open / Close RingMenu"
 	-- Hooked ActionButton functions
 	ActionButton_GetPagedID_Old = ActionButton_GetPagedID -- TODO: fix so that it can be a component
 	function RingMenuButton_GetPagedID(button)
-		--zPrint("lol")
 		if button.isRingMenu then
 			return RingMenu_settings.startPageID + button:GetID() - 1
 		else

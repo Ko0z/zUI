@@ -109,7 +109,6 @@ end
 function zUI.api.AddHighlight(button)
 	button.enter = button:CreateTexture(nil, 'OVERLAY')
     button.enter:SetAllPoints()
-	zPrint("ADDED")
     button.enter:SetTexture("Interface\\Buttons\\CheckButtonHilight")
     button.enter:SetTexCoord(.075, .95, .05, .95)
     button.enter:SetBlendMode'ADD'

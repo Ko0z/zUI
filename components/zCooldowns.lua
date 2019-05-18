@@ -154,7 +154,6 @@ zUI:RegisterComponent("zCooldowns", function ()
 			this:SetPoint("BOTTOMRIGHT", parent, "BOTTOMRIGHT", 1, -1)
 		end
 
-		--zPrint(this:GetName());
 		-- don't draw global cooldowns
 		if this.zCooldownType == "NOGCD" and duration < tonumber(C.appearance.cd.threshold) then
 			return

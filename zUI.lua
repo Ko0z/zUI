@@ -111,7 +111,7 @@ end
 
 function zUI:GetEnvironment()
 	-- Load API into environment
-	--zPrint("LOADED ENVIRONMENT!")
+
 	for n, func in pairs(zUI.api or {}) do
 		zUI.env[n] = func
 	end

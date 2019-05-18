@@ -117,19 +117,16 @@ zUI:RegisterComponent("zEasyLife", function ()
 	cache_update:RegisterEvent("PLAYER_TARGET_CHANGED")
 	cache_update:SetScript("OnEvent", function()
 		if event == "PLAYER_TARGET_CHANGED" and UnitIsDead("target") then
-			--zPrint("PLAYER_TARGET_CHANGED");
 			healthscan:SetUnit("target")
 			--if (UnitIsPlayer("target")) then
 				cache[UnitName("target")] = healthbar:GetValue()
 			--end
 		elseif event == "UNIT_HEALTH" and UnitIsDead(arg1) and UnitName(arg1) then
-			--zPrint("UNIT_HEALTH1");
 			healthscan:SetUnit(arg1)
 			--if (UnitIsPlayer("target")) then
 				cache[UnitName(arg1)] = healthbar:GetValue()
 			--end
 		elseif event == "UNIT_HEALTH" and UnitName(arg1) then
-			--zPrint("UNIT_HEALTH2");
 			--if (UnitIsPlayer("target")) then
 				cache[UnitName(arg1)] = nil
 			--end
@@ -151,7 +148,6 @@ zUI:RegisterComponent("zEasyLife", function ()
 			buff = UnitBuff('target', i)
 			if buff == [[Interface\Icons\Ability_Rogue_FeignDeath]] then
 				--PlayerFrame_Update();
-				zPrint("looping");
 				UnitFrameHealthBar_Update(PlayerFrameHealthBar, "player");
 				return true
 			end
@@ -173,7 +169,6 @@ zUI:RegisterComponent("zEasyLife", function ()
 				--unit, dead, lost = target, oldUnitIsDead'target', false
 				unit, dead, lost = target, UnitIsDead'target', false
 			elseif unit then
-				--zPrint("looping");
 				local _PlaySound, _UIErrorsFrame_OnEvent = PlaySound, UIErrorsFrame_OnEvent
 				PlaySound, UIErrorsFrame_OnEvent = lost and PlaySound or pass, pass
 				TargetByName(unit, true)
@@ -181,18 +176,15 @@ zUI:RegisterComponent("zEasyLife", function ()
 				if UnitExists'target' then
 					--if not (lost or (not dead and oldUnitIsDead'target' and feigning())) then
 					if not (lost or (not dead and UnitIsDead'target' and feigning())) then
-						--zPrint("Clear Target!");
 						ClearTarget()
 						unit, lost = nil, false
 					end
 				else
 					lost = true
-					--zPrint("target lost, trying to retarget...!")
 					if(UnitIsPlayer('target')) then
 						TargetByName(unit, true)
 					end
 					if not UnitExists'target' then
-						--zPrint("target doesn't exist!")
 						unit, lost = nil, false
 					end
 				end

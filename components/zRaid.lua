@@ -114,8 +114,6 @@ end
 --end
 
 local debuffs = function(arg1)
-	--zPrint(tostring(this.unit) .. "arg1: " .. tostring(arg1));
-
 	-- nil	-	raid2
 
     if this.unit ~= arg1 or not this.unit then return end
@@ -174,17 +172,14 @@ local debuffs = function(arg1)
     local _, _, dtype = UnitDebuff(this.unit, 1, 1) -- only returns the ones that the player can dispel
     local lastfound = 1
 
-	--zPrint("GOT PAST!");
     if dtype then
         local colour = DebuffTypeColor[dtype]
         zSkinColor(this, colour.r, colour.g, colour.b)
         tinsert(cursed, this.unit)
 		--table.insert
-		--zPrint("Inserted cursed");
     else
         zSkinColor(this, .1, .1, .1)
         if cursed[this.unit] then tremove(cursed, this.unit) end
-		--zPrint("Curse cleared!");
     end
 
     for i = 1, 2 do
@@ -216,22 +211,15 @@ local Decurse = function(unit)
     --    target = UnitName'target'   -- might need to be id instead
     --end
 	class = string.upper(class);
-	--zPrint(class);
-	--zPrint("Trying to CAST: ".. decurse[class]);
 	for i, v in pairs(decurse) do
-		--zPrint("i = " .. decurse[i][1]);
-		--zPrint("v = " .. v[1]);
 		if(i == class) then
 			for j, k in pairs(decurse[i]) do
-				--zPrint(tostring(k));
-				--zPrint("Trying to CAST: ".. k);
 				CastSpellByName(k, unit);
 			end
 		end
 		
 		--if(v == class) then
 		--	--CastSpellByName(class, unit)
-		--	zPrint("Trying to CAST: ".. class);
 		--end
 	end
 
@@ -364,7 +352,6 @@ local raidupdate = function()
                                 power == 1 and 0 or power == 3 and 1 or 0,
                                 power == 1 and 0 or power == 3 and 0 or 1)
 		
-		--zPrint("Name: " .. UnitName(this.unit));
         name:SetText(string.sub(UnitName(this.unit), 1, 6));
 		--hp:Hide()
 
@@ -604,11 +591,9 @@ local CreateUnits = function()
             if  arg1 == 'RightButton' then
 				--Decurse(this.unit);
 				
-				--zPrint(tostring(cursed[this.unit]));
 				local isCursed;
 				for i, v in pairs(cursed) do
 				    if v == this.unit then
-					--zPrint("JACKPOT")
 					isCursed = true;
 					end
 				end
@@ -616,7 +601,6 @@ local CreateUnits = function()
                 --if cursed[this.unit] then
                 if isCursed then
                     Decurse(this.unit)
-					--zPrint("Trying decurse")
                 else
                     ToggleTank(this.unit)
                 end

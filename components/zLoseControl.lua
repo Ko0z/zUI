@@ -176,11 +176,9 @@ zLoseControlFrame:SetScript("OnEvent", function()
 		for j=0, 31 do
 			local buffTexture = GetPlayerBuffTexture(j)
 			if cachedTextures[spellFound] == buffTexture then
-				--zPrint(j);
 				local expirationTime = GetPlayerBuffTimeLeft(j)
 				--local _, _, dtype = UnitDebuff("player", j + 1)
 				local dtype = GetPlayerBuffDispelType(j)
-				--zPrint(dtype);
 				local colour = DebuffTypeColor[dtype] or DebuffTypeColor['none']
 				zSkinColor(zLoseControlFrame, colour.r, colour.g, colour.b);
 				this:Show()

@@ -28,36 +28,6 @@ local minimap_settings = C.position["zMinimapSquared"];
 local modZoom = function()
     if not arg1 then return end
 
-	--if (IsControlKeyDown() and C.minimap.square == "1") then
-		--if(not minimap_settings) then
-		--	zPrint("Settings not found, setting...")
-		--	minimap_settings = {}
-		--	minimap_settings.scale = 1;
-		--end
-		--minimap_settings.scale = zUI.api.clamp(zUI.squaredminimap:GetScale() + arg1/10, 0.3, 2.0);
-		--zUI.squaredminimap:SetScale(minimap_settings.scale);
-
-		--minimap_settings.scale = zUI.api.clamp(zUI.squaredminimap:GetScale() + arg1/10, 0.3, 2.0);
-		--zUI.squaredminimap:SetScale(minimap_settings.scale);
-		----c_position.scale = zUI.api.clamp(WorldMapFrame:GetScale() + arg1/10, 0.1, 2.0)
-		----WorldMapFrame:SetScale(c_position.scale)
-		----local scalee = zUI.squaredminimap:GetScale();
-		----zPrint("Scale: " .. tostring(scalee));
-		--local zscale,x,y=zUI.squaredminimap:GetEffectiveScale(),GetCursorPosition();
-		----zPrint("Effective scale: " .. tostring(zscale));
-		--zPrint("Cursor: " .. x .. ", " .. y);
-		--zUI.squaredminimap:ClearAllPoints();
-		----zUI.squaredminimap:SetPoint("CENTER", UIParent, "BOTTOMLEFT",x/minimap_settings.scale,y/minimap_settings.scale);
-		--zUI.squaredminimap:SetPoint("CENTER", UIParent, "BOTTOMLEFT",x/minimap_settings.scale,y/minimap_settings.scale);
-		--
-		--
-		--
-		--local point, relativeTo, relativePoint, xOfs, yOfs = zUI.squaredminimap:GetPoint()
-		----zPrint("GetPoint: " .. xOfs .. ", " .. yOfs);
-		--C.position["zMinimapSquared"]["xpos"] = xOfs;
-		--C.position["zMinimapSquared"]["ypos"] = yOfs;
-		--C.position["zMinimapSquared"]["scale"] = minimap_settings.scale;
-	--elseif (arg1 > 0 and Minimap:GetZoom() < 5) then
 	if (arg1 > 0 and Minimap:GetZoom() < 5) then
         Minimap:SetZoom(Minimap:GetZoom() + 1)
     elseif arg1 < 0 and Minimap:GetZoom() > 0 then
@@ -80,16 +50,6 @@ for _, v in pairs({
 }) do
     v:Hide()
 end
-
---MiniMapTrackingFrame:SetFrameStrata'MEDIUM'
---MiniMapTrackingFrame:ClearAllPoints()
---MiniMapTrackingFrame:SetPoint('BOTTOM', -19, -19)
---MiniMapTrackingFrame:SetScript('OnShow', function()
---    GameTimeFrame:ClearAllPoints() GameTimeFrame:SetPoint('BOTTOM', 33, 8)
---end)
---MiniMapTrackingFrame:SetScript('OnHide', function()
---    GameTimeFrame:ClearAllPoints() GameTimeFrame:SetPoint('BOTTOM', 12, 10)
---end)
 
 MiniMapMailFrame:ClearAllPoints()
 MiniMapMailFrame:SetPoint('TOPRIGHT', 0, -10)
@@ -114,12 +74,9 @@ zUI.zClock:SetScript("OnUpdate", function()
 	zdeltaTime = zdeltaTime + elapsed;
 
 	if(zdeltaTime >= 6.0) then -- updates only every 6 seconds, I dont care for exact time atm
-		--zPrint("zClock Update");
 		--zClockText:SetText(zClock_GetTimeText());
 		zClockText:SetText(date("%H:%M"));	--options needed
 		zdeltaTime = 0;
-		--time = date("%I:%M");
-		--zPrint(time);
 	end
 	
 end)
@@ -211,10 +168,8 @@ if (C.minimap.square == "1") then
 			zUI.squaredminimap:ClearAllPoints()
 			zUI.squaredminimap:SetPoint("CENTER",UIParent, "BOTTOMLEFT",zUI_config["position"]["zMinimapSquared"].xpos, zUI_config["position"]["zMinimapSquared"].ypos);
 			--zUI.squaredminimap:SetPoint("CENTER",UIParent, "TOPRIGHT",zUI_config["position"]["zMinimapSquared"].xpos, zUI_config["position"]["zMinimapSquared"].ypos);
-			--zPrint("Set")
 			--zUI.squaredminimap:SetPoint("BOTTOMLEFT",UIParent,"TOPRIGHT", 0,0);
 			--local x,y = zUI.squaredminimap:GetCenter()
-			--zPrint("OnMouseUp: " .. x .. ", " .. y);
 		end
 	--else
 		--zUI.squaredminimap:SetPoint("CENTER", UIParent, -10, -10);
@@ -235,13 +190,9 @@ if (C.minimap.square == "1") then
 			C.position["zMinimapSquared"] = {}
 		end
 		local x,y = this:GetCenter()
-		zPrint("OnMouseUp: " .. x .. ", " .. y);
 		C.position["zMinimapSquared"]["xpos"] = x;
 		C.position["zMinimapSquared"]["ypos"] = y;
 		this:SetPoint("CENTER",UIParent, "BOTTOMLEFT",x,y);
-		--this:SetPoint("CENTER",UIParent, "TOPRIGHT",x,y);
-
-
 	end);
     zUI.squaredminimap:RegisterForDrag("LeftButton");
 	--zUI.squaredminimap:SetWidth(C.minimap.width)

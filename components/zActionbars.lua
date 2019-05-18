@@ -37,10 +37,6 @@ zUI:RegisterComponent("zActionbars", function ()
 		ReloadUI();
 	end
 
-	--function zUI:getMana()
-		--zPrint("MANA: " .. _G.manabar:GetValue());
-	--end
-
 	---------------------------------------------------------------------------------------------------------
 	if (C.global.darkmode == "1") then
 		local zTOOLTIP_DEFAULT_COLOR = { r = 0, g = 0, b = 0 };
@@ -1017,10 +1013,8 @@ zUI:RegisterComponent("zActionbars", function ()
 	end
 
 	if (C.actionbars.bfa_style == "1") then
-		--zPrint("BFA Style!");
 		LoadActionBarBFA();
 	else
-		--zPrint("Elite Style!");
 		LoadActionBarElite();
 	end
 

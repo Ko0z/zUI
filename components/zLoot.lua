@@ -650,12 +650,10 @@ zUI:RegisterComponent("zLoot", function ()
 	zUI.loot:SetScript("OnEvent", function()
 		if event == "OPEN_MASTER_LOOT_LIST" then
 			ToggleDropDownMenu(1, nil, GroupLootDropDown, zUI.loot.slots[zUI.loot.selectedSlot], 0, 0)
-			--zPrint("OPEN_MASTER_LOOT_LIST");
 		end
 
 		if event == "UPDATE_MASTER_LOOT_LIST" then
 			UIDropDownMenu_Refresh(GroupLootDropDown)
-			--zPrint("UPDATE_MASTER_LOOT_LIST");
 		end
 
 		if event == "LOOT_OPENED" then
@@ -675,7 +673,6 @@ zUI:RegisterComponent("zLoot", function ()
 			end
 
 			this.numLootItems = GetNumLootItems(); -- added
-			--zPrint("On OPEN. Items: " .. this.numLootItems);
 			--this.numLootToShow = this.numLootItems;
 			zUI.loot:UpdateLootFrame()
 		end
@@ -683,10 +680,7 @@ zUI:RegisterComponent("zLoot", function ()
 		if event == "LOOT_SLOT_CLEARED" then
 			if (not this:IsVisible()) then return; end
 
-			--zPrint("LOOT_SLOT_CLEARED, Slot: " .. tostring(arg1));
-
 			local numberz = GetNumLootItems();
-			--zPrint("On Slot cleared. Items: " .. numberz);
 
 			--zUI.loot.slots[arg1]:Hide() -- is it this thats causing problems?
 			zUI.loot.slots[arg1]:Hide() -- is it this thats causing problems?
@@ -708,7 +702,6 @@ zUI:RegisterComponent("zLoot", function ()
 			for _, v in pairs(this.slots) do
 				v:Hide()
 			end
-			--zPrint("---------------");
 		end
 
 		if event == "CHAT_MSG_SYSTEM" then

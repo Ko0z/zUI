@@ -76,12 +76,10 @@ zUI:RegisterComponent("zCalculator", function ()
     zUI.xcalc:RegisterEvent("PLAYER_REGEN_DISABLED")
     zUI.xcalc:SetScript("OnEvent", function()
 		if event == "PLAYER_REGEN_DISABLED" then
-			--zPrint("Calc Regen disabled.")
 			if Xcalc_Settings.Binding and Xcalc_Settings.Binding == 1 and overrideOn then 
 				zUI.xcalc.unbind() -- unconditionally remove our overrides on combat, we don' want to be hogging keys when someone's jumped.
 			end
 		elseif event == "PLAYER_REGEN_ENABLED" then
-			--zPrint("Calc Regen enabled.")
 			if zUI.xcalc_window and Xcalc_Settings.Binding and Xcalc_Settings.Binding == 1 then
 				if zUI.xcalc_window:IsShown() and not overrideOn then
 					zUI.xcalc.rebind()
@@ -98,7 +96,6 @@ zUI:RegisterComponent("zCalculator", function ()
 		
 		if (C.calculator.bindings == "1") then
 			for key,value in pairs(zUI.xcalc.BindingMap) do
-				--zPrint("Bound Key: " .. key)
 				--SetOverrideBinding(frame,false,key,value)
 				SetBinding(key,value)
 			end
@@ -114,7 +111,6 @@ zUI:RegisterComponent("zCalculator", function ()
 			--	SetBinding(key)
 			--end
 			LoadBindings(2);
-			--zPrint("UNBOUND ")
 			overrideOn = nil
 		end
 	end
@@ -309,7 +305,6 @@ zUI:RegisterComponent("zCalculator", function ()
 				if (currText == "0") then
 					currText = ""
 				end	
-				--zPrint(key)
 				--currText = ("%s%s"):format(currText,key)
 				currText = string.format("%s%s",currText,key)
 			end
@@ -478,7 +473,6 @@ zUI:RegisterComponent("zCalculator", function ()
 			if(copper ~= math.floor(copper)) then
 				copper = round(copper,tonumber(C.calculator.copperdecimals));
 			end
-			--zPrint(tostring(copper) .. " Copper")
 			temp = string.format("%s%sc",temp,copper)
 			
 		end
@@ -550,7 +544,6 @@ zUI:RegisterComponent("zCalculator", function ()
 		end
 		zUI.xcalc.NumberDisplay = displaynumber
 		local floatNumber = tonumber(displaynumber)
-		--zPrint(tostring(floatNumber))
 		--if(not tonumber(displaynumber) and floatNumber == math.floor(floatNumber)) then
 		--if(not tostring(floatNumber) or floatNumber ~= math.floor(floatNumber)) then
 		if(not floatNumber) then
@@ -566,18 +559,11 @@ zUI:RegisterComponent("zCalculator", function ()
 			end
 		end
 		--elseif(floatNumber ~= math.floor(floatNumber)) then
-		--	zPrint("Float!!")
 		--	xcalc_numberdisplay:SetText( round(displaynumber,2) )
 		--else
-		--	zPrint("Integer!!")
 		--	xcalc_numberdisplay:SetText( displaynumber )
 		--end
 	end
-
-	--function zUI.xcalc.OnShow()
-	--	zPrint("REBIND THAT SUCKER!")
-	--	zUI.xcalc.rebind()
-	--end
 
 	-- Draw the main window
 	function zUI.xcalc.windowframe()

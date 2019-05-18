@@ -110,21 +110,6 @@ zUI:RegisterSkin("Actionbuttons", function ()
 				--_G['PetActionButton'..i]
 			}
 		) do
-			--v:SetFrameLevel("MEDIUM")
-			--v:SetFrameStrata'LOW' -- LOW --possibly causing stance background image to be superior..
-			-- keybind
-			--v.keybind = v:CreateFontString(nil, "OVERLAY", "GameFontNormal");
-			--v.keybind:SetText("A");
-			--zPrint("MADE")
-			---- keybind options
-			----if showkybind == "1" then f.keybind:Show() else f.keybind:Hide() end
-			--SetAllPointsOffset(v.keybind, v, 0, 0)
-			--v.keybind:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE");
-			----v.keybind:SetTextColor(unpack(bind_color))
-			--v.keybind:SetJustifyH("RIGHT")
-			--v.keybind:SetJustifyV("TOP")
-			--v.keybind:SetNonSpaceWrap(false)
-
 			zStyle_Button(v)
 			if (C.global.darkmode == "1") then
 				zSkinColor(v,0.2,0.2,0.2,1);

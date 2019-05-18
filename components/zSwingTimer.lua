@@ -138,24 +138,8 @@ zUI:RegisterComponent("zSwingTimer", function ()
 	function zUI.swingtimer:AuraResetTimer()
 		currentWpnSpd = UnitAttackSpeed("player")
 		if(currentWpnSpd ~= oldWpnSpd) then 
-			--zPrint("Weapon Speed Changed!")
-			--if (zUI.swingtimer:ShouldResetTimer()) then
-			
 			if (st_timer > 0) then
-				--local percentTime = st_timer / oldWpnSpd
-				--zPrint(percentTime .. " %")
-				--local diff = st_timer - currentWpnSpd
-				--if(st_timer > currentWpnSpd) then
-				--if(percentTime > 0.9) then
-					--zPrint("Gained attack speed")
-					--zPrint(diff)
-					--st_timer = st_timer - diff
-				--else
-					--zPrint("lost attack speed")
-					--zPrint(diff)
 				st_timer = currentWpnSpd
-				--end
-				--zUI.swingtimer:ResetTimer()
 			end
 			--end
 			oldWpnSpd = currentWpnSpd
@@ -228,7 +212,6 @@ zUI:RegisterComponent("zSwingTimer", function ()
 			zUI.swingtimer:UpdateAppearance()
 			zUI.swingtimer:UnregisterEvent("PLAYER_ENTERING_WORLD")
 			r, g, b = strsplit(",", C.swingtimer.color)
-			zPrint(r ..",".. b ..",".. g);
 		elseif (event == "PLAYER_REGEN_DISABLED") then
 			combat = true
 		elseif (event == "UNIT_INVENTORY_CHANGED") then
@@ -240,55 +223,15 @@ zUI:RegisterComponent("zSwingTimer", function ()
 				end
 			end
 		elseif (event == "CHAT_MSG_COMBAT_SELF_MISSES") then
-			--if (zUI.swingtimer:ShouldResetTimer()) then
-				zUI.swingtimer:ResetTimer()
-			--end
+			zUI.swingtimer:ResetTimer()
 		elseif (event == "CHAT_MSG_COMBAT_SELF_HITS") then
 			if (string.find(arg1, "You hit") or string.find(arg1, "You crit")) then
-			--if (string.find(arg1, "You hit")) then
-				--if (zUI.swingtimer:ShouldResetTimer()) then
-					zUI.swingtimer:ResetTimer()
-				--end
-			--elseif (string.find(arg1, "You crit")) then
-				--if CLASS == "MAGE" then
-					--	local _, _, _, _, rank = GetTalentInfo(2, 10) -- improved scorch
-					--	if rank == 3 then
-				--local _, _, _, _, rank = GetTalentInfo(2, 16)
-				--zPrint("crit!!! Flurry rank is:")
-				--zPrint(tostring(rank))
-
-				--if (zUI.swingtimer:ShouldResetTimer()) then
-				--	zUI.swingtimer:ResetTimer()
-				--end
+				zUI.swingtimer:ResetTimer()
 			end
-		--elseif (event == "CHAT_MSG_SPELL_BREAK_AURA") then
-		--	for unit, effect in string.gfind(arg1, "(.+)'s (.+) is removed%.") do
-		--		--AuraGone(unit, effect)
-		--		zPrint(tostring(effect))
-		--	end
-		--	zPrint("CHAT_MSG_SPELL_BREAK_AURA")
-		--elseif (event == "UNIT_AURA" and arg1 == "player") then
 		elseif (event == "CHAT_MSG_SPELL_PERIODIC_SELF_BUFFS") then
-			--zPrint("CHAT_MSG_SPELL_PERIODIC_SELF_BUFFS")
 			zUI.swingtimer:AuraResetTimer()
-			--for effect in string.gfind(arg1, 'You gain (.+)%.') do
-				--zPrint(tostring(effect))
-			--end
 		elseif (event == "CHAT_MSG_SPELL_AURA_GONE_SELF") then
-			--zPrint("CHAT_MSG_SPELL_AURA_GONE_SELF")
 			zUI.swingtimer:AuraResetTimer()
-			
-			--for effect in string.gfind(arg1, '(.+) fades from you.') do
-				--zPrint(tostring(effect))
-			--end
-		--elseif (event == "UNIT_AURA") then
-			--for effect, unit in string.gfind(arg1, '(.+) fades from (.+)%.') do
-			--	--AuraGone(unit, effect)
-			--	zPrint(tostring(effect))
-			--end
-			--zPrint("UNIT_AURA")
-			--zPrint(tostring(arg3))
-			--zPrint(tostring(arg4))
 		elseif (event == "CHAT_MSG_SPELL_SELF_DAMAGE") then
 			for _, str in combatStrings do
 				local _, _, spell = strfind(arg1, str)
@@ -315,17 +258,6 @@ zUI:RegisterComponent("zSwingTimer", function ()
 	end)
 
 	zUI.swingtimer:SetScript("OnUpdate", function()
-		
-		--currentWpnSpd = UnitAttackSpeed("player")
-		--if(currentWpnSpd ~= oldWpnSpd) then 
-		--	--zPrint("Weapon Speed Changed!")
-		--	--if (zUI.swingtimer:ShouldResetTimer()) then
-		--	zUI.swingtimer:ResetTimer()
-		--	--end
-		--	oldWpnSpd = currentWpnSpd
-		--end
-
-		--zPrint(tostring(speedMH))
 		if (st_timer > 0) then
 			st_timer = st_timer - arg1
 			if (st_timer < 0) then

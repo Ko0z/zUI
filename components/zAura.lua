@@ -24,7 +24,6 @@ local OnUpdate = function()
         local d     = _G[f..'Border']
         local icon  = _G[f..'Icon']
         if  d then
-			--zPrint("D EXIST")
             local r, g, b = d:GetVertexColor()
             --if  skin.enable then
             zSkinColor(_G[f], r*1.5, g*1.5, b*1.5)
@@ -147,25 +146,20 @@ for i = 1, 16 do
 	zUI.PlayerDebuffs[i]:SetScript("OnEnter", function() 
 		GameTooltip:SetOwner(this, "ANCHOR_TOPRIGHT");
 		GameTooltip:SetPlayerBuff(GetPlayerBuff(this.id-1,"HARMFUL"));
-		--zPrint("OnEnter: " .. this:GetName())
 	end)
 	zUI.PlayerDebuffs[i]:SetScript("OnLeave", function() 
 		GameTooltip:Hide(); 
-		--zPrint("OnLeave")
 	end)
 end
 
 function zPlayerDebuffs_Event()
 	for i = 1, 16 do
         local icon, stack, dtype = UnitDebuff('player', i)
-        --local bu = ("zPlayerFrameDebuff"..i)
         local bu = zUI.PlayerDebuffs[i]
         if  bu and icon then
             local count = _G["zPlayerFrameDebuff"..i.."Count"];
             local texture = _G["zPlayerFrameDebuff"..i.."Icon"];
             local colour    = DebuffTypeColor[dtype] or DebuffTypeColor["none"]
-			--zPrint(icon);
-			--zSkin(bu,0);
 
             if  stack > 1 then
                 count:SetText(stack)
@@ -189,7 +183,6 @@ function zPlayerDebuffs_Event()
         else
             if  bu then 
                 bu:Hide() 
-				--zPrint("Hide: " .. bu:GetName());
             end
         end
     end

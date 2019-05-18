@@ -18,15 +18,6 @@ zUI:RegisterComponent("zKeybind", function ()
 		hideOnEscape = true
 	}
 
-	--local keymap = {
-	--	["BonusActionButton"]         = "ACTIONBUTTON",
-	--	["MultiBarBottomLeftButton"]  = "MULTIACTIONBAR1BUTTON",
-	--	["MultiBarBottomRightButton"] = "MULTIACTIONBAR2BUTTON",
-	--	["MultiBarRightButton"]       = "MULTIACTIONBAR3BUTTON",
-	--	["MultiBarLeftButton"]        = "MULTIACTIONBAR4BUTTON",
-	--	["ShapeshiftButton"]          = "SHAPESHIFTBUTTON",
-	--	["PetActionButton"]           = "BONUSACTIONBUTTON",
-	--}
 	local modifiers = {
 		["ALT"]   = "ALT-",
 		["CTRL"]  = "CTRL-",
@@ -116,9 +107,7 @@ zUI:RegisterComponent("zKeybind", function ()
 	end
 
 	function zUI.zKeybind:ActionKeyClick(key)
-		zPrint("Hooked script!")
 		if(key) then
-			--zPrint(tostring(key));
 			zUI.zKeybind:OnKeyUp(key)
 			this:SetButtonState("NORMAL");
 			this:SetChecked(0);
@@ -133,7 +122,6 @@ zUI:RegisterComponent("zKeybind", function ()
 	end)	
 
 	function zUI.zKeybind:OnKeyUp(keyCode)
-		zPrint("OnKeyUP: " ..  tostring(keyCode));
 		if modifiers[keyCode] then return end -- ignore single modifier keyup
 
 		if ( keyCode == "LeftButton" or keyCode == "RightButton") then
@@ -149,7 +137,7 @@ zUI:RegisterComponent("zKeybind", function ()
 		local need_save = false
 		local frame = GetMouseFocus()
 		local hovername = (frame and frame.GetName) and (frame:GetName()) or ""
-		--local binding = zUI.zKeybind:GetBinding(hovername)
+		
 		local binding = zGetBinding(hovername);
 
 		if keyCode == "ESCAPE" and not binding then 
@@ -163,13 +151,11 @@ zUI:RegisterComponent("zKeybind", function ()
 				local key = (GetBindingKey(binding))
 				if (key) then
 					SetBinding(key)
-					zPrint("KEY CLEARED!");
 					need_save = true
 				end
 			else
 				if (SetBinding(zUI.zKeybind:GetPrefix()..keyCode,binding)) then
 					need_save = true
-					zPrint("KEY SET!");
 				end
 			end
 		end
@@ -179,21 +165,6 @@ zUI:RegisterComponent("zKeybind", function ()
 			SaveBindings(GetCurrentBindingSet())
 		end
 	end
-
-	--function zUI.zKeybind:GetBinding(button_name)
-	--	local found,_,buttontype,buttonindex = string.find(button_name,"^(%a+)(%d+)$")
-	--	if found then
-	--		if keymap[buttontype] then
-	--			return string.format("%s%d",keymap[buttontype],buttonindex)
-	--		elseif buttontype == "ActionButton" then
-	--			return string.format("ACTIONBUTTON%d",buttonindex)
-	--		else
-	--			return nil
-	--		end
-	--	else
-	--		return nil
-	--	end
-	--end
 
 	function zUI.zKeybind:GetPrefix()
 		return string.format("%s%s%s",

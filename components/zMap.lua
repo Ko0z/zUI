@@ -115,7 +115,6 @@ zUI:RegisterComponent("zMap", function ()
 				WorldMapFrame:SetScale(c_position.scale)
 		  
 				local zscale,x,y=WorldMapFrame:GetEffectiveScale(),GetCursorPosition();
-				--zPrint("Cursor: " .. x .. ", " .. y);
 				WorldMapFrame:ClearAllPoints()
 				WorldMapFrame:SetPoint("CENTER",UIParent, "BOTTOMLEFT",x/c_position.scale,y/c_position.scale);
 
@@ -124,7 +123,6 @@ zUI:RegisterComponent("zMap", function ()
 				end
 
 				local point, relativeTo, relativePoint, xOfs, yOfs = this:GetPoint()
-				--zPrint("GetPoint: " .. xOfs .. ", " .. yOfs);
 				C.position[WorldMapFrame:GetName()]["xpos"] = xOfs;
 				C.position[WorldMapFrame:GetName()]["ypos"] = yOfs;
 				C.position[WorldMapFrame:GetName()]["scale"] = c_position.scale;
@@ -135,7 +133,6 @@ zUI:RegisterComponent("zMap", function ()
 					zUI.zMap.playerModel:SetModelScale(1)
 				end
 
-				--zPrint("Setting Point")
 			end
 		end)
 
@@ -150,7 +147,6 @@ zUI:RegisterComponent("zMap", function ()
 				C.position[WorldMapFrame:GetName()] = {}
 			end
 			local x,y = this:GetCenter()
-			--zPrint("OnMouseUp: " .. x .. ", " .. y);
 			C.position[WorldMapFrame:GetName()]["xpos"] = x;
 			C.position[WorldMapFrame:GetName()]["ypos"] = y;
 			this:SetPoint("CENTER",UIParent, "BOTTOMLEFT",x,y);
