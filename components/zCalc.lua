@@ -93,7 +93,7 @@ zUI:RegisterComponent("zCalculator", function ()
 	-- Processes for binding and unbinding numberpad keys to Xcalc
 	function zUI.xcalc.rebind()
 		--if (Xcalc_Settings.Binding == 1) and not InCombatLockdown() then
-		
+		zPrint(fontRed .. "'Shift-Enter' to chat while calculator is shown.")
 		if (C.calculator.bindings == "1") then
 			for key,value in pairs(zUI.xcalc.BindingMap) do
 				--SetOverrideBinding(frame,false,key,value)
@@ -580,7 +580,10 @@ zUI:RegisterComponent("zCalculator", function ()
 		frame:SetScript("OnMouseDown", function() frame:StartMoving() end)
 		frame:SetScript("OnMouseUp", function() frame:StopMovingOrSizing() end)
 		--frame:SetScript("OnShow", zUI.xcalc.OnShow)
-		frame:SetScript("OnShow", function() zUI.xcalc.rebind() end)
+		frame:SetScript("OnShow", function() 
+			zUI.xcalc.rebind() 
+			
+		end)
 		frame:SetScript("OnHide", function() zUI.xcalc.unbind() end)
 		frame:SetBackdrop({bgFile = "Interface/DialogFrame/UI-DialogBox-Background"})
 			--edgeFile = "Interface/DialogFrame/UI-DialogBox-Border",
@@ -891,6 +894,7 @@ end)
 
 
 SLASH_CALC1 = "/calc"
+SLASH_CALC2 = "/calculator"
 function SlashCmdList.CALC( msg, editbox )
 	--zUI.zCalculator.calc(msg);
 	--zUI.api.calc(msg);

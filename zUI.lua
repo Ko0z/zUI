@@ -169,7 +169,8 @@ zUI:SetScript("OnEvent", function()
 		-- ADDON LOADED, READY FOR ACTION
 		--zPrint("Core initiating component load sequence.")
 		zPrint("Thank's for using zUI, type /zui for options frame.");
-		zPrint("type /kb to bind your keys.");
+		zPrint("/kb to bind your keys.");
+		zPrint("/calc to show the calculator.");
 
 		local major, minor, fix = zUI.api.strsplit(".", tostring(GetAddOnMetadata("zUI", "Version")))
 		zUI.version.major = tonumber(major) or 1

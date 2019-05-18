@@ -972,7 +972,7 @@ end
 			CreateConfig(nil, T["Enable BFA-Style"], C.actionbars, "bfa_style", "checkbox")
 			CreateConfig(nil, T["Enable Square Style"], C.actionbars, "squarebuttons", "checkbox")
 			CreateConfig(nil, T["Enable Global Dark Mode"], C.global, "darkmode", "checkbox")
-			CreateConfig(nil, T["Show Endcaps (Only with BFA-Style Disabled)"], C.actionbars, "endcap", "checkbox")
+			CreateConfig(nil, T["Show Endcaps"], C.actionbars, "endcap", "checkbox")
 
 			CreateConfig(nil, T["Hotkey Text Color"], C.hotkeys, "color", "color")
 		end)

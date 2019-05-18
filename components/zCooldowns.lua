@@ -101,11 +101,12 @@ zUI:RegisterComponent("zCooldowns", function ()
 		if not this:GetParent() then this:Hide()  end
 
 		-- avoid to set cooldowns on invalid frames
-		if this:GetParent() and this:GetParent():GetName() and _G[this:GetParent():GetName() .. "Cooldown"] then
-			if not _G[this:GetParent():GetName() .. "Cooldown"]:IsShown() then
-				this:Hide()
-			end
-		end
+		--if this:GetParent() and this:GetParent():GetName() and _G[this:GetParent():GetName() .. "Cooldown"] then
+		--	if not _G[this:GetParent():GetName() .. "Cooldown"]:IsShown() then
+		--		zPrint(this:GetParent():GetName() .. "Cooldown")
+		--		--this:Hide()
+		--	end
+		--end
 
 		if not this.next then this.next = GetTime() + .1 end
 		if this.next > GetTime() then return end
@@ -125,10 +126,13 @@ zUI:RegisterComponent("zCooldowns", function ()
 	local function zCreateCoolDown(cooldown, start, duration, size)
 		if (size == nil) then size = 14; end
 		cooldown.cd = CreateFrame("Frame", "zCooldownFrame", cooldown:GetParent())
+		--local parents = cooldown:GetParent()
+		--zPrint("Parent: " .. parents:GetName())
 		cooldown.cd:SetAllPoints(cooldown:GetParent())
-		cooldown.cd:SetFrameLevel(cooldown.cd:GetFrameLevel() + 2)
+		cooldown.cd:SetFrameLevel(cooldown:GetFrameLevel() + 2)
 
 		cooldown.cd.text = cooldown.cd:CreateFontString("zCooldownFrameText", "OVERLAY")
+		
 		if (size > 12) then
 			cooldown.cd.text:SetFont(STANDARD_TEXT_FONT, size, "OUTLINE")
 		else
@@ -162,11 +166,12 @@ zUI:RegisterComponent("zCooldowns", function ()
 		-- print time as text on cooldown frames
 		if start > 0 and duration > 0 and enable > 0 then
 			if( not this.cd ) then
-				if (this.zTextSize) then
-					zCreateCoolDown(this, start, duration, this.zTextSize);
-				else
-					zCreateCoolDown(this, start, duration);
-				end
+				--if (this.zTextSize) then
+				--zPrint(this:GetName());	
+				zCreateCoolDown(this, start, duration, this.zTextSize);
+				--else
+				--	zCreateCoolDown(this, start, duration);
+				--end
 			end
 			this.cd.start = start
 			this.cd.duration = duration

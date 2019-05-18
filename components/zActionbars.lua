@@ -106,13 +106,22 @@ zUI:RegisterComponent("zActionbars", function ()
 		-- Due to the texture being 1024x128 I had to split it in two too support Vanilla (max 512)
 		-- Left split of the art.
 		zUI.zBars.ActionBarArtSmall.left = zUI.zBars.ActionBarArtSmall:CreateTexture(nil,"BACKGROUND")
-		zUI.zBars.ActionBarArtSmall.left:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtSmallLeft")
+
+		--if (C.actionbars.endcap == "1") then
+		--	zUI.zBars.ActionBarArtSmall.left:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtSmallLeft")
+		--else
+		--	zUI.zBars.ActionBarArtSmall.left:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtSmallLeftNoGryph")
+		--end
+
 		zUI.zBars.ActionBarArtSmall.left:SetPoint("BOTTOMLEFT", zUI.zBars.ActionBarArtSmall, "BOTTOMLEFT", 0, 0);
 		zUI.zBars.ActionBarArtSmall.left:SetWidth(512);
 		zUI.zBars.ActionBarArtSmall.left:SetHeight(128);
 		-- Right split of the art.
 		zUI.zBars.ActionBarArtSmall.right = zUI.zBars.ActionBarArtSmall:CreateTexture(nil,"BACKGROUND")
-		zUI.zBars.ActionBarArtSmall.right:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtSmallRight")
+
+		--zUI.zBars.ActionBarArtSmall.right:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtSmallRight")
+		--zUI.zBars.ActionBarArtSmall.right:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtSmallRightNoGryph")
+
 		zUI.zBars.ActionBarArtSmall.right:SetPoint("BOTTOMLEFT", zUI.zBars.ActionBarArtSmall, "BOTTOMLEFT", 512, 0);
 		zUI.zBars.ActionBarArtSmall.right:SetWidth(512);
 		zUI.zBars.ActionBarArtSmall.right:SetHeight(128);
@@ -126,17 +135,36 @@ zUI:RegisterComponent("zActionbars", function ()
 		-- Due to the texture being 1024x128 I had to split it in two too support Vanilla (max 512)
 		-- Left split of the art.
 		zUI.zBars.ActionBarArtLarge.left = zUI.zBars.ActionBarArtLarge:CreateTexture(nil,"BACKGROUND")
-		zUI.zBars.ActionBarArtLarge.left:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtLargeLeft")
+
+		--zUI.zBars.ActionBarArtLarge.left:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtLargeLeft")
+		--zUI.zBars.ActionBarArtLarge.left:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtLargeLeftNoGryph")
+
 		zUI.zBars.ActionBarArtLarge.left:SetPoint("BOTTOMLEFT", zUI.zBars.ActionBarArtLarge, "BOTTOMLEFT", 0, 0);
 		zUI.zBars.ActionBarArtLarge.left:SetWidth(512);
 		zUI.zBars.ActionBarArtLarge.left:SetHeight(128);
 		-- Right split of the art.
 		zUI.zBars.ActionBarArtLarge.right = zUI.zBars.ActionBarArtLarge:CreateTexture(nil,"BACKGROUND")
-		zUI.zBars.ActionBarArtLarge.right:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtLargeRight")
+
+		--zUI.zBars.ActionBarArtLarge.right:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtLargeRight")
+		--zUI.zBars.ActionBarArtLarge.right:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtLargeRightNoGryph")
+
 		zUI.zBars.ActionBarArtLarge.right:SetPoint("BOTTOMLEFT", zUI.zBars.ActionBarArtLarge, "BOTTOMLEFT", 512, 0);
 		zUI.zBars.ActionBarArtLarge.right:SetWidth(512);
 		zUI.zBars.ActionBarArtLarge.right:SetHeight(128);
 		
+
+		if (C.actionbars.endcap == "1") then
+			zUI.zBars.ActionBarArtSmall.left:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtSmallLeft")
+			zUI.zBars.ActionBarArtSmall.right:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtSmallRight")
+			zUI.zBars.ActionBarArtLarge.left:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtLargeLeft")
+			zUI.zBars.ActionBarArtLarge.right:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtLargeRight")
+		else
+			zUI.zBars.ActionBarArtSmall.left:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtSmallLeftNoGryph")
+			zUI.zBars.ActionBarArtSmall.right:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtSmallRightNoGryph")
+			zUI.zBars.ActionBarArtLarge.left:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtLargeLeftNoGryph")
+			zUI.zBars.ActionBarArtLarge.right:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtLargeRightNoGryph")
+		end
+
 		zUI.zBars.ActionBarArtLarge:Hide();
 		----------------------==[ XPBarBackground-Frame ]==------------------------------------------------->
 		zUI.zBars.xpbg = CreateFrame("Frame", nil, MainMenuBar)
@@ -353,7 +381,7 @@ zUI:RegisterComponent("zActionbars", function ()
 			--arrows and page number
 			ActionBarUpButton:SetPoint("CENTER",MainMenuBarArtFrame,"TOPLEFT",521,-23)
 			ActionBarDownButton:SetPoint("CENTER",MainMenuBarArtFrame,"TOPLEFT",521,-42)
-			MainMenuBarPageNumber:SetPoint("CENTER",MainMenuBarArtFrame,29,-5)
+			MainMenuBarPageNumber:SetPoint("CENTER",MainMenuBarArtFrame,27,-5)
 			--exp bar sizing and positioning
 			MainMenuExpBar_Update();
 			MainMenuExpBar:ClearAllPoints()

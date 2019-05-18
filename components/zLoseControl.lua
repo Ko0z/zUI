@@ -135,8 +135,10 @@ zSkinColor(zLoseControlFrame,0.3,0.3,0.3);
 
 zLoseControlFrame.texture = zLoseControlFrame:CreateTexture(zLoseControlFrame, "BACKGROUND")
 zLoseControlFrame.texture:SetAllPoints(zLoseControlFrame)
-zLoseControlFrame.cooldown = CreateFrame("Model", "Cooldown", zLoseControlFrame, "CooldownFrameTemplate")
+zLoseControlFrame.cooldown = CreateFrame("Model", "zLoseControlCooldown", zLoseControlFrame, "CooldownFrameTemplate")
 zLoseControlFrame.cooldown:SetAllPoints(zLoseControlFrame) 
+zLoseControlFrame.cooldown.zCooldownType = "ALL"
+zLoseControlFrame.cooldown.zTextSize = 22
 
 zLoseControlFrame.maxExpirationTime = 0
 zLoseControlFrame:Hide()
@@ -183,7 +185,7 @@ zLoseControlFrame:SetScript("OnEvent", function()
 				zSkinColor(zLoseControlFrame, colour.r, colour.g, colour.b);
 				this:Show()
 				this.texture:SetTexture(buffTexture)
-				this.cooldown:SetModelScale(this:GetEffectiveScale() or 1)
+				--this.cooldown:SetModelScale(this:GetEffectiveScale() or 1)
 				if this.maxExpirationTime <= expirationTime then
 					CooldownFrame_SetTimer(this.cooldown, GetTime(), expirationTime, 1)
 					this.maxExpirationTime = expirationTime

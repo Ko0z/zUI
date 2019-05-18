@@ -15,10 +15,11 @@ zUI:RegisterSkin("Bag", function () --modui inspired
         for k = 1, MAX_CONTAINER_ITEMS do
             local bu = _G['ContainerFrame'..i..'Item'..k]
             local cd = _G['ContainerFrame'..i..'Item'..k..'Cooldown']
+			--cd.zCooldownType = "NOGCD"
             zStyle_Items(bu)
 			zStyle_ButtonElements(bu)
 			--zSkinColor(bu,1,0,0,1); --Color in zBag script instead.
-            cd:SetFrameLevel(bu:GetFrameLevel() + 1) 
+            --cd:SetFrameLevel(bu:GetFrameLevel() + 1) 
             cd:SetFrameStrata'HIGH'
         end
     end

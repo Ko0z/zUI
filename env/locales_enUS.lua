@@ -254,7 +254,7 @@ zUI_locale["enUS"]["spells"] = {
   ['Bending Shinbone']={t=1500,icon='Temp'},
   ['Big Bronze Bomb']={t=1000,icon='Spell_Fire_SelfDestruct'},
   ['Big Iron Bomb']={t=1000,icon='Spell_Fire_SelfDestruct'},
-  ['Birth']={t=2000,icon='Temp'},
+  --['Birth']={t=2000,icon='Temp'},
   ['Black Arrow']={t=2000,icon='Ability_TheBlackArrow'},
   ['Black Battlestrider']={t=3000,icon='Ability_Mount_MechaStrider'},
   ['Black Ram']={t=3000,icon='Ability_Mount_MountainRam'},

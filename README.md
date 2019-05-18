@@ -8,8 +8,6 @@ This addon aims to preserve the blizzard look/design but with a modern touch and
 - MobHealth support, http://addons.us.to/addon/mobhealth
 - 
 
-
-
 ## Older Screenshots
 <img src="https://i.imgur.com/4TwwTnP.png" align="right" width="48%">
 <img src="https://i.imgur.com/hSGbk0m.png" width="48%">
@@ -27,12 +25,15 @@ This addon aims to preserve the blizzard look/design but with a modern touch and
 <img src="https://i.imgur.com/AQ86XrM.png" align="right" width="48%">
 <img src="https://i.imgur.com/K0Pv46b.png" width="48%">
 
+<img src="https://i.imgur.com/eUQKn0T.png" align="center">
+
 ## Features
 There are a lot of different features in this UI and the user can choose to disable any component that they dont want to use without 
 having any issues becuase of it. 
 All the components work independently and the user can choose to disable anything you see here.
 ### Theme
 - Change color on almost any frame, bar or text.
+- Hide end caps option (gryphons)
 - Move almost any frame to your liking by "Shift-click + drag"
 - Global dark theme with some new background textures.
 - Quality colored borders on gear/items in bag/bank/character etc
