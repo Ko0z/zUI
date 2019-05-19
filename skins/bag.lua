@@ -15,7 +15,7 @@ zUI:RegisterSkin("Bag", function () --modui inspired
         for k = 1, MAX_CONTAINER_ITEMS do
             local bu = _G['ContainerFrame'..i..'Item'..k]
             local cd = _G['ContainerFrame'..i..'Item'..k..'Cooldown']
-			--cd.zCooldownType = "NOGCD"
+			cd.zCooldownType = "NOGCD"
             zStyle_Items(bu)
 			zStyle_ButtonElements(bu)
 			--zSkinColor(bu,1,0,0,1); --Color in zBag script instead.
@@ -327,8 +327,8 @@ zUI:RegisterSkin("Bag", function () --modui inspired
 				        ri.f:SetPoint('TOPLEFT', ri)
 				        ri.f:SetPoint('BOTTOMRIGHT', ri)
                         ri.f:EnableMouse(false)
-                        zSkin(ri.f, 11)
-                        zSkinColor(ri.f, .7, .7, .7)
+                        zSkin(ri.f, 2)
+                        zSkinColor(ri.f, .3, .3, .3)
 			        end
 
                     ri:SetParent(ri.f)

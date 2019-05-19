@@ -5,12 +5,48 @@ zUI:RegisterSkin("Theme", function () --modui inspired
 	ZUI_COLOURELEMENTS_FOR_UI = {}
 	ZUI_COLOURELEMENTS_BORDER_FOR_UI = {}
 
-	--for _, v in pairs(ZUI_COLOURELEMENTS_FOR_UI) do
-    --     table.remove(ZUI_COLOURELEMENTS_FOR_UI, v)
-    --end
-    --for _, v in pairs(ZUI_COLOURELEMENTS_BORDER_FOR_UI) do
-    --     table.remove(ZUI_COLOURELEMENTS_BORDER_FOR_UI, v)
-    --end
+	if (C.global.darkmode == "1") then
+		local zTOOLTIP_DEFAULT_COLOR = { r = 0, g = 0, b = 0 };
+		local zTOOLTIP_DEFAULT_BACKGROUND_COLOR = { r = 0.0, g = 0.0, b = 0.0 };
+	
+		ItemRefTooltip:SetBackdropColor(zTOOLTIP_DEFAULT_BACKGROUND_COLOR.r, zTOOLTIP_DEFAULT_BACKGROUND_COLOR.g, zTOOLTIP_DEFAULT_BACKGROUND_COLOR.b);
+		
+		hooksecurefunc("GameTooltip_OnLoad", function()
+			this:SetBackdropColor(zTOOLTIP_DEFAULT_BACKGROUND_COLOR.r, zTOOLTIP_DEFAULT_BACKGROUND_COLOR.g, zTOOLTIP_DEFAULT_BACKGROUND_COLOR.b,1);
+		end,true)
+		
+		hooksecurefunc("GameTooltip_OnShow", function()
+			this:SetBackdropColor(zTOOLTIP_DEFAULT_BACKGROUND_COLOR.r, zTOOLTIP_DEFAULT_BACKGROUND_COLOR.g, zTOOLTIP_DEFAULT_BACKGROUND_COLOR.b,1);
+		end,true)
+
+		hooksecurefunc("GameTooltip_OnHide", function()
+			this:SetBackdropColor(zTOOLTIP_DEFAULT_BACKGROUND_COLOR.r, zTOOLTIP_DEFAULT_BACKGROUND_COLOR.g, zTOOLTIP_DEFAULT_BACKGROUND_COLOR.b,1);
+		end,true)
+	end
+
+	UIOptionsFrame:SetScript("OnShow", function() -- Move to style?
+		-- default events
+		UIOptionsFrame_Load();
+		MultiActionBar_Update();
+		MultiActionBar_ShowAllGrids();
+		Disable_BagButtons();
+		UpdateMicroButtons();
+		
+		-- customize
+		UIOptionsBlackground:Hide() -- removes black sideos for UIOptions (Interface)
+		--BlackoutWorld:Hide(); -- removes black sideos for map
+
+		UIOptionsFrame:SetMovable(true)
+		UIOptionsFrame:EnableMouse(true)
+		UIOptionsFrame:SetScale(.8)
+		UIOptionsFrame:SetScript("OnMouseDown",function()
+			UIOptionsFrame:StartMoving()
+		end)
+
+		UIOptionsFrame:SetScript("OnMouseUp",function()
+			UIOptionsFrame:StopMovingOrSizing()
+		end)
+	end)
 
 	for _, v in pairs({
             -- MINIMAP CLUSTER
@@ -58,12 +94,41 @@ zUI:RegisterSkin("Theme", function () --modui inspired
 		ReputationXPBarTexture1,
 		ReputationXPBarTexture2,
 		ReputationXPBarTexture3,
+		ShapeshiftBarLeft,
+		ShapeshiftBarMiddle,
+		ShapeshiftBarRight,
 		SlidingActionBarTexture0,
 		SlidingActionBarTexture1,
 		MainMenuBarLeftEndCap,
 		MainMenuBarRightEndCap,
 		ExhaustionTick:GetNormalTexture(),
 	}) do table.insert(ZUI_COLOURELEMENTS_FOR_UI, v) end
+
+
+	if (C.actionbars.endcap == "0") then
+		MainMenuBarLeftEndCap:Hide();
+		MainMenuBarRightEndCap:Hide();
+	end
+
+	if (zActionBarArtSmallLeft ~= nil) then
+		for _, v in pairs({
+			zActionBarArtSmallLeft,
+			zActionBarArtSmallRight,
+			zActionBarArtLargeLeft,
+			zActionBarArtLargeRight,
+		}) do table.insert(ZUI_COLOURELEMENTS_FOR_UI, v) end
+	end
+	
+	if (zActionBarTexture1) then
+		for _, v in pairs({
+			zActionBarTexture1,
+			zActionBarTexture2,
+			zActionBarTexture3,
+			zActionBarTexture4,
+			zActionBarEndCapLeft,
+			zActionBarEndCapRight,
+		}) do table.insert(ZUI_COLOURELEMENTS_FOR_UI, v) end
+	end
 
 	-- BAGS
     for i = 1, 12 do

@@ -1,100 +1,8 @@
------==(( TODO ))==-----------------
---[[
-	Fix functions getting called multiple times.
-]]
-
 zUI:RegisterComponent("zActionbars", function () 
 	
 	UIPARENT_MANAGED_FRAME_POSITIONS["CastingBarFrame"] = {baseY = 70, bottomEither = 50, pet = 50, reputation = 19}; -- {baseY = 60, bottomEither = 40, pet = 40, reputation = 9};
 
-	function zUI:zSwapUI()
-		if (C.actionbars.bfa_style == "1") then
-			C.actionbars.bfa_style = "0";
-		elseif (C.actionbars.bfa_style == "0") then
-			C.actionbars.bfa_style = "1";
-		end
-
-		ReloadUI();
-	end
-
-	function zUI:zButtonSwap()
-		if (C.actionbars.squarebuttons == "1") then
-			C.actionbars.squarebuttons = "0";
-		elseif (C.actionbars.squarebuttons == "0") then
-			C.actionbars.squarebuttons = "1";
-		end
-
-		ReloadUI();
-	end
-
-	function zUI:DarkMode()
-		if (C.global.darkmode == "1") then
-			C.global.darkmode = "0";
-		elseif (C.global.darkmode == "0") then
-			C.global.darkmode = "1";
-		end
-
-		ReloadUI();
-	end
-
-	---------------------------------------------------------------------------------------------------------
-	if (C.global.darkmode == "1") then
-		local zTOOLTIP_DEFAULT_COLOR = { r = 0, g = 0, b = 0 };
-		local zTOOLTIP_DEFAULT_BACKGROUND_COLOR = { r = 0.0, g = 0.0, b = 0.0 };
-	
-		ItemRefTooltip:SetBackdropColor(zTOOLTIP_DEFAULT_BACKGROUND_COLOR.r, zTOOLTIP_DEFAULT_BACKGROUND_COLOR.g, zTOOLTIP_DEFAULT_BACKGROUND_COLOR.b);
-		
-		hooksecurefunc("GameTooltip_OnLoad", function()
-			--this:SetBackdropBorderColor(zTOOLTIP_DEFAULT_COLOR.r, zTOOLTIP_DEFAULT_COLOR.g, zTOOLTIP_DEFAULT_COLOR.b);
-			this:SetBackdropColor(zTOOLTIP_DEFAULT_BACKGROUND_COLOR.r, zTOOLTIP_DEFAULT_BACKGROUND_COLOR.g, zTOOLTIP_DEFAULT_BACKGROUND_COLOR.b,1);
-			--ItemRefTooltip:SetBackdropColor(zTOOLTIP_DEFAULT_BACKGROUND_COLOR.r, zTOOLTIP_DEFAULT_BACKGROUND_COLOR.g, zTOOLTIP_DEFAULT_BACKGROUND_COLOR.b);
-			--this:SetAlpha(1);
-		end,true)
-		
-		hooksecurefunc("GameTooltip_OnShow", function()
-			this:SetBackdropColor(zTOOLTIP_DEFAULT_BACKGROUND_COLOR.r, zTOOLTIP_DEFAULT_BACKGROUND_COLOR.g, zTOOLTIP_DEFAULT_BACKGROUND_COLOR.b,1);
-		end,true)
-
-		hooksecurefunc("GameTooltip_OnHide", function()
-			--this:SetBackdropBorderColor(zTOOLTIP_DEFAULT_COLOR.r, zTOOLTIP_DEFAULT_COLOR.g, zTOOLTIP_DEFAULT_COLOR.b);
-			this:SetBackdropColor(zTOOLTIP_DEFAULT_BACKGROUND_COLOR.r, zTOOLTIP_DEFAULT_BACKGROUND_COLOR.g, zTOOLTIP_DEFAULT_BACKGROUND_COLOR.b,1);
-			--ItemRefTooltip:SetBackdropColor(zTOOLTIP_DEFAULT_BACKGROUND_COLOR.r, zTOOLTIP_DEFAULT_BACKGROUND_COLOR.g, zTOOLTIP_DEFAULT_BACKGROUND_COLOR.b);
-			--this:SetAlpha(1);
-		end,true)
-	end
-
-	UIOptionsFrame:SetScript("OnShow", function() -- Move to style?
-		-- default events
-		UIOptionsFrame_Load();
-		MultiActionBar_Update();
-		MultiActionBar_ShowAllGrids();
-		Disable_BagButtons();
-		UpdateMicroButtons();
-		
-		-- customize
-		UIOptionsBlackground:Hide() -- removes black sideos for UIOptions (Interface)
-		--BlackoutWorld:Hide(); -- removes black sideos for map
-
-		UIOptionsFrame:SetMovable(true)
-		UIOptionsFrame:EnableMouse(true)
-		UIOptionsFrame:SetScale(.8)
-		UIOptionsFrame:SetScript("OnMouseDown",function()
-			UIOptionsFrame:StartMoving()
-		end)
-
-		UIOptionsFrame:SetScript("OnMouseUp",function()
-			UIOptionsFrame:StopMovingOrSizing()
-		end)
-	end)
-
-	
-
 	zUI.zBars = CreateFrame("Frame", nil, UIParent);
-	--zAction:RegisterEvent("ADDON_LOADED");
-
-	
-
-
 	-- BFA
 	local function LoadActionBarBFA()
 		----------------------==[ zUI.zBars.ActionBarArtSmall-Frame ]==----------------------------------------------->
@@ -105,23 +13,12 @@ zUI:RegisterComponent("zActionbars", function ()
 		zUI.zBars.ActionBarArtSmall:SetPoint("Bottom",-237,-11)
 		-- Due to the texture being 1024x128 I had to split it in two too support Vanilla (max 512)
 		-- Left split of the art.
-		zUI.zBars.ActionBarArtSmall.left = zUI.zBars.ActionBarArtSmall:CreateTexture(nil,"BACKGROUND")
-
-		--if (C.actionbars.endcap == "1") then
-		--	zUI.zBars.ActionBarArtSmall.left:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtSmallLeft")
-		--else
-		--	zUI.zBars.ActionBarArtSmall.left:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtSmallLeftNoGryph")
-		--end
-
+		zUI.zBars.ActionBarArtSmall.left = zUI.zBars.ActionBarArtSmall:CreateTexture("zActionBarArtSmallLeft","BACKGROUND")
 		zUI.zBars.ActionBarArtSmall.left:SetPoint("BOTTOMLEFT", zUI.zBars.ActionBarArtSmall, "BOTTOMLEFT", 0, 0);
 		zUI.zBars.ActionBarArtSmall.left:SetWidth(512);
 		zUI.zBars.ActionBarArtSmall.left:SetHeight(128);
 		-- Right split of the art.
-		zUI.zBars.ActionBarArtSmall.right = zUI.zBars.ActionBarArtSmall:CreateTexture(nil,"BACKGROUND")
-
-		--zUI.zBars.ActionBarArtSmall.right:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtSmallRight")
-		--zUI.zBars.ActionBarArtSmall.right:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtSmallRightNoGryph")
-
+		zUI.zBars.ActionBarArtSmall.right = zUI.zBars.ActionBarArtSmall:CreateTexture("zActionBarArtSmallRight","BACKGROUND")
 		zUI.zBars.ActionBarArtSmall.right:SetPoint("BOTTOMLEFT", zUI.zBars.ActionBarArtSmall, "BOTTOMLEFT", 512, 0);
 		zUI.zBars.ActionBarArtSmall.right:SetWidth(512);
 		zUI.zBars.ActionBarArtSmall.right:SetHeight(128);
@@ -134,25 +31,16 @@ zUI:RegisterComponent("zActionbars", function ()
 		zUI.zBars.ActionBarArtLarge:SetPoint("Bottom",-111,-11)
 		-- Due to the texture being 1024x128 I had to split it in two too support Vanilla (max 512)
 		-- Left split of the art.
-		zUI.zBars.ActionBarArtLarge.left = zUI.zBars.ActionBarArtLarge:CreateTexture(nil,"BACKGROUND")
-
-		--zUI.zBars.ActionBarArtLarge.left:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtLargeLeft")
-		--zUI.zBars.ActionBarArtLarge.left:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtLargeLeftNoGryph")
-
+		zUI.zBars.ActionBarArtLarge.left = zUI.zBars.ActionBarArtLarge:CreateTexture("zActionBarArtLargeLeft","BACKGROUND")
 		zUI.zBars.ActionBarArtLarge.left:SetPoint("BOTTOMLEFT", zUI.zBars.ActionBarArtLarge, "BOTTOMLEFT", 0, 0);
 		zUI.zBars.ActionBarArtLarge.left:SetWidth(512);
 		zUI.zBars.ActionBarArtLarge.left:SetHeight(128);
 		-- Right split of the art.
-		zUI.zBars.ActionBarArtLarge.right = zUI.zBars.ActionBarArtLarge:CreateTexture(nil,"BACKGROUND")
-
-		--zUI.zBars.ActionBarArtLarge.right:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtLargeRight")
-		--zUI.zBars.ActionBarArtLarge.right:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtLargeRightNoGryph")
-
+		zUI.zBars.ActionBarArtLarge.right = zUI.zBars.ActionBarArtLarge:CreateTexture("zActionBarArtLargeRight","BACKGROUND")
 		zUI.zBars.ActionBarArtLarge.right:SetPoint("BOTTOMLEFT", zUI.zBars.ActionBarArtLarge, "BOTTOMLEFT", 512, 0);
 		zUI.zBars.ActionBarArtLarge.right:SetWidth(512);
 		zUI.zBars.ActionBarArtLarge.right:SetHeight(128);
 		
-
 		if (C.actionbars.endcap == "1") then
 			zUI.zBars.ActionBarArtSmall.left:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtSmallLeft")
 			zUI.zBars.ActionBarArtSmall.right:SetTexture("Interface\\Addons\\zUI\\img\\ActionBarArtSmallRight")
@@ -271,44 +159,13 @@ zUI:RegisterComponent("zActionbars", function ()
 		MainMenuBarExpText:SetPoint("CENTER",MainMenuExpBar,0,1)
 		MainMenuBarOverlayFrame:SetFrameStrata("MEDIUM") --changes xp bar text strata
 
-	
-
 		--------------------==[ ACTIONBARS/BUTTONS POSITIONING AND SCALING ]==-----------------------------------
 		--Only needs to be run once:
 		local function Initial_ActionBarLayoutBFA()
-			-- some initial styling as well...
-
 			
-			if (C.global.darkmode == "1") then
-				for _, v in pairs(
-					{
-					BonusActionBarTexture0,
-					BonusActionBarTexture1,
-					SlidingActionBarTexture0,
-					SlidingActionBarTexture1,
-					BonusActionBarTexture0,
-					BonusActionBarTexture1,	--added
-					zUI.zBars.ActionBarArtLarge.left,
-					zUI.zBars.ActionBarArtLarge.right,
-					zUI.zBars.ActionBarArtSmall.left,
-					zUI.zBars.ActionBarArtSmall.right,
-					ShapeshiftBarLeft,
-					ShapeshiftBarMiddle,
-					ShapeshiftBarRight,
-					TargetofTargetTexture,
-					PetFrameTexture	--to here
-					}
-				) do
-					v:SetVertexColor(0.3, 0.3, 0.3); -- todo: add options value..
-				end
-			end
-			
-
 			MainMenuBarLeftEndCap:Hide()
 			MainMenuBarRightEndCap:Hide()
 			
-			--_G.BONUSACTIONBAR_SLIDETIME = 0.001;
-			--if not InCombatLockdown() then
 			--reposition bottom left actionbuttons
 			MultiBarBottomLeftButton1:SetPoint("BOTTOMLEFT",MultiBarBottomLeft,0,-6)
 
@@ -321,22 +178,10 @@ zUI:RegisterComponent("zActionbars", function ()
 			--reposition right bottom
 			MultiBarLeftButton1:SetPoint("TOPRIGHT",MultiBarLeft,41,11)
 
-			--reposition bags
-			MainMenuBarBackpackButton:SetPoint("BOTTOMRIGHT",UIParent,-7,52)
-			MainMenuBarBackpackButton:SetScale(.76)
-			CharacterBag0Slot:SetScale(.76);
-			CharacterBag1Slot:SetScale(.76);
-			CharacterBag2Slot:SetScale(.76);
-			CharacterBag3Slot:SetScale(.76);
-
 			--reposition pet actionbuttons
 			SlidingActionBarTexture0:SetPoint("TOPLEFT",PetActionBarFrame,1,-5) -- pet bar texture (displayed when bottom left bar is hidden)
 			PetActionButton1:ClearAllPoints()
 			PetActionButton1:SetPoint("TOP",PetActionBarFrame,"LEFT",51,4)
-
-			--stance buttons
-			--StanceBarLeft:SetPoint("BOTTOMLEFT",StanceBarFrame,0,-5) --stance bar texture for when Bottom Left Bar is hidden
-			--StanceButton1:ClearAllPoints()
 
 			-- Named ShapeshiftBarFrame in Vanilla!!
 			ShapeshiftBarLeft:SetPoint("BOTTOMLEFT",ShapeshiftBarFrame,0,-5) --stance bar texture for when Bottom Left Bar is hidden
@@ -490,77 +335,6 @@ zUI:RegisterComponent("zActionbars", function ()
 		MainMenuBarLeftEndCap:Hide()
 		MainMenuBarRightEndCap:Hide()
 
-		if (C.global.darkmode == "1") then
-			for _, v in pairs(
-				{
-				BonusActionBarTexture0,
-				BonusActionBarTexture1,
-				SlidingActionBarTexture0,
-				SlidingActionBarTexture1,
-				zActionBarTexture1,
-				zActionBarTexture2,
-				zActionBarTexture3,
-				zActionBarTexture4,
-				zActionBarEndCapLeft,
-				zActionBarEndCapRight,
-				MainMenuMaxLevelBar0,
-				MainMenuMaxLevelBar1,
-				MainMenuMaxLevelBar2,
-				MainMenuMaxLevelBar3,
-				ShapeshiftBarLeft,
-				ShapeshiftBarMiddle,
-				ShapeshiftBarRight,
-				PetFrameTexture,
-				PartyMemberFrame1Texture, --added
-				PartyMemberFrame2Texture,
-				PartyMemberFrame3Texture,
-				PartyMemberFrame4Texture,
-				PartyMemberFrame1PetFrameTexture,
-				PartyMemberFrame2PetFrameTexture,
-				PartyMemberFrame3PetFrameTexture,
-				PartyMemberFrame4PetFrameTexture,
-				TargetofTargetTexture,
-				CastingBarBorder,
-				MiniMapMailBorder, -- test
-				MiniMapTrackingBorder,
-				MiniMapMeetingStoneBorder,
-				MiniMapMailBorder,
-				MiniMapBattlefieldBorder
-				}
-			) do
-				v:SetVertexColor(0.3, 0.3, 0.3); -- todo: add options value..
-			end
-		end
-		
-		if (C.global.darkmode == "1") then
-			for _, v in pairs(
-				{
-				ReputationXPBarTexture0,
-				ReputationXPBarTexture1,
-				ReputationXPBarTexture2,
-				ReputationXPBarTexture3,
-				MainMenuXPBarTexture0,
-				MainMenuXPBarTexture1,
-				MainMenuXPBarTexture2,
-				MainMenuXPBarTexture3,
-				ReputationWatchBarTexture0,
-				ReputationWatchBarTexture1,
-				ReputationWatchBarTexture2,
-				ReputationWatchBarTexture3
-				}
-			) do
-				v:SetVertexColor(0.2, 0.2, 0.2); -- todo: add options value..
-			end
-		end
-
-		--reposition bags
-		MainMenuBarBackpackButton:SetPoint("BOTTOMRIGHT",UIParent,-7,52)
-		MainMenuBarBackpackButton:SetScale(.76)
-		CharacterBag0Slot:SetScale(.76);
-		CharacterBag1Slot:SetScale(.76);
-		CharacterBag2Slot:SetScale(.76);
-		CharacterBag3Slot:SetScale(.76);
-
 		MultiBarLeft:ClearAllPoints();
 		MultiBarLeft:SetPoint("BOTTOMRIGHT", -7, 98);
 		-- since the MultiBarRight always gonna be horisontal in this layout, we can form it initially.
@@ -595,21 +369,11 @@ zUI:RegisterComponent("zActionbars", function ()
 		for i = 0, 3 do --for loop, hides MainMenuBarTexture (0-3)
 		   _G["MainMenuBarTexture" .. i]:Hide()
 		end
-		--MainMenuBarArtFrame:Hide()
-
+		
 		local faction = "HUMAN";
 		local capFaction = "DWARF";
 		 
-		--zUI.zBars = CreateFrame("Frame", nil, UIParent);
-
 		zUI.zBars.zActionBarArt = CreateFrame("Frame","zActionBarArt",MainMenuBar)
-		--zActionBarArt:SetFrameStrata("MEDIUM")
-		--zActionBarArt:SetWidth(1024)
-		--zActionBarArt:SetHeight(128)
-
-		--zUI.zBars.zActionBarArt:SetPoint("Bottom",0,0)
-		--zUI.zBars.zActionBarArt:SetPoint("Bottom",-237,-11)
-		--zUI.zBars.zActionBarArt:SetPoint("TOPLEFT",MainMenuBar,"BOTTOMRIGHT")
 		zUI.zBars.zActionBarArt:SetAllPoints(MainMenuBar);
 
 		zUI.zBars.zActionBarArt.one = zUI.zBars.zActionBarArt:CreateTexture("zActionBarTexture1","ARTWORK") -- offset 4 ->
@@ -618,36 +382,23 @@ zUI:RegisterComponent("zActionbars", function ()
 		zActionBarTexture1:SetWidth(256);
 		zActionBarTexture1:SetHeight(43);
 		zActionBarTexture1:SetTexCoord(0,1.0,0.83203125,1.0);
-		--zActionBarTexture1:Hide()
-		--zActionBarTexture2:Hide()
-		--zActionBarTexture3:Hide()
-		--zActionBarEndCapLeft:Hide()
-		--zActionBarEndCapRight:Hide()
+		
 		zUI.zBars.zActionBarArt.two = zUI.zBars.zActionBarArt:CreateTexture("zActionBarTexture2","ARTWORK")
 		zActionBarTexture2:SetTexture("Interface/MainMenuBar/UI-MainMenuBar-".. faction);
 		zActionBarTexture2:SetPoint("RIGHT",zActionBarTexture1,"RIGHT",256,0)
 		zActionBarTexture2:SetWidth(256);
 		zActionBarTexture2:SetHeight(43);
 		zActionBarTexture2:SetTexCoord(0,1.0,0.58203125,0.75);
-		--zActionBarTexture2:Hide()
-		--zActionBarTexture3:Hide()
-		--zActionBarEndCapLeft:Hide()
-		--zActionBarEndCapRight:Hide()
-		--
+		
 		zUI.zBars.zActionBarArt.three = zUI.zBars.zActionBarArt:CreateTexture("zActionBarTexture3","ARTWORK")
 		zActionBarTexture3:SetTexture("Interface/MainMenuBar/UI-MainMenuBar-".. faction);
-		--zActionBarTexture3:SetPoint("BOTTOM", 123, 0);
 		zActionBarTexture3:SetPoint("RIGHT",zActionBarTexture2,"RIGHT",248,0)
 		zActionBarTexture3:SetWidth(256);
 		zActionBarTexture3:SetHeight(43);
-		--zActionBarTexture3:SetTexCoord(0,1.0,0.83203125,1.0);
 		zActionBarTexture3:SetTexCoord(1.0,0,0.58203125,0.75);
-		--zActionBarTexture3:Hide()
-		--zActionBarEndCapLeft:Hide()
-		--zActionBarEndCapRight:Hide()
+
 		zUI.zBars.zActionBarArt.four = zUI.zBars.zActionBarArt:CreateTexture("zActionBarTexture4","ARTWORK")	-- offset 4 <-
 		zActionBarTexture4:SetTexture("Interface/MainMenuBar/UI-MainMenuBar-".. faction);
-		--zActionBarTexture4:SetPoint("BOTTOM", 377, 0);
 		zActionBarTexture4:SetPoint("RIGHT",zActionBarTexture3,"RIGHT",256,0)
 		zActionBarTexture4:SetWidth(256);
 		zActionBarTexture4:SetHeight(43);
@@ -655,71 +406,35 @@ zUI:RegisterComponent("zActionbars", function ()
 
 		-----------------------==[ Gryph or Lion ]==-----------------------------------------------
 		zUI.zBars.zActionBarArt.left = zUI.zBars.zActionBarArt:CreateTexture("zActionBarEndCapLeft","OVERLAY")
-		--zActionBarTextureLeft:SetTexture("Interface/MainMenuBar/UI-MainMenuBar-EndCap-Human");
 		zActionBarEndCapLeft:SetTexture("Interface/MainMenuBar/UI-MainMenuBar-EndCap-" .. capFaction);
 		zActionBarEndCapLeft:SetPoint("BOTTOM", -540, 0);
 		zActionBarEndCapLeft:SetWidth(128);
 		zActionBarEndCapLeft:SetHeight(128);
-		--zActionBarEndCapLeft:Hide()
-		--zActionBarEndCapRight:Hide()
 		zUI.zBars.zActionBarArt.right = zUI.zBars.zActionBarArt:CreateTexture("zActionBarEndCapRight","OVERLAY")
-		--zActionBarTextureLeft:SetTexture("Interface/MainMenuBar/UI-MainMenuBar-EndCap-Human");
 		zActionBarEndCapRight:SetTexture("Interface/MainMenuBar/UI-MainMenuBar-EndCap-" .. capFaction);
 		zActionBarEndCapRight:SetPoint("BOTTOM", 540, 0);
 		zActionBarEndCapRight:SetWidth(128);
 		zActionBarEndCapRight:SetHeight(128);
 		zActionBarEndCapRight:SetTexCoord(1.0,0,0,1.0);
-		--zActionBarEndCapRight:Hide()
-
+		
 		if(C.actionbars.endcap == "0") then
 			zActionBarEndCapLeft:Hide()
 			zActionBarEndCapRight:Hide()
 		end
 		-----------------------==[ ActionBarUpButton and Down ]==-----------------------------------------------
 		ActionBarUpButton:ClearAllPoints();
-		--ActionBarUpButton:SetPoint("RIGHT",zActionBarTexture4,"RIGHT",24,7)
 		ActionBarUpButton:SetPoint("BOTTOMLEFT",zActionBarEndCapRight,"BOTTOMLEFT",24,13)
-
 		ActionBarDownButton:ClearAllPoints();
 		ActionBarDownButton:SetPoint("BOTTOMLEFT",zActionBarEndCapRight,"BOTTOMLEFT",24,-5)
-
 		MainMenuBarPageNumber:ClearAllPoints();
 		MainMenuBarPageNumber:SetPoint("BOTTOMLEFT",zActionBarEndCapRight,"BOTTOMLEFT",50,16)
 		---------------------------------------------------------------------------------------------------------
-		--CharacterMicroButton:ClearAllPoints();
-		--CharacterMicroButton:SetPoint("TOP",UIParent,"TOP",0,0)
-
-		--MainMenuBarBackpackButton:ClearAllPoints();
-		--MainMenuBarBackpackButton:SetPoint("TOP",UIParent,"TOP",0,-64)
-
 		MainMenuBarLeftEndCap:Hide();
 		MainMenuBarRightEndCap:Hide();
 
 		Initial_ActionLayout();
 
-		--PetActionBarFrame:SetFrameLevel
-		
-
 		local function Update_ActionLayout()
-			if MultiBarBottomLeft:IsShown() then
-				--PetActionButton1:SetPoint("TOP",PetActionBarFrame,"LEFT",51,4)
-			
-				--ShapeshiftButton1:SetPoint("LEFT",ShapeshiftBarFrame,2,-4)
-			else
-				--PetActionButton1:SetPoint("TOP",PetActionBarFrame,"LEFT",51,7)
-			
-				--ShapeshiftButton1:SetPoint("LEFT",ShapeshiftBarFrame,12,-2)
-			end
-
-			--Right Bar:
-			if MultiBarRight:IsShown() then
-				--do
-			else
-			end
-			--BonusActionBarTexture0:Hide()
-			--BonusActionBarTexture1:Hide()
-			--ShapeshiftBarLeft:SetFrameStrata("BACKGROUND")
-			
 			--------------------==[ LARGE-MODE ]==--------------------------
 			if (MultiBarBottomRight:IsShown()) then 
 				zActionBarTexture3:Show();
@@ -808,8 +523,6 @@ zUI:RegisterComponent("zActionbars", function ()
 					SlidingActionBarTexture1:Show();
 					ShapeshiftButton1:SetPoint("BOTTOMLEFT",ShapeshiftBarFrame,"BOTTOMLEFT",266,3) --orig small
 					ShapeshiftBarLeft:SetPoint("BOTTOMLEFT",ShapeshiftBarFrame,"BOTTOMLEFT",255,0) --orig small
-					--SlidingActionBarTexture0:ClearAllPoints();
-					--SlidingActionBarTexture0:SetPoint("TOPLEFT",PetActionBarFrame,"TOPLEFT",100,0)
 				end
 			end
 		end
@@ -819,18 +532,10 @@ zUI:RegisterComponent("zActionbars", function ()
 		hooksecurefunc("ReputationWatchBar_Update", function()
 			if (MultiBarBottomRight:IsShown()) then
 				ReputationWatchStatusBar:SetWidth(1024);
-
-				--ReputationXPBarTexture2:Show();
-				--ReputationXPBarTexture3:Show();
-
 				MainMenuMaxLevelBar0:Show();
 				MainMenuMaxLevelBar3:Show();
-
-				--ReputationWatchStatusBarText:SetFont(STANDARD_TEXT_FONT, 10)
 			else
 				ReputationWatchStatusBar:SetWidth(512); --ReputationWatchStatusBar:SetHeight(10); --needs further hand holding..
-				
-				
 				if(MainMenuExpBar:IsShown()) then
 					ReputationWatchBarTexture2:Hide()
 					ReputationWatchBarTexture3:Hide()
@@ -840,8 +545,6 @@ zUI:RegisterComponent("zActionbars", function ()
 				end
 				MainMenuMaxLevelBar0:Hide();
 				MainMenuMaxLevelBar3:Hide();
-
-				--ReputationWatchStatusBarText:SetFont(STANDARD_TEXT_FONT, 10)
 			end
 		end, true)
 
@@ -850,65 +553,62 @@ zUI:RegisterComponent("zActionbars", function ()
 				MainMenuExpBar:SetWidth(1024);
 				MainMenuXPBarTexture0:Show()
 				MainMenuXPBarTexture3:Show()
-
-				--ReputationXPBarTexture2:Show();
-				--ReputationXPBarTexture3:Show();
-				--MainMenuMaxLevelBar0:Show();
-				--MainMenuMaxLevelBar3:Show();
-				--ReputationWatchStatusBarText:SetFont(STANDARD_TEXT_FONT, 10)
 			else
 				MainMenuExpBar:SetWidth(512); --ReputationWatchStatusBar:SetHeight(10); --needs further hand holding..
 				MainMenuXPBarTexture0:Hide();
 				MainMenuXPBarTexture3:Hide();
-
-
-				--ReputationXPBarTexture2:Hide();
-				--ReputationXPBarTexture3:Hide();
-				--MainMenuMaxLevelBar0:Hide();
-				--MainMenuMaxLevelBar3:Hide();
-				--ReputationWatchStatusBarText:SetFont(STANDARD_TEXT_FONT, 10)
 			end
 		end, true)
 
-		--Update_ActionLayout();
-		--MoveMicroButtonsToBottomRight();
-		--Initial_ActionLayout();
 	end
 
 	----------------------==[ MicroMenuArt-Frame ]==---------------------------------------------------->
-	--zUI.zBars.mma = CreateFrame("Frame", nil, CharacterMicroButton)
+
 	zUI.zBars.mma = CreateFrame("Frame", nil, UIParent)
 	zUI.zBars.mma:SetFrameStrata("MEDIUM")
 	zUI.zBars.mma:SetWidth(512)
 	zUI.zBars.mma:SetHeight(128)
-	--zUI.zBars.mma:SetPoint("Bottom",-72,-4)
 	zUI.zBars.mma:SetPoint("BOTTOMRIGHT",0,0)
-	--zUI.zBars.mma:SetScale(0.9);
 	zUI.zBars.mma.t = zUI.zBars.mma:CreateTexture(nil,"BACKGROUND")
 	zUI.zBars.mma.t:SetTexture("Interface\\Addons\\zUI\\img\\MicroMenuArt8Slot")
 	zUI.zBars.mma.t:SetAllPoints(zUI.zBars.mma)
 	if (C.global.darkmode == "1") then zUI.zBars.mma.t:SetVertexColor(0.2, 0.2, 0.2) end
-	--zUI.zBars.mma.t:Hide()
+
+	if (C.global.microbuttons_auto_hide == "1") then
+		zUI.zBars.Enter = CreateFrame("Frame", "MicroEnter", UIParent);
+		MicroEnter:SetFrameStrata("MEDIUM")
+		MicroEnter:SetPoint("BOTTOMRIGHT", UIParent, 0, 0);
+		MicroEnter:SetWidth(200);
+		MicroEnter:SetHeight(70);
+		--MicroEnter.tex = MicroEnter:CreateTexture(nil,"ARTWORK");
+		--MicroEnter.tex:SetAllPoints(MicroEnter);
+		--MicroEnter.tex:SetTexture(0,1,0,0.6);
+		MicroEnter:EnableMouse(true);
+		MicroEnter:SetScript("OnEnter", function() 
+			--zPrint("Enter");
+			zUI.zBars.mma:SetPoint("BOTTOMRIGHT",0,0)
+			MicroLeave:Show();
+		end)
+
+		zUI.zBars.Leave = CreateFrame("Frame", "MicroLeave", UIParent);
+		MicroLeave:SetFrameStrata("BACKGROUND");
+		MicroLeave:SetAllPoints(UIParent);
+		--MicroLeave.tex = MicroLeave:CreateTexture(nil,"ARTWORK");
+		--MicroLeave.tex:SetAllPoints(MicroLeave);
+		--MicroLeave.tex:SetTexture(1,0,0,0.6);
+		MicroLeave:EnableMouse(true);
+		MicroLeave:SetScript("OnEnter", function() 
+			--zPrint("Leave");
+			zUI.zBars.mma:SetPoint("BOTTOMRIGHT",196,0)
+			this:Hide();
+		end)
+		MicroLeave:Hide();
+		zUI.zBars.mma:SetPoint("BOTTOMRIGHT",196,0);
+	end
+
 	--------------------==[ MICRO MENU MOVEMENT, POSITIONING AND SIZING ]==----------------------------------
-	-- NO VEHICLES IN VANILLA !!!!
-	-- Hopefully this is a clever way of hooking...
-	--zHooksecurefunc("UpdateMicroButtons", MoveMicroButtonsToBottomRight)
+
 	function MoveMicroButtonsToBottomRight()
-		--for i=1, 8 do --select micro menu buttons
-		 -- local v = _G[MICRO_BUTTONS[i]]
-		 -- v:ClearAllPoints()
-		 -- v:SetSize(24,44) --Originally w=28 h=58
-		--end
-		
-		--CharacterMicroButton:ClearAllPoints(); CharacterMicroButton:SetSize(24,44); --Originally w=28 h=58
-		--CharacterMicroButton:ClearAllPoints(); CharacterMicroButton:SetWidth(24); CharacterMicroButton:SetHeight(44); --Originally w=28 h=58
-		--SpellbookMicroButton:ClearAllPoints(); SpellbookMicroButton:SetWidth(24); SpellbookMicroButton:SetHeight(44); --Originally w=28 h=58
-		--TalentMicroButton:ClearAllPoints(); TalentMicroButton:SetWidth(24); TalentMicroButton:SetHeight(44); --Originally w=28 h=58
-		--QuestLogMicroButton:ClearAllPoints(); QuestLogMicroButton:SetWidth(24); QuestLogMicroButton:SetHeight(44); --Originally w=28 h=58
-		--SocialsMicroButton:ClearAllPoints(); SocialsMicroButton:SetWidth(24); SocialsMicroButton:SetHeight(44); --Originally w=28 h=58
-		--WorldMapMicroButton:ClearAllPoints(); WorldMapMicroButton:SetWidth(24); WorldMapMicroButton:SetHeight(44); --Originally w=28 h=58
-		--MainMenuMicroButton:ClearAllPoints(); MainMenuMicroButton:SetWidth(24); MainMenuMicroButton:SetHeight(44); --Originally w=28 h=58
-		--HelpMicroButton:ClearAllPoints(); HelpMicroButton:SetWidth(24); HelpMicroButton:SetHeight(44); --Originally w=28 h=58
 		CharacterMicroButton:SetScale(0.9);
 		SpellbookMicroButton:SetScale(0.9);
 		TalentMicroButton:SetScale(0.9);
@@ -917,46 +617,24 @@ zUI:RegisterComponent("zActionbars", function ()
 		WorldMapMicroButton:SetScale(0.9);
 		MainMenuMicroButton:SetScale(0.9);
 		HelpMicroButton:SetScale(0.9);
-		--CharacterMicroButton:SetPoint("BOTTOMRIGHT",UIParent,-172,4)
-		
 		CharacterMicroButton:ClearAllPoints();
-		CharacterMicroButton:SetPoint("BOTTOMRIGHT",MainMenuBarMicroButton,-192,1)
-		--SpellbookMicroButton:SetPoint("BOTTOMRIGHT",CharacterMicroButton,24,0)
-		--TalentMicroButton:SetPoint("BOTTOMRIGHT",SpellbookMicroButton,24,0)
-		----QuestLogMicroButton:SetPoint("BOTTOMRIGHT",TalentMicroButton,24,0)
-		--SocialsMicroButton:SetPoint("BOTTOMRIGHT",QuestLogMicroButton,24,0)
-		--WorldMapMicroButton:SetPoint("BOTTOMRIGHT",SocialsMicroButton,24,0)
-		--MainMenuMicroButton:SetPoint("BOTTOMRIGHT",WorldMapMicroButton,24,0)
-		--HelpMicroButton:SetPoint("BOTTOMRIGHT",MainMenuMicroButton,24,0)
-
-		--MicroButtonPortrait:SetPoint("TOP",CharacterMicroButton,0,-27) --Originally "TOP",CharacterMicroButton", "TOP", 0, -28
-		--MicroButtonPortrait:SetSize(16,20) --Originally w=18 h=25
-		--MicroButtonPortrait:SetWidth(16); MicroButtonPortrait:SetHeight(20);
-
-		-- POSSIBLY HIDE THIS SINCE IT'S NOT PRESENT IN BFA AS IT IS IN VANILLA
-		-- TODO mouseOver tooltip placement --++ Fixed hopefully
-
-		--MainMenuBarPerformanceBarFrame:ClearAllPoints();	
-
-		--MainMenuBarPerformanceBarFrame:SetFrameStrata("HIGH");
-		--MainMenuBarPerformanceBarFrame:ClearAllPoints();
-		--MainMenuBarPerformanceBarFrame:SetWidth(16);
-		--MainMenuBarPerformanceBarFrame:SetHeight(64);
-		--MainMenuBarPerformanceBarFrame:SetPoint("BOTTOMRIGHT",MainMenuBar,"BOTTOMRIGHT",53,0)
-
-		--MainMenuBarPerformanceBar:SetFrameStrata("HIGH");
+		CharacterMicroButton:SetPoint("BOTTOMRIGHT",zUI.zBars.mma,-192,1)
+		MainMenuBarBackpackButton:SetPoint("BOTTOMRIGHT",zUI.zBars.mma,-7,52)
+		MainMenuBarBackpackButton:SetScale(.76)
+		CharacterBag0Slot:SetScale(.76);
+		CharacterBag1Slot:SetScale(.76);
+		CharacterBag2Slot:SetScale(.76);
+		CharacterBag3Slot:SetScale(.76);
 		MainMenuBarPerformanceBarFrame:ClearAllPoints();
 		MainMenuBarPerformanceBarFrame:SetWidth(12);
 		MainMenuBarPerformanceBarFrame:SetHeight(44);
 		MainMenuBarPerformanceBarFrame:SetPoint("TOPLEFT",HelpMicroButton,"TOPLEFT",22,-13)
 		MainMenuBarPerformanceBarFrame:SetFrameStrata"HIGH"
+
 		for _, v in pairs({MainMenuBarPerformanceBarFrame:GetRegions()}) do
-			--v:Hide()
 			v:ClearAllPoints();
 			v:SetWidth(12);
 			v:SetHeight(44);
-
-			--v:SetPoint("TOPLEFT",HelpMicroButton,"TOPLEFT",20,-9)
 			v:SetPoint("TOPLEFT",HelpMicroButton,"TOPLEFT",22,-13)
 		end
 
@@ -964,75 +642,26 @@ zUI:RegisterComponent("zActionbars", function ()
 		MainMenuBarPerformanceBarFrameButton:SetWidth(14);
 		MainMenuBarPerformanceBarFrameButton:SetHeight(44);
 		MainMenuBarPerformanceBarFrameButton:SetPoint("TOPLEFT",HelpMicroButton,"TOPLEFT",20,-13)
-		--MainMenuBarPerformanceBarFrameButton:SetParent(MainMenuBarPerformanceBarFrame)
-		--MainMenuBarPerformanceBarFrameButton:SetAllPoints();
-		--MainMenuBarPerformanceBar:ClearAllPoints();
-		--MainMenuBarPerformanceBar:SetWidth(16);
-		--MainMenuBarPerformanceBar:SetHeight(64);
-		--MainMenuBarPerformanceBar:SetPoint("TOPLEFT",MainMenuBarPerformanceBarFrame,"TOPLEFT",0,0)
-
-		
-		--zUI.zBars.zActionBarArt:Hide()
-		--zUI.zBars.mma:Show()
-		--zUI.zBars.mma:Hide()
-		--zActionBarEndCapLeft:Hide()
-		--zActionBarEndCapRight:Hide()
-
-		--MainMenuBarPerformanceBarFrame:SetWidth(12);
-		--MainMenuBarPerformanceBarFrame:SetHeight(40);
-		----MainMenuBarPerformanceBarFrame:SetScale(0.8);
-		--MainMenuBarPerformanceBarFrame:SetPoint("TOPLEFT",HelpMicroButton,"TOPLEFT",20,-9) --Originally "CENTER",MainMenuMicroButton", "CENTER", 0, 0
-		----MainMenuBarPerformanceBarFrame:SetPoint("CENTER",HelpMicroButton,15,-9)
-		--
-		--MainMenuBarPerformanceBarFrame:SetFrameStrata("HIGH");
-		----MainMenuBarPerformanceBar:SetFrameStrata("HIGH");
-		--
-		--MainMenuBarPerformanceBar:ClearAllPoints();
-		--MainMenuBarPerformanceBar:SetWidth(12);
-		--MainMenuBarPerformanceBar:SetHeight(44);
-		--
-		--MainMenuBarPerformanceBar:SetPoint("TOPLEFT",MainMenuBarPerformanceBarFrame,"BOTTOMLEFT",0,0)
-		--MainMenuBarPerformanceBar:SetPoint("CENTER",MainMenuBarPerformanceBarFrame,0,0)
-
-		--MainMenuBarPerformanceBarFrameButton:ClearAllPoints();
-		--MainMenuBarPerformanceBarFrameButton:SetPoint("TOPLEFT",UIParent,"BOTTOMLEFT",50,0)
-
-		--MainMenuBarPerformanceBar:SetAllPoints(MainMenuBarPerformanceBarFrame);
-		--MainMenuBarPerformanceBarFrame:Hide()
-		
-
 		KeyRingButton:SetScale(0.9);
-		--UpdateTalentButton();
-		--[[
-		CharacterMicroButtonFlash:SetSize(51,47) -- Originally w=64 h=64
-		CharacterMicroButtonFlash:SetPoint("TOPLEFT",CharacterMicroButton,-1,-14) -- Originally ("TOPLEFT",CharacterMicroButton,"TOPLEFT",-2,-18)
-		SpellbookMicroButtonFlash:SetSize(51,47) -- Originally w=64 h=64
-		SpellbookMicroButtonFlash:SetPoint("TOPLEFT",SpellbookMicroButton,-1,-14) -- Originally ("TOPLEFT",SpellbookMicroButton,"TOPLEFT",-2,-18)
-		TalentMicroButtonFlash:SetSize(51,47) -- Originally w=64 h=64
-		TalentMicroButtonFlash:SetPoint("TOPLEFT",TalentMicroButton,-1,-14) -- Originally ("TOPLEFT",TalentMicroButton,"TOPLEFT",-2,-18)
-		QuestLogMicroButtonFlash:SetSize(51,47) -- Originally w=64 h=64
-		QuestLogMicroButtonFlash:SetPoint("TOPLEFT",QuestLogMicroButton,-1,-14) -- Originally ("TOPLEFT",QuestLogMicroButton,"TOPLEFT",-2,-18)
-		MainMenuMicroButtonFlash:SetSize(51,47) -- Originally w=64 h=64
-		MainMenuMicroButtonFlash:SetPoint("TOPLEFT",MainMenuMicroButton,-1,-14) -- Originally ("TOPLEFT",MainMenuMicroButton,"TOPLEFT",-2,-18)
-		--]]
 	end
+
 	local f=CreateFrame("Frame")
 	f:RegisterEvent("PLAYER_ENTERING_WORLD")
 	f:SetScript("OnEvent", function()
 		MoveMicroButtonsToBottomRight();
-		f:UnregisterEvent("PLAYER_ENTERING_WORLD"); -- only run once duuh. MODIFIED
+		f:UnregisterEvent("PLAYER_ENTERING_WORLD"); 
 	end)
 
 	-- Only for testing purpose what happens when player gets to lvl 10 and the microbutton talent icon appears.
-	function zUpdateTalentButton()
-		if ( UnitLevel("player") < 10 ) then
-			TalentMicroButton:Hide();
-			QuestLogMicroButton:SetPoint("BOTTOMLEFT", "TalentMicroButton", "BOTTOMLEFT", 0, 0);
-		else	
-			TalentMicroButton:Show();
-			QuestLogMicroButton:SetPoint("BOTTOMLEFT", "TalentMicroButton", "BOTTOMRIGHT", -2, 0);
-		end
-	end
+	--function zUpdateTalentButton()
+	--	if ( UnitLevel("player") < 10 ) then
+	--		TalentMicroButton:Hide();
+	--		QuestLogMicroButton:SetPoint("BOTTOMLEFT", "TalentMicroButton", "BOTTOMLEFT", 0, 0);
+	--	else	
+	--		TalentMicroButton:Show();
+	--		QuestLogMicroButton:SetPoint("BOTTOMLEFT", "TalentMicroButton", "BOTTOMRIGHT", -2, 0);
+	--	end
+	--end
 	
 	--------------------==[ BLIZZARD TEXTURES ]==-----------------------------------
 	--hide Blizzard art textures

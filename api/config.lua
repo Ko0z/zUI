@@ -78,6 +78,7 @@ zUI:UpdateConfig( "chat", nil, "ilink", "0")
 zUI:UpdateConfig( "chat", nil, "tformat", "1")
 zUI:UpdateConfig( "chat", nil, "tstamps", "1")
 
+zUI:UpdateConfig( "global", nil, "microbuttons_auto_hide", "0")
 zUI:UpdateConfig( "global", nil, "darkmode", "1")
 zUI:UpdateConfig( "global", nil, "font_size", "12")
 zUI:UpdateConfig( "global", nil, "font_unit_size", "12")
