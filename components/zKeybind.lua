@@ -1,3 +1,4 @@
+-- Many credits to Shagu, pfUI
 zUI:RegisterComponent("zKeybind", function ()
 	
 	-- Reload request after key bindings...

@@ -1,3 +1,4 @@
+-- Credits to Shagu
 -- this table is added in later expansions
 CLASS_SORT_ORDER = CLASS_SORT_ORDER or {
   "WARRIOR",

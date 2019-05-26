@@ -1,3 +1,4 @@
+-- many Credits to Modernist, modUI
 zUI:RegisterComponent("zRaid", function () 
 -- these were originally based on luna's raidframes
 -- credits to rhena, modernist

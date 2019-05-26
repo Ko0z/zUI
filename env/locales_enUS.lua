@@ -1,3 +1,4 @@
+-- Credits to Shagu
 zUI_locale["enUS"] = {}
 
 zUI_locale["enUS"]["class"] = {

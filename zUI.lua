@@ -1,3 +1,4 @@
+-- General structure credits to Shagu, pfUI
 function zPrint(txt)
 	if( DEFAULT_CHAT_FRAME ) then
 		--DEFAULT_CHAT_FRAME:AddMessage(fontBlue.."<|cffffd200z|cff808080UI|r" .. fontBlue .. "> |r"..txt)

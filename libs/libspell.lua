@@ -1,4 +1,4 @@
--- load zUI environment
+-- Credits to Shagu, pfUI
 setfenv(1, zUI:GetEnvironment())
 
 -- return instantly when another libspell is already active

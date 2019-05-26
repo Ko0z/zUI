@@ -1,3 +1,4 @@
+-- Credits to MrFIXIT, xcalc
 BINDING_HEADER_XCALC = "xcalc"
 BINDING_NAME_XC_TOGGLEWINDOW = "Toggle xcalc"
 BINDING_HEADER_XCALC_AUTOMATIC = "xcalc (automatic)"

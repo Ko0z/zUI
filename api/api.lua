@@ -1,4 +1,4 @@
-
+-- Credits to Shagu, Modernist
 zUI.api = { }
 
 -- load zUI environment

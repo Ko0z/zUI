@@ -1,3 +1,4 @@
+-- Credits to millanzarreta, LoseControl
 zUI:RegisterComponent("zLoseControl", function ()
 
 local CC      = "CC"

@@ -1,3 +1,4 @@
+-- Credits to Shagu
 zUI:RegisterComponent("zTroubleSeeker", function ()
 	-- mainly for debugging, checks for illegal function calls
 	-- Credits to Shagu

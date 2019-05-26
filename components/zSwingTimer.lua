@@ -1,3 +1,4 @@
+-- Credits to EinBaum, SP_SwingTimer
 zUI:RegisterComponent("zSwingTimer", function ()
 
 	local _, class = UnitClass("player")

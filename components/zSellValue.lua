@@ -1,3 +1,4 @@
+-- Credits to Shagu, pfUI
 zUI:RegisterComponent("zSellValue", function () 
 	zUI.sellvalue = CreateFrame( "Frame" , "zGameTooltip", GameTooltip )
 

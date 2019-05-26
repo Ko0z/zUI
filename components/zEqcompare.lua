@@ -1,3 +1,4 @@
+-- Credits to Shagu, pfUI
 zUI:RegisterComponent("zEqcompare", function ()
   local loc = zUI.cache["locale"]
   for key, value in pairs(L["itemtypes"]) do setglobal(key, value) end

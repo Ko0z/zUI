@@ -1,3 +1,4 @@
+-- Option frame system credits to Shagu, pfUI
 zUI:RegisterComponent("zOptions", function ()
 
 ZUI_MINIMAPBUTTON_LINE1 = "Click to toggle Options"

@@ -1,3 +1,4 @@
+-- Credist to Modernist, modUI
 zUI:RegisterSkin("Theme", function () --modui inspired
 	
 	local faction = UnitFactionGroup("player");

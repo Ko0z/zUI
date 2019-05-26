@@ -1,3 +1,4 @@
+-- Credits to Shagu, PfUI
 zUI:RegisterComponent("zMap", function ()
 
 	local fake_ipairs = lua51 and loadstring([[local tmp = {}; return function(...)

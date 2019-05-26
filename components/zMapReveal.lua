@@ -1,3 +1,4 @@
+-- Credits to pfUI
 zUI:RegisterComponent("zMapFog", function ()
   -- do not load if other map addon is loaded
   if Cartographer then return end

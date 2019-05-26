@@ -1,3 +1,4 @@
+-- Many credits to Shagu, pfUI
 zUI:RegisterComponent("zEasyLife", function ()
 	---------==[ auto-switch-stance ]==----------------
 	if (C.quality.auto_stance == "1") then

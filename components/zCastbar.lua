@@ -1,3 +1,4 @@
+-- Credits to Shagu, pfUI
 zUI:RegisterComponent("zCastbar", function ()
 	--local font = C.castbar.use_unitfonts == "1" and zUI.font_unit or zUI.font_default
 	--local font_size = C.castbar.use_unitfonts == "1" and C.global.font_unit_size or C.global.font_size

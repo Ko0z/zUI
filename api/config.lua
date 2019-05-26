@@ -1,3 +1,4 @@
+-- Option system credits to Shagu, pfUI
 function zUI:UpdateConfig(group, subgroup, entry, value)
   -- create empty config if not existing
 	if not zUI_config then

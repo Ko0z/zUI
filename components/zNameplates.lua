@@ -1,3 +1,4 @@
+-- Credits to Shagu, pfUI
 zUI:RegisterComponent("zNameplates", function ()
 	
 	NAMEPLATE_OBJECTORDER = { "border", "glow", "name", "level", "levelicon",

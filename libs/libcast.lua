@@ -1,5 +1,4 @@
--- load zUI environment
--- Credits to Shagu
+-- Credits to Shagu, pfUI
 setfenv(1, zUI:GetEnvironment())
 
 --[[ libcast ]]--

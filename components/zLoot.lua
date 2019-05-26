@@ -1,3 +1,4 @@
+-- Many credits to Shagu, pfUI
 zUI:RegisterComponent("zLoot", function ()
 	zUI.loot = CreateFrame("Frame", "zLootFrame", UIParent);
 	zUI.loot:Hide();

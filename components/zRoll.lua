@@ -1,3 +1,4 @@
+-- Credits to Shagu, pfUI
 zUI:RegisterComponent("zRoll", function ()
 	local font = STANDARD_TEXT_FONT
 	local font_size = C.global.font_size

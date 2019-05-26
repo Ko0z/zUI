@@ -1,6 +1,4 @@
---setfenv(1, zUI:GetEnvironment())
-
-
+--Credits to Modernist, modUI
 zUI:RegisterComponent("zChat", function ()
 	--_G = getfenv(0)
 	local _, class = UnitClass'Player'

@@ -1,3 +1,4 @@
+-- Credits to Modernist, modUI
 zUI:RegisterComponent("zMapPin", function ()
 
     local H     = {}
@@ -90,10 +91,6 @@ zUI:RegisterComponent("zMapPin", function ()
         end
     end
 
-	--hooksecurefunc("WorldMapButton_OnClick", function()
-			
-	--end,true)
-
     local OnClick = function(mB, bu)
         if  IsShiftKeyDown() then
             if not bu then bu = this end
@@ -115,9 +112,6 @@ zUI:RegisterComponent("zMapPin", function ()
             end
         end
     end
-
-    --WorldMapButton_OnClick  = OnClick
-    --WorldMapFrame_Update    = Update
 
 	hooksecurefunc("WorldMapButton_OnClick",OnClick,false);
 	hooksecurefunc("WorldMapFrame_Update",Update,false);
