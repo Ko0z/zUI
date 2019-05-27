@@ -32,6 +32,13 @@ This addon aims to preserve the blizzard look/design but with a modern touch and
 
 ## Heritage
 This addon started out as a fork of Shagu's pfUI. The general idea at first was just to tweak some things to have it look exactly as I wanted, and as time moved on I started to add other features with the purpose of having the most crucial features under the same "roof" and as light-weight as possible. I've always wanted to preserve the blizzard UI in some ways and I really liked the look of Modernist's modUI which is the foundation of the art decisions made here. So these guys deserve a big thank you becuase they are the reason this addon exist! Please check out their work and leave a star www.gitlab.com/Shagu , www.github.com/obble
+## Special thanks to
+Shagu, www.gitlab.com/Shagu
+Modernist, www.github.com/obble
+EinBaum, www.github.com/EinBaum
+millanzarreta, Kouri82 https://wow.curseforge.com/projects/losecontrol
+MrFIXIT, https://www.curseforge.com/wow/addons/xcalc
+
 ## Features
 There are a lot of different features in this UI and the user can choose to disable any component that they dont want to use without 
 having any issues becuase of it. 
