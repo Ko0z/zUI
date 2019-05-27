@@ -1,7 +1,4 @@
 # zUI
-Many features and the general structure is heavily inspired or written by Shagu. Please check out his work at www.gitlab.com/shagu
-Modernist addons has also been a great source of inspiration, check out his work at www.github.com/obble
-
 An upcoming UI for Classic World of Warcraft. Built on the 1.12.1 client but will later be modified to be compatible with 1.13 and beyond!
 This addon aims to preserve the blizzard look/design but with a modern touch and with some nice features added.
 <img src="https://i.imgur.com/R2FI64k.png" align="right" width="28%">

@@ -91,6 +91,7 @@ zUI:UpdateConfig( "global", nil, "language", GetLocale())
 zUI:UpdateConfig( "gui", nil, "reloadmarker", "0")
 
 zUI:UpdateConfig( "hotkeys", nil, "color", "1,1,1,1")
+zUI:UpdateConfig( "hotkeys", nil, "blizzard_font", "1")
 
 zUI:UpdateConfig( "loot", nil, "autoresize", "1")
 zUI:UpdateConfig( "loot", nil, "rollannounce", "0")
@@ -142,7 +143,7 @@ zUI:UpdateConfig( "quality", nil, "feign_death", "1")
 zUI:UpdateConfig( "quality", "swingtimer", "enable_for_all", "0")
 zUI:UpdateConfig( "quality", "swingtimer", "disable", "0")
 
-zUI:UpdateConfig( "skin", nil, "dark", ".3,.3,.3,1")
+zUI:UpdateConfig( "skin", nil, "dark", ".2,.2,.2,1")
 
 zUI:UpdateConfig( "swingtimer", nil, "color", "1.0, 1.0, 1.0, 1")
 

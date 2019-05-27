@@ -227,7 +227,11 @@ zUI:RegisterSkin("Bag", function () --modui inspired
         bu:SetNormalTexture''
         ic:SetTexCoord(.1, .9, .1, .9)
         zSkin(bu, .25)
-        zSkinColor(bu, .7, .7, .7)
+		if(C.global.darkmode == "1") then
+			zSkinColor(bu, .7, .7, .7)
+		--else
+			--zSkinColor(bu, .7, .7, .7)
+		end
         du:ClearAllPoints() du:SetPoint('CENTER', bu, 'BOTTOM', 2, -9)
     end
 
@@ -499,7 +503,12 @@ zUI:RegisterSkin("Bag", function () --modui inspired
 	for i = 1, 5 do
         local bu = _G['TargetFrameBuff'..i]
         zSkin(bu, 1)
-        zSkinColor(bu, .3, .3, .3)
+		if(C.global.darkmode == "1") then
+			zSkinColor(bu, .3, .3, .3)
+		--else
+			--zSkinColor(bu, .7, .7, .7)
+		end
+        --zSkinColor(bu, .3, .3, .3)
     end
 	--
     --for i = 1, 16 do

@@ -1003,13 +1003,12 @@ function zUI.api.SetupHotkeyString(parent)
 	if (parent) then
 		-- Create new frame to hold our hotkey string
 		local f = CreateFrame("Frame", nil, parent);
-		f.keybind = f:CreateFontString(nil, "OVERLAY", "GameFontNormal");
+		f.keybind = f:CreateFontString(nil, "OVERLAY", "NumberFontNormalSmallGray");
 		f:RegisterEvent("UPDATE_BINDINGS");
 		SetAllPointsOffset(f.keybind, parent, 0, 0);
-		f.keybind:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE");
-		--local hotkey_color = { strsplit(",", C.hotkeys.color) }
-		--f.keybind:SetTextColor(unpack(hotkey_color));
-		--local hotkey_color = { strsplit(",", C.hotkeys.color) }
+		if (zUI_config.hotkeys.blizzard_font == "0") then
+			f.keybind:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE");
+		end
 		f.keybind:SetTextColor(unpack({ strsplit(",", C.hotkeys.color) }));
 		f.keybind:SetJustifyH("RIGHT")
 		f.keybind:SetJustifyV("TOP")

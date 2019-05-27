@@ -143,7 +143,14 @@ end
 		--hooksecurefunc("ActionButton_OnUpdate", function(elapsed)
 		--	AddBorderColour(GetTime())
 		--end,true)
-		
+		local cr,cg,cb,ca;
+		if(C.global.darkmode == "1") then
+			cr,cg,cb,ca = zUI.api.GetStringColor(C.skin.dark)
+		else
+			cr,cg,cb,ca = 1,1,1,1;
+		end
+
+
 		hooksecurefunc("ActionButtonDown", function(id)	-- todo get an option for this!!! and all other colors..
 			ActionButtonUp(id)
 			if ( BonusActionBarFrame:IsShown() ) then
@@ -159,11 +166,13 @@ end
 		hooksecurefunc("ActionButtonUp", function(id)
 			if ( BonusActionBarFrame:IsShown() ) then
 				local button = getglobal("BonusActionButton"..id);
-				zSkinColor(button, .2, .2, .2); 
+				--zSkinColor(button, .2, .2, .2); 
+				zSkinColor(button, cr, cg, cb); 
 				button:SetChecked(0);
 			end
 			local button = getglobal("ActionButton"..id)
-			zSkinColor(button, .2, .2, .2); 
+			--zSkinColor(button, .2, .2, .2); 
+			zSkinColor(button, cr, cg, cb); 
 			button:SetChecked(0);
 		end, true)
 
@@ -176,7 +185,8 @@ end
 
 		hooksecurefunc("MultiActionButtonUp", function(bar, id, onSelf)
 			local button = getglobal(bar.."Button"..id);
-			zSkinColor(button, .2, .2, .2);
+			--zSkinColor(button, .2, .2, .2);
+			zSkinColor(button, cr, cg, cb); 
 			button:SetChecked(0);
 		end, true)
 

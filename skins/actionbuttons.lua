@@ -1,4 +1,6 @@
 zUI:RegisterSkin("Actionbuttons", function () 
+	
+	local cr,cg,cb,ca = zUI.api.GetStringColor(C.skin.dark)
 
 	for i = 1, 24 do
 		local bu = _G['BonusActionButton'..i]
@@ -11,7 +13,7 @@ zUI:RegisterSkin("Actionbuttons", function ()
 			zStyle_ButtonElements(bu)
 			--bu:SetCheckedTexture''
 			if (C.global.darkmode == "1") then 
-				zSkinColor(bu,0.2,0.2,0.2,1);
+				zSkinColor(bu,cr,cg,cb,ca);
 			else
 				zSkinColor(bu,0.7,0.7,0.7,1);
 			end
@@ -28,10 +30,10 @@ zUI:RegisterSkin("Actionbuttons", function ()
 			}
 		) do
 			-----------==[[ HIDE ORIG HOTKEY TEXT ]]==-------------->
-			local hk    = _G[v:GetName()..'HotKey']
-			if (hk) then
-				hk:Hide();
-			end
+			--local hk    = _G[v:GetName()..'HotKey']
+			--if (hk) then
+			--	hk:Hide();
+			--end
 			-------------------------------------------------------->
 			if (C.actionbars.squarebuttons == "1") then
 				zStyle_Button(v,0,0,1) --square borders.
@@ -40,7 +42,8 @@ zUI:RegisterSkin("Actionbuttons", function ()
 			end
 			zStyle_ButtonElements(v)
 			if (C.global.darkmode == "1") then
-				zSkinColor(v,0.1,0.1,0.1,1);
+				--zSkinColor(v,0.1,0.1,0.1,1);
+				zSkinColor(v,cr,cg,cb,ca);
 			else
 				zSkinColor(v,0.7,0.7,0.7,1);
 			end
@@ -112,7 +115,8 @@ zUI:RegisterSkin("Actionbuttons", function ()
 		) do
 			zStyle_Button(v)
 			if (C.global.darkmode == "1") then
-				zSkinColor(v,0.2,0.2,0.2,1);
+				--zSkinColor(v,0.2,0.2,0.2,1);
+				zSkinColor(v,cr,cg,cb,ca);
 			else
 				zSkinColor(v,0.7,0.7,0.7,1);
 			end
@@ -128,7 +132,8 @@ zUI:RegisterSkin("Actionbuttons", function ()
 			v:SetFrameStrata'LOW' -- LOW --possibly causing stance background image to be superior..
 			zStyle_Button(v)
 			if (C.global.darkmode == "1") then
-				zSkinColor(v,0.2,0.2,0.2,1);
+				--zSkinColor(v,0.2,0.2,0.2,1);
+				zSkinColor(v,cr,cg,cb,ca);
 			else
 				zSkinColor(v,0.7,0.7,0.7,1);
 			end

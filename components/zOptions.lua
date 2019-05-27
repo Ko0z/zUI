@@ -972,6 +972,7 @@ end
 		CreateGUIEntry("General", nil, function()
 			CreateConfig(nil, T["Auto Hide Micro Menu"], C.global, "microbuttons_auto_hide", "checkbox")
 			CreateConfig(nil, T["Show Endcaps (Gryphons)"], C.actionbars, "endcap", "checkbox")
+			CreateConfig(nil, T["Enable Global Dark Mode"], C.global, "darkmode", "checkbox")
 
 			CreateConfig(nil, T["Quality of Life"], nil, nil, "header")
 			CreateConfig(nil, T["Auto Dismount"], C.quality, "auto_dismount", "checkbox")
@@ -986,8 +987,10 @@ end
 		CreateGUIEntry("Actionbars", nil, function()
 			CreateConfig(nil, T["Enable BFA-Style"], C.actionbars, "bfa_style", "checkbox")
 			CreateConfig(nil, T["Enable Square Style"], C.actionbars, "squarebuttons", "checkbox")
-			CreateConfig(nil, T["Enable Global Dark Mode"], C.global, "darkmode", "checkbox")
+			
 			CreateConfig(nil, T["Hotkey Text Color"], C.hotkeys, "color", "color")
+			CreateConfig(nil, T["Use Blizzard Hotkey Font"], C.hotkeys, "blizzard_font", "checkbox")
+			CreateConfig(nil, T["Action Button Border Color"], C.skin, "dark", "color")
 		end)
 
 		CreateGUIEntry("Unitframes", nil, function()

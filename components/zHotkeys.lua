@@ -29,4 +29,22 @@
 			SetupHotkeyString(v);
 		end
 	end
+
+	for i = 1, 12 do
+		for _, v in pairs(
+				{
+				_G['ActionButton'..i],
+				_G['MultiBarRightButton'..i],
+				_G['MultiBarLeftButton'..i],
+				_G['MultiBarBottomLeftButton'..i],
+				_G['MultiBarBottomRightButton'..i],
+			}
+		) do
+			-----------==[[ HIDE ORIG HOTKEY TEXT ]]==-------------->
+			local hk    = _G[v:GetName()..'HotKey']
+			if (hk) then
+				hk:Hide();
+			end
+		end
+	end
 end)
