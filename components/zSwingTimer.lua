@@ -132,16 +132,16 @@ zUI:RegisterComponent("zSwingTimer", function ()
 
 	function zUI.swingtimer:ShouldResetTimer()
 		local percentTime = st_timer / zUI.swingtimer:GetWeaponSpeed()
-		return (percentTime < 0.025)
+		--zPrint(tostring(percentTime))
+		return (percentTime < 0.04)
 	end
 
 	function zUI.swingtimer:AuraResetTimer()
 		currentWpnSpd = UnitAttackSpeed("player")
 		if(currentWpnSpd ~= oldWpnSpd) then 
 			if (st_timer > 0) then
-				st_timer = currentWpnSpd
+				st_timer = st_timer - (oldWpnSpd - currentWpnSpd);
 			end
-			--end
 			oldWpnSpd = currentWpnSpd
 		end
 	end
