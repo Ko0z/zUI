@@ -93,10 +93,12 @@ function zUI.api.UnitColor(unit)
 	else
 		if (C.unitframes.npcclasscolor == "1") then
 			local localizedClass, englishClass = UnitClass(unit);
-			local classColor = RAID_CLASS_COLORS[englishClass];
-
-			if ( classColor ) then
+			
+			if ( englishClass ~= nil ) then
+				local classColor = RAID_CLASS_COLORS[englishClass];
 				r, g, b = classColor.r, classColor.g, classColor.b;
+			else
+				r, g, b = TargetFrameNameBackground:GetVertexColor();
 			end
 		else
 			r, g, b = TargetFrameNameBackground:GetVertexColor();

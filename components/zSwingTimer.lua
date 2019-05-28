@@ -132,8 +132,7 @@ zUI:RegisterComponent("zSwingTimer", function ()
 
 	function zUI.swingtimer:ShouldResetTimer()
 		local percentTime = st_timer / zUI.swingtimer:GetWeaponSpeed()
-		--return (percentTime < 0.025)
-		return true
+		return (percentTime < 0.025)
 	end
 
 	function zUI.swingtimer:AuraResetTimer()
@@ -224,10 +223,14 @@ zUI:RegisterComponent("zSwingTimer", function ()
 				end
 			end
 		elseif (event == "CHAT_MSG_COMBAT_SELF_MISSES") then
-			zUI.swingtimer:ResetTimer()
+			if (zUI.swingtimer:ShouldResetTimer()) then
+				zUI.swingtimer:ResetTimer()
+			end
 		elseif (event == "CHAT_MSG_COMBAT_SELF_HITS") then
 			if (string.find(arg1, "You hit") or string.find(arg1, "You crit")) then
-				zUI.swingtimer:ResetTimer()
+				if (zUI.swingtimer:ShouldResetTimer()) then
+					zUI.swingtimer:ResetTimer()
+				end
 			end
 		elseif (event == "CHAT_MSG_SPELL_PERIODIC_SELF_BUFFS") then
 			zUI.swingtimer:AuraResetTimer()

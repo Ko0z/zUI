@@ -29,12 +29,7 @@ zUI:RegisterSkin("Actionbuttons", function ()
 				_G['MultiBarBottomRightButton'..i],
 			}
 		) do
-			-----------==[[ HIDE ORIG HOTKEY TEXT ]]==-------------->
-			--local hk    = _G[v:GetName()..'HotKey']
-			--if (hk) then
-			--	hk:Hide();
-			--end
-			-------------------------------------------------------->
+			
 			if (C.actionbars.squarebuttons == "1") then
 				zStyle_Button(v,0,0,1) --square borders.
 			else
