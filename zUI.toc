@@ -38,7 +38,7 @@ components\zCalc.lua
 #components\zTicTac.lua
 components\zInstaCast.lua
 components\zMiniMap.lua
-components\zRingMenu.lua
+#components\zRingMenu.lua
 components\zMap.lua
 components\zMapPin.lua
 components\zMapReveal.lua
