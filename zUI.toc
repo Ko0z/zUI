@@ -28,14 +28,14 @@ libs\libdebuff.lua
 libs\libunitscan.lua
 
 # components
---components\zMobHealth.lua
+#components\zMobHealth.lua
 components\zOptions.lua
 components\zActionbars.lua
 components\zKeybind.lua
 components\zCooldowns.lua
 components\zCastbar.lua
 components\zCalc.lua
---components\zTicTac.lua
+#components\zTicTac.lua
 components\zInstaCast.lua
 components\zMiniMap.lua
 components\zRingMenu.lua
@@ -63,7 +63,7 @@ components\zEnergy.lua
 skins\actionbuttons.lua
 skins\bag.lua
 skins\tip.lua
---skins\chatballoon.lua
+#skins\chatballoon.lua
 skins\theme.lua
 
 
