@@ -2,7 +2,7 @@
 ## Title: |cffffd200z|cff808080UI 
 ## Author: Ko0zi, Shagu, Modernist, Shirsig and Road-block
 ## Notes: A UI that aims to preserve the blizzard look/design but with a modern touch and with some nice features added.
-## Version: 0.1.7
+## Version: 0.1.8
 ## SavedVariables: zUI_profiles, zUI_addon_profiles, zUI_cache
 ## SavedVariablesPerCharacter: zUI_config, zUI_init, zUI_playerDB
 
