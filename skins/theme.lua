@@ -277,16 +277,19 @@ zUI:RegisterSkin("Theme", function () --modui inspired
         table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
     end
 
-    QuestLogFrame.Material = QuestLogFrame:CreateTexture(nil, 'OVERLAY', nil, 7)
-	if(faction) then
-		QuestLogFrame.Material:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_" .. faction)
-	else
-		QuestLogFrame.Material:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_Horde")
-	end
-    QuestLogFrame.Material:SetWidth(514)
-    QuestLogFrame.Material:SetHeight(354)
-    QuestLogFrame.Material:SetPoint('TOPLEFT', QuestLogDetailScrollFrame)
-    QuestLogFrame.Material:SetVertexColor(.9, .9, .9)
+    local qlMaterial = QuestLogDetailScrollFrame.Material or QuestLogDetailScrollFrame:CreateTexture(nil, "BACKGROUND")
+    local qlTexture = "Interface\\AddOns\\zUI\\img\\QuestBG_"
+
+    -- zUI QuestLog texture transparency size: x-211, y-103
+    -- See SetPoint() below. Shorten height by 2px
+    local qlFrameX = QuestLogDetailScrollChildFrame:GetWidth() + 211
+    local qlFrameY = QuestLogDetailScrollChildFrame:GetHeight() + 101
+
+    qlMaterial:SetTexture(qlTexture .. (faction or "Horde"))
+    qlMaterial:SetWidth(qlFrameX)
+    qlMaterial:SetHeight(qlFrameY)
+    qlMaterial:SetPoint("TOPLEFT", 0, 2) -- offset 2px for better alignment
+    qlMaterial:SetVertexColor(.9, .9, .9)
 
         -- QUEST TIMER
     table.insert(ZUI_COLOURELEMENTS_BORDER_FOR_UI, QuestTimerFrame)

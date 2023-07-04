@@ -580,17 +580,25 @@ zUI:RegisterComponent("zUnitframes", function ()
 				MobHealth3BlizzardPowerText:Hide();
 			end
 
-            if GetCVar'statusBarText' == '0' then
-                zTargetHealthText:Hide() zTargetPowerText:Hide()
-                TargetFrameHealthBar:SetScript('OnEnter', function() zTargetHealthText:Show() end)
-                TargetFrameHealthBar:SetScript('OnLeave', function() zTargetHealthText:Hide() end)
-                TargetFrameManaBar:SetScript('OnEnter', function() zTargetPowerText:Show() end)
-                TargetFrameManaBar:SetScript('OnLeave', function() zTargetPowerText:Hide() end)
-				--Initialize();
-            else
-                zTargetHealthText:Show() zTargetPowerText:Show()
-				--Initialize();
-            end
+			if (C.unitframes.forceshowtext == "1") then
+				zTargetHealthText:Show() zTargetPowerText:Show()
+				PlayerFrameHealthBarText:Show() PlayerFrameManaBarText:Show()
+				
+				PlayerFrameHealthBar:SetScript('OnLeave', function() PlayerFrameHealthBarText:Show() end)
+				PlayerFrameManaBar:SetScript('OnLeave', function() PlayerFrameManaBarText:Show() end)
+			else
+				if GetCVar'statusBarText' == '0' then
+				    zTargetHealthText:Hide() zTargetPowerText:Hide()
+				    TargetFrameHealthBar:SetScript('OnEnter', function() zTargetHealthText:Show() end)
+				    TargetFrameHealthBar:SetScript('OnLeave', function() zTargetHealthText:Hide() end)
+				    TargetFrameManaBar:SetScript('OnEnter', function() zTargetPowerText:Show() end)
+				    TargetFrameManaBar:SetScript('OnLeave', function() zTargetPowerText:Hide() end)
+					--Initialize();
+				else
+				    zTargetHealthText:Show() zTargetPowerText:Show()
+					--Initialize();
+				end
+			end
         elseif(event == "ADDON_LOADED") then
 			--zPrint(arg1);
 			if (arg1 == "MobHealth") then
