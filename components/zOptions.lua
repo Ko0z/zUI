@@ -1000,7 +1000,7 @@ end
 			CreateConfig(nil, T["Improved Pet Frame"], C.unitframes, "improvedpet", "checkbox")
 			
 			CreateConfig(nil, T["Text"], nil, nil, "header")
-			CreateConfig(nil, T["Force Show Hp/Mp (Ignore 'Status Bar Text' Interface Option)"], C.unitframes, "forceshowtext", "checkbox")
+			--CreateConfig(nil, T["Force Show Hp/Mp (Ignore 'Status Bar Text' Interface Option)"], C.unitframes, "forceshowtext", "checkbox")
 			CreateConfig(nil, T["Show Percentage"], C.unitframes, "percentages", "checkbox")
 			CreateConfig(nil, T["Format HP/MP-Text (1000 = 1k)"], C.unitframes, "trueformat", "checkbox")
 			CreateConfig(nil, T["Gradient Colored HP-Text"], C.unitframes, "coloredtext", "checkbox")

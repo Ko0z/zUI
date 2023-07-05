@@ -2,7 +2,7 @@
 An upcoming UI for Classic World of Warcraft. Built on the 1.12.1 client but will later be modified to be compatible with 1.13 and beyond!
 This addon aims to preserve the blizzard look/design but with a modern touch and with some nice features added.
 
-<b>TurtleWoW players, look at the bottom of this ReadMe.</b>
+<b>TurtleWoW compatible.</b>
 <img src="https://i.imgur.com/R2FI64k.png" align="right" width="28%">
 ## Third-Party Addon Support
 
@@ -101,9 +101,5 @@ All the components work independently and the user can choose to disable anythin
 - TODO: Sell all grey's button, Automatic quest accept, Add better character stats
 
 ### TurtleWoW Hp/Mp duplicate fix
-- To fix the duplicate HP/MP text on unitframes you need to disable 'Status Bar Text' in WoW Interface Options and enable 'Force Show Hp/Mp' in zUI Settings under Unitframes tab.
-
-![image](https://github.com/Ko0z/zUI/assets/9639004/28fecbbf-4034-4178-908d-26fad9217501)
-
-![image](https://github.com/Ko0z/zUI/assets/9639004/b95f62a0-8a8d-4c5c-b4a7-a0562e39c400)
+- This addon will hide TurtleWoW status text on target frame automatically
 

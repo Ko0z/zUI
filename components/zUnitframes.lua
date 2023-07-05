@@ -585,28 +585,18 @@ zUI:RegisterComponent("zUnitframes", function ()
 				MobHealth3BlizzardPowerText:Hide();
 			end
 
-			if (C.unitframes.forceshowtext == "1") then
-				zTargetHealthText:Show() zTargetPowerText:Show()
-				PlayerFrameHealthBarText:Show() PlayerFrameManaBarText:Show()
-				
-				PlayerFrameHealthBar:SetScript('OnLeave', function() PlayerFrameHealthBarText:Show() end)
-				PlayerFrameManaBar:SetScript('OnLeave', function() PlayerFrameManaBarText:Show() end)
-
-				PlayerFrameHealthBar:SetScript('OnEvent', function() PlayerFrameHealthBarText:Show() end)
-				PlayerFrameManaBar:SetScript('OnEvent', function() PlayerFrameManaBarText:Show() end)
+			if GetCVar'statusBarText' == '0' then
+				zTargetHealthText:Hide() zTargetPowerText:Hide()
+				TargetFrameHealthBar:SetScript('OnEnter', function() zTargetHealthText:Show() end)
+				TargetFrameHealthBar:SetScript('OnLeave', function() zTargetHealthText:Hide() end)
+				TargetFrameManaBar:SetScript('OnEnter', function() zTargetPowerText:Show() end)
+				TargetFrameManaBar:SetScript('OnLeave', function() zTargetPowerText:Hide() end)
+				--Initialize();
 			else
-				if GetCVar'statusBarText' == '0' then
-				    zTargetHealthText:Hide() zTargetPowerText:Hide()
-				    TargetFrameHealthBar:SetScript('OnEnter', function() zTargetHealthText:Show() end)
-				    TargetFrameHealthBar:SetScript('OnLeave', function() zTargetHealthText:Hide() end)
-				    TargetFrameManaBar:SetScript('OnEnter', function() zTargetPowerText:Show() end)
-				    TargetFrameManaBar:SetScript('OnLeave', function() zTargetPowerText:Hide() end)
-					--Initialize();
-				else
-				    zTargetHealthText:Show() zTargetPowerText:Show()
-					--Initialize();
-				end
+				zTargetHealthText:Show() zTargetPowerText:Show()
+				--Initialize();
 			end
+			
         elseif(event == "ADDON_LOADED") then
 			--zPrint(arg1);
 			if (arg1 == "MobHealth") then
@@ -619,6 +609,13 @@ zUI:RegisterComponent("zUnitframes", function ()
 		end
 		
     end)
+
+	-- Added for TurtleWoW forces their own status text on target frame
+	hooksecurefunc("TargetHealthCheck", function()
+		TargetHPText:Hide()
+		TargetHPPercText:Hide()
+		return
+	end,true)
 
 	--- added,
 	hooksecurefunc("PlayerFrame_UpdatePvPStatus", function() --todo move to correct place.
