@@ -572,8 +572,13 @@ zUI:RegisterComponent("zUnitframes", function ()
     end
 
 	local f = CreateFrame'Frame'
-    f:RegisterEvent'CVAR_UPDATE' f:RegisterEvent'PLAYER_ENTERING_WORLD' f:RegisterEvent'ADDON_LOADED'
+
+    f:RegisterEvent'CVAR_UPDATE' 
+	f:RegisterEvent'PLAYER_ENTERING_WORLD' 
+	f:RegisterEvent'ADDON_LOADED'
+	
     f:SetScript('OnEvent', function()
+		
         if arg1 == 'STATUS_BAR_TEXT' or event == 'PLAYER_ENTERING_WORLD' then
 			if (MobHealth3BlizzardHealthText or MobHealth3BlizzardPowerText) then
 				MobHealth3BlizzardHealthText:Hide();
@@ -586,6 +591,9 @@ zUI:RegisterComponent("zUnitframes", function ()
 				
 				PlayerFrameHealthBar:SetScript('OnLeave', function() PlayerFrameHealthBarText:Show() end)
 				PlayerFrameManaBar:SetScript('OnLeave', function() PlayerFrameManaBarText:Show() end)
+
+				PlayerFrameHealthBar:SetScript('OnEvent', function() PlayerFrameHealthBarText:Show() end)
+				PlayerFrameManaBar:SetScript('OnEvent', function() PlayerFrameManaBarText:Show() end)
 			else
 				if GetCVar'statusBarText' == '0' then
 				    zTargetHealthText:Hide() zTargetPowerText:Hide()
@@ -607,6 +615,7 @@ zUI:RegisterComponent("zUnitframes", function ()
 					MobHealth3BlizzardPowerText:Hide();
 				end
 			end
+
 		end
 		
     end)
