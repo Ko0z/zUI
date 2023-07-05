@@ -612,8 +612,14 @@ zUI:RegisterComponent("zUnitframes", function ()
 
 	-- Added for TurtleWoW forces their own status text on target frame
 	hooksecurefunc("TargetHealthCheck", function()
-		TargetHPText:Hide()
-		TargetHPPercText:Hide()
+		if (TargetHPText) then
+			TargetHPText:Hide()
+		end
+		
+		if (TargetHPPercText) then
+			TargetHPPercText:Hide()
+		end
+		
 		return
 	end,true)
 
