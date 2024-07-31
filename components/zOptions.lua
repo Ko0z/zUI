@@ -1056,7 +1056,7 @@ end
 			CreateConfig(nil, T["Timer Minute Color"], C.appearance.cd, "minutecolor", "color")
 			CreateConfig(nil, T["Timer Hour Color"], C.appearance.cd, "hourcolor", "color")
 			CreateConfig(nil, T["Timer Day Color"], C.appearance.cd, "daycolor", "color")
-			
+			CreateConfig(nil, T["Show Cooldown Background Timer"], C.actionbars, "cooldown_background", "checkbox")
 		end)
 
 		CreateGUIEntry("Map", nil, function()

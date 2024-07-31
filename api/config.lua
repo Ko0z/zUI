@@ -33,6 +33,7 @@ zUI:UpdateConfig( "actionbars", nil, "bfa_style", "1")
 zUI:UpdateConfig( "actionbars", nil, "darkmode", "1")
 zUI:UpdateConfig( "actionbars", nil, "squarebuttons", "0")
 zUI:UpdateConfig( "actionbars", nil, "endcap", "1")
+zUI:UpdateConfig( "actionbars", nil, "cooldown_background", "1")
 
 zUI:UpdateConfig( "appearance", "cd", "lowcolor", "1,.1,.1,1")
 zUI:UpdateConfig( "appearance", "cd", "normalcolor", "1,0.82,0,1") 

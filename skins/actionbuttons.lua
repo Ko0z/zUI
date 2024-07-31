@@ -89,7 +89,9 @@ zUI:RegisterSkin("Actionbuttons", function ()
 				_G['BonusActionButton'..i..'Cooldown']
 			}
 		) do 
-			v:SetFrameLevel(4)
+			if (C.actionbars.cooldown_background == "0") then
+				v:SetFrameLevel(4)
+			end
 			v.zCooldownType = "NOGCD"
 			v.zTextSize = 20; -- TODO: Make config for size
 		end
