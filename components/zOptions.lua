@@ -973,6 +973,7 @@ end
 			CreateConfig(nil, T["Auto Hide Micro Menu"], C.global, "microbuttons_auto_hide", "checkbox")
 			CreateConfig(nil, T["Show Endcaps (Gryphons)"], C.actionbars, "endcap", "checkbox")
 			CreateConfig(nil, T["Enable Global Dark Mode"], C.global, "darkmode", "checkbox")
+			CreateConfig(nil, T["Turtle Mail Fix"], C.global, "tmail", "checkbox")
 
 			CreateConfig(nil, T["Quality of Life"], nil, nil, "header")
 			CreateConfig(nil, T["Auto Dismount"], C.quality, "auto_dismount", "checkbox")

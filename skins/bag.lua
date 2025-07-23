@@ -395,9 +395,11 @@ zUI:RegisterSkin("Bag", function () --modui inspired
     slot:ClearAllPoints()
     slot:SetPoint('TOPLEFT', SendMailPackageButton)
     slot:SetPoint('BOTTOMRIGHT', SendMailPackageButton)
-
-    zSkin(SendMailPackageButton, 1)
-    zSkinColor(SendMailPackageButton, .7, .7, .7)
+    
+    if (C.global.tmail ~= "1") then
+        zSkin(SendMailPackageButton, 1)
+        zSkinColor(SendMailPackageButton, .7, .7, .7)
+    end
 
     zSkin(OpenMailMoneyButton, 1)
     zSkinColor(OpenMailMoneyButton, .7, .7, .7)
