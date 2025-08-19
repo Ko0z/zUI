@@ -1,12 +1,6 @@
-
-
 zUI:RegisterComponent("zUnitframes", function ()
 	zUI.zUnitframes = CreateFrame("Frame", "zUnitframes", UIParent);
-	--setfenv(0, zUI:GetEnvironment())
-	--local _G = getfenv(0)
-
-	--local C = zUI_config
-
+	
 	for _, v in pairs({ PlayerFrame, TargetFrame, PartyMemberFrame1 }) do
         v:SetUserPlaced(true) v:SetMovable(true) v:EnableMouse(true)
         v:SetScript('OnDragStart', function() if IsShiftKeyDown() then this:StartMoving() end end)
@@ -18,19 +12,12 @@ zUI:RegisterComponent("zUnitframes", function ()
 		if (this == PlayerFrameHealthBar ) then 
 			if (C.unitframes.playerclasscolor == "1") then
 				this:SetStatusBarColor(UnitColor("player"));
-				--return --should not run original function after this since return.
 			else
 				this:SetStatusBarColor(0,1,0);
-				--return
 			end
 
 		elseif (this == TargetFrameHealthBar ) then 
-			--if ( UnitIsTapped("target") and not UnitIsTappedByPlayer("target") ) then
-			-- Gray if npc is tapped by other player
-			--	this:SetStatusBarColor(0.5, 0.5, 0.5);
-			--else -- Standard by class etc if not
-				this:SetStatusBarColor(UnitColor("target"));	
-			--end
+				this:SetStatusBarColor(UnitColor("target"));
 		end
 	end
 
@@ -38,18 +25,7 @@ zUI:RegisterComponent("zUnitframes", function ()
 	function _G.TargetFrame_OnHide() CloseDropDownMenus() end
 
 	function zTargetFrame_OnUpdate()
-		--MH3Blizz:PowerUpdate();
-
-		-- Set back color of health bar
-		--TargetofTarget_Update();
-
-		--if ( UnitIsTapped("target") and not UnitIsTappedByPlayer("target") ) then
-			-- Gray if npc is tapped by other player
-		--	this.healthbar:SetStatusBarColor(0.5, 0.5, 0.5);
-		--else -- Standard by class etc if not
-		--zPrint(this:GetName())
-			this.healthbar:SetStatusBarColor(UnitColor(this.healthbar.unit));	
-		--end
+			this.healthbar:SetStatusBarColor(UnitColor(this.healthbar.unit));
 	end
 
 	function zTargetFrame_CheckClassification()
@@ -110,8 +86,7 @@ zUI:RegisterComponent("zUnitframes", function ()
 				end
 			end
 		end
-		--CombatFeedback_OnUpdate(elapsed); -- gets fired in function before it? 
-
+		
 		if(C.unitframes.hidepettext == "1") then
 			PetFrame.healthbar.TextString:Hide();
 			PetFrame.manabar.TextString:Hide();
@@ -277,8 +252,6 @@ zUI:RegisterComponent("zUnitframes", function ()
 			TargetDeadText:SetPoint("CENTER",-50,4);
 			TargetFrameNameBackground:Hide();
 		else
-			--if (classification == "minus") then -- ROFL, "minus" came in Patch 5.0.4 , been here for ages...
-			
 			TargetFrameHealthBar:SetHeight(29);
 			TargetFrameHealthBar:SetPoint("TOPLEFT",6,-22);
 			TargetFrameManaBar:SetPoint("TOPLEFT",6,-51);
@@ -294,7 +267,7 @@ zUI:RegisterComponent("zUnitframes", function ()
 		if (C.unitframes.improvedpet == "1") then
 			PetFrameTexture:SetTexCoord(1, 0, 0, 1)
 			PetFrameTexture:ClearAllPoints()
-			PetFrameTexture:SetPoint("BOTTOMRIGHT", PlayerFrame, "BOTTOMRIGHT", -104, -28)--HERE -102, -29 -- -2, +1
+			PetFrameTexture:SetPoint("BOTTOMRIGHT", PlayerFrame, "BOTTOMRIGHT", -104, -28)
 			PetPortrait:ClearAllPoints() 
 			PetPortrait:SetPoint("BOTTOMRIGHT", PetFrame, "BOTTOMRIGHT", -86, 8)
 			PetAttackModeTexture:ClearAllPoints() 
@@ -405,32 +378,25 @@ zUI:RegisterComponent("zUnitframes", function ()
 
 
 	-----------------------------------==[[ TargetFrame Health ]]==------------------------------------------>
-
 	-- Create frame and fontstrings
-
     zUI.MobHealth = CreateFrame("Frame", "zMobHealthFrame", TargetFrame)
 
     htext = zUI.MobHealth:CreateFontString("zTargetHealthText", "ARTWORK")
     htext:SetFontObject(GameFontNormalSmall)
     htext:SetHeight(32)
-	
-    --htext:SetPoint("TOP", TargetFrameHealthBar, "BOTTOM", MH3BlizzConfig.healthX-2, MH3BlizzConfig.healthY+22)
-	--zTargetHealthText:SetPoint('CENTER', TargetFrameHealthBar, 0, -9) -- -2
     htext:SetTextColor(1, 1, 1, 1)
 
     ptext = zUI.MobHealth:CreateFontString("zTargetPowerText", "ARTWORK")
     ptext:SetFontObject(GameFontNormalSmall)
     ptext:SetHeight(32)
-    --ptext:SetPoint("TOP", TargetFrameManaBar, "BOTTOM", MH3BlizzConfig.powerX-2, MH3BlizzConfig.powerY+22)
-	--zTargetPowerText:SetPoint('CENTER', TargetFrameManaBar, 0, -1) -- 1
     ptext:SetTextColor(1, 1, 1, 1)
 
 	if(C.unitframes.compactmode == "1") then
-		zTargetHealthText:SetPoint('CENTER', TargetFrameHealthBar, 0, -2) -- -2
-		zTargetPowerText:SetPoint('CENTER', TargetFrameManaBar, 0, 1) -- 1
+		zTargetHealthText:SetPoint('CENTER', TargetFrameHealthBar, 0, -2)
+		zTargetPowerText:SetPoint('CENTER', TargetFrameManaBar, 0, 1)
 	else
-		zTargetHealthText:SetPoint('CENTER', TargetFrameHealthBar, 0, -8) -- -2
-		zTargetPowerText:SetPoint('CENTER', TargetFrameManaBar, 0, -1) -- 1
+		zTargetHealthText:SetPoint('CENTER', TargetFrameHealthBar, 0, -8)
+		zTargetPowerText:SetPoint('CENTER', TargetFrameManaBar, 0, -1)
 	end
 
 	for _, v in pairs ({zTargetHealthText, zTargetPowerText}) do
@@ -443,22 +409,10 @@ zUI:RegisterComponent("zUnitframes", function ()
 		v:SetJustifyV'MIDDLE'
 		if uStatus == 0 and uBoth == 0 then
             v:ClearAllPoints()
-            v:SetPoint('CENTER', TargetFrame, v:GetName() == 'zTargetPowerText' and -26 or -75, -3) -- -3
+            v:SetPoint('CENTER', TargetFrame, v:GetName() == 'zTargetPowerText' and -26 or -75, -3)
         end
 	end
-    --        v:SetShadowOffset(0, 0)
-    --        v:SetJustifyV'MIDDLE'
-    --        if uStatus == 0 and uBoth == 0 then
-    --            v:ClearAllPoints()
-    --            v:SetPoint('CENTER', TargetFrame, v:GetName() == 'zTargetPowerText' and -26 or -75, -3) -- -3
-    --        end
-    --    end
-	--	zTargetHealthText:ClearAllPoints()
-	--	zTargetHealthText:SetPoint('CENTER', TargetFrameHealthBar, 0, -2)
-	--
-	--	zTargetPowerText:ClearAllPoints()
-	--	zTargetPowerText:SetPoint('CENTER', TargetFrameManaBar, 0, 1)
-	--
+    
 	zMobHealthFrame:RegisterEvent("UNIT_HEALTH");
 	zMobHealthFrame:RegisterEvent("UNIT_MANA");
 	zMobHealthFrame:RegisterEvent("PLAYER_TARGET_CHANGED");
@@ -467,12 +421,9 @@ zUI:RegisterComponent("zUnitframes", function ()
 	
 		if (event == "UNIT_HEALTH") then
 			if arg1 == "target" then zUI.MobHealth:HealthUpdate() end
-			--zPrint("HealthUpdate!");
 		elseif (event == "UNIT_MANA") then
 			if arg1 == "target" then zUI.MobHealth:PowerUpdate() end
-			--zPrint("ManaUpdate!");
 		elseif (event == "PLAYER_TARGET_CHANGED") then
-			--zPrint("TargetChanged!");
 			zUI.MobHealth:HealthUpdate();
 			zUI.MobHealth:PowerUpdate();
 		end
@@ -491,8 +442,7 @@ zUI:RegisterComponent("zUnitframes", function ()
 
         local percent = math.floor(v/max*100)
         local string  = zTargetHealthText
-        --Initialize()
-
+        
         --if MH3BlizzConfig.healthAbs then
             if max == 100 then
                 -- Do nothing!
@@ -514,11 +464,7 @@ zUI:RegisterComponent("zUnitframes", function ()
 					string:SetText(true_format(v)..'/'..true_format(max))
 				end
             end
-			--string:ClearAllPoints();
-            --string:SetPoint('RIGHT', -8, 6)
-			--string:SetPoint('RIGHT', TargetFrame,-8, 6)
         elseif uValue  == 1 and uBoth == 0 then
-            --local logic = MH3BlizzConfig.healthPerc and v <= 100 and percent == v
             local logic = v <= 100 and percent == v
             local t = logic and true_format(v)..'%' or true_format(v)
             string:SetText(t)
@@ -534,10 +480,8 @@ zUI:RegisterComponent("zUnitframes", function ()
         local v, max   = UnitMana'target', UnitManaMax'target'
         local percent  = math.floor(v/max*100)
         local string   = zTargetPowerText
-        --Initialize()
-
+        
         if max == 0 or cur == 0 or percent == 0 then string:SetText() return end
-        --if MH3BlizzConfig.powerAbs then v = math.floor(v) end
         v = math.floor(v)
 		-- FOR COLOR CHANGING MP
 		if (C.unitframes.coloredtext == "1") then
@@ -559,10 +503,8 @@ zUI:RegisterComponent("zUnitframes", function ()
 					string:SetText(true_format(v)..'/'..true_format(max))
 				end
             end
-			--string:ClearAllPoints();
             string:SetPoint('RIGHT', -8, 0) -- -8
         elseif uValue  == 1 and uBoth == 0 then
-            --local logic = MH3BlizzConfig.powerPerc and v <= 100 and percent == v and class ~= 'ROGUE'
             local logic = v <= 100 and percent == v and class ~= 'ROGUE'
             local t = logic and true_format(v)..'%' or true_format(v)
             string:SetText(t)
@@ -591,14 +533,11 @@ zUI:RegisterComponent("zUnitframes", function ()
 				TargetFrameHealthBar:SetScript('OnLeave', function() zTargetHealthText:Hide() end)
 				TargetFrameManaBar:SetScript('OnEnter', function() zTargetPowerText:Show() end)
 				TargetFrameManaBar:SetScript('OnLeave', function() zTargetPowerText:Hide() end)
-				--Initialize();
 			else
 				zTargetHealthText:Show() zTargetPowerText:Show()
-				--Initialize();
 			end
 			
         elseif(event == "ADDON_LOADED") then
-			--zPrint(arg1);
 			if (arg1 == "MobHealth") then
 				if (MobHealth3BlizzardHealthText or MobHealth3BlizzardPowerText) then
 					MobHealth3BlizzardHealthText:Hide();

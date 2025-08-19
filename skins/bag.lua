@@ -20,8 +20,6 @@ zUI:RegisterSkin("Bag", function () --modui inspired
 			    cd.zCooldownType = "NOGCD"
                 zStyle_Items(bu)
 			    zStyle_ButtonElements(bu)
-			    --zSkinColor(bu,1,0,0,1); --Color in zBag script instead.
-                --cd:SetFrameLevel(bu:GetFrameLevel() + 1) 
                 cd:SetFrameStrata'HIGH'
             end
         end
@@ -235,8 +233,6 @@ zUI:RegisterSkin("Bag", function () --modui inspired
             zSkin(bu, .25)
 		    if(C.global.darkmode == "1") then
 			    zSkinColor(bu, .7, .7, .7)
-		    --else
-			    --zSkinColor(bu, .7, .7, .7)
 		    end
             du:ClearAllPoints() du:SetPoint('CENTER', bu, 'BOTTOM', 2, -9)
         end
@@ -403,35 +399,49 @@ zUI:RegisterSkin("Bag", function () --modui inspired
 
 	---------------------==[[ Mail ]]==---------------------------->
     if C.skins.mail == "1" then
-	    local slot = SendMailPackageButton:GetRegions()
-        slot:ClearAllPoints()
-        slot:SetPoint('TOPLEFT', SendMailPackageButton)
-        slot:SetPoint('BOTTOMRIGHT', SendMailPackageButton)
+
+        local f = CreateFrame'Frame'
+
+	    f:RegisterEvent'PLAYER_ENTERING_WORLD' 
+	    f:RegisterEvent'ADDON_LOADED'
+	    
+        -- If we run code that want to know FACTION we need to wait until Entering World etc..
+        f:SetScript('OnEvent', function()
+		
+            if event == 'PLAYER_ENTERING_WORLD' then
+			    local slot = SendMailPackageButton:GetRegions()
+                slot:ClearAllPoints()
+                slot:SetPoint('TOPLEFT', SendMailPackageButton)
+                slot:SetPoint('BOTTOMRIGHT', SendMailPackageButton)
 	
-	    if (C.global.tmail ~= "1") then
-		    zSkin(SendMailPackageButton, 1)
-		    zSkinColor(SendMailPackageButton, .7, .7, .7)
-	    end
+	            if (not TurtleMail) then
+		            zSkin(SendMailPackageButton, 1)
+		            zSkinColor(SendMailPackageButton, .7, .7, .7)
+	            end
 
-        zSkin(OpenMailMoneyButton, 1)
-        zSkinColor(OpenMailMoneyButton, .7, .7, .7)
+                zSkin(OpenMailMoneyButton, 1)
+                zSkinColor(OpenMailMoneyButton, .7, .7, .7)
 
-        zSkin(OpenMailPackageButton, 1)
-        zSkinColor(OpenMailPackageButton, .7, .7, .7)
+                zSkin(OpenMailPackageButton, 1)
+                zSkinColor(OpenMailPackageButton, .7, .7, .7)
 
-        for i = 1, 7 do
-            local bu = _G['MailItem'..i]
-            local tx = _G['MailItem'..i..'ButtonIcon']
-            local ic = bu:GetRegions()
-            if  bu then
-                local f = CreateFrame('Frame', nil, bu)
-                f:SetPoint('TOPLEFT', ic, 0, 0) f:SetPoint('BOTTOMRIGHT', ic, 0, 6)
-                zSkin(f, 1)
-                zSkinColor(f, .7, .7, .7)
-                tx:SetPoint('TOPLEFT', f)
-                tx:SetPoint('BOTTOMRIGHT', f)
-            end
-        end
+                for i = 1, 7 do
+                    local bu = _G['MailItem'..i]
+                    local tx = _G['MailItem'..i..'ButtonIcon']
+                    local ic = bu:GetRegions()
+                    if  bu then
+                        local f = CreateFrame('Frame', nil, bu)
+                        f:SetPoint('TOPLEFT', ic, 0, 0) f:SetPoint('BOTTOMRIGHT', ic, 0, 6)
+                        zSkin(f, 1)
+                        zSkinColor(f, .7, .7, .7)
+                        tx:SetPoint('TOPLEFT', f)
+                        tx:SetPoint('BOTTOMRIGHT', f)
+                    end
+                end
+			end
+
+        end)
+
 	end
 
 	---------------------==[[ Merchant ]]==---------------------------->
@@ -467,10 +477,10 @@ zUI:RegisterSkin("Bag", function () --modui inspired
                 zSkin(bu)
                 zSkinColor(bu, .7, .7, .7)
                 SkinDraw(bu, 'OVERLAY')
-
+    
             end
         end
-
+    
         for i = 1, 12 do
             local bu = _G['SpellButton'..i]
             local ic = _G['SpellButton'..i..'IconTexture']
@@ -525,23 +535,8 @@ zUI:RegisterSkin("Bag", function () --modui inspired
         zSkin(bu, 1)
 		if(C.global.darkmode == "1") then
 			zSkinColor(bu, .3, .3, .3)
-		--else
-			--zSkinColor(bu, .7, .7, .7)
 		end
-        --zSkinColor(bu, .3, .3, .3)
     end
-	--
-    --for i = 1, 16 do
-    --    local bu = _G['TargetFrameDebuff'..i]
-    --    zSkin(bu, 1)
-    --    zSkinColor(bu, 1, 0, 0)
-    --end
-
-    --for i = 1, 4 do
-    --    local bu = _G['TargetofTargetFrameDebuff'..i]
-    --    zSkin(bu, 0)
-    --    zSkinColor(bu, 1, 0, 0)
-    --end
 
 	-- TODO search for TargetofTargetFrameDebuff change distance from eachother...
 

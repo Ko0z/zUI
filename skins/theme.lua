@@ -230,7 +230,6 @@ zUI:RegisterSkin("Theme", function () --modui inspired
 	    MailFrame.Material:SetVertexColor(.9, .9, .9)
 
         MailFrame:SetScript('OnShow', function()
-            zPrint("MailFrame:OnShow");
             local faction = UnitFactionGroup("player");
             if(faction) then
 		        MailFrame.Material:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_" .. faction)
@@ -262,9 +261,7 @@ zUI:RegisterSkin("Theme", function () --modui inspired
 
 	-- QUEST
     if C.skins.quest == "1" then
-
-        local faction = UnitFactionGroup("player");
-
+        
         for _, v in pairs({
             QuestFrameGreetingPanel,
             QuestFrameDetailPanel,
@@ -275,19 +272,6 @@ zUI:RegisterSkin("Theme", function () --modui inspired
 
             for _, j in pairs({a, b, c, d}) do table.insert(ZUI_COLOURELEMENTS_FOR_UI, j) end
 	
-            v.Material = v:CreateTexture(nil, 'OVERLAY', nil, 7)
-            
-            if(faction) then
-			    v.Material:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_" .. faction)
-		    else
-			    v.Material:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_Horde")
-		    end
-
-            v.Material:SetWidth(511)
-            v.Material:SetHeight(418)
-            v.Material:SetPoint('TOPLEFT', v, 24, -82)
-            v.Material:SetVertexColor(.9, .9, .9)
-	
             if v == GossipFrameGreetingPanel or v == QuestFrameGreetingPanel then
                 v.Corner = v:CreateTexture(nil, 'OVERLAY', nil, 7)
                 v.Corner:SetTexture[[Interface\QuestFrame\UI-Quest-BotLeftPatch]]
@@ -297,6 +281,41 @@ zUI:RegisterSkin("Theme", function () --modui inspired
                 table.insert(ZUI_COLOURELEMENTS_FOR_UI, v.Corner)
             end
         end
+
+        local f = CreateFrame'Frame'
+	    f:RegisterEvent'PLAYER_ENTERING_WORLD'
+	    
+        -- If we run code that want to know FACTION we need to wait until Entering World etc..
+        f:SetScript('OnEvent', function()
+		
+            if event == 'PLAYER_ENTERING_WORLD' then
+                for _, v in pairs({
+                    QuestFrameGreetingPanel,
+                    QuestFrameDetailPanel,
+                    QuestFrameProgressPanel,
+                    QuestFrameRewardPanel,
+                    GossipFrameGreetingPanel}) do
+                    
+                    -- It seems like the order in which this happens is very important!
+                    --> CreateTexture
+                    --> SetTexture
+                    --> SetWidth .....
+                    v.Material = v:CreateTexture(nil, 'OVERLAY', nil, 7)
+                    
+                    if(UnitFactionGroup("player") == "Horde") then
+		                v.Material:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_Horde")
+	                else
+		                v.Material:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_Alliance")
+	                end
+
+                    v.Material:SetWidth(511)
+                    v.Material:SetHeight(418)
+                    v.Material:SetPoint('TOPLEFT', v, 24, -82)
+                    v.Material:SetVertexColor(.9, .9, .9)
+                end
+			end
+
+        end)  
 
 	    -- QUEST LOG
         local _, _, a, b, c, d = QuestLogFrame:GetRegions()
@@ -356,28 +375,36 @@ zUI:RegisterSkin("Theme", function () --modui inspired
 
 	-- SPELLBOOK
     if C.skins.spellbook == "1" then
+        
         local _, a, b, c, d = SpellBookFrame:GetRegions()
         for _, v in pairs({a, b, c, d}) do
             table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
         end
-
+        
 	    -- TODO once again find that texture... Found an old blizzard test image lol, 
-	    SpellBookFrame.Material = SpellBookFrame:CreateTexture(nil, 'OVERLAY', nil, 7)
-        SpellBookFrame.Material:SetWidth(544) -- 300
-        SpellBookFrame.Material:SetHeight(445) -- 336
-        SpellBookFrame.Material:SetPoint('TOPLEFT', SpellBookFrame, 22, -74)
-        SpellBookFrame.Material:SetVertexColor(.9, .9, .9)
 
-        SpellBookFrame:SetScript('OnShow', function()
-            zPrint("SpellBookFrame:OnShow");
-            local faction = UnitFactionGroup("player");
-            if(faction) then
-		        SpellBookFrame.Material:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_" .. faction)
-	        else
-		        SpellBookFrame.Material:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_Horde")
-	        end
-	    end)
-
+        local f = CreateFrame'Frame'
+        
+	    f:RegisterEvent'PLAYER_ENTERING_WORLD'
+	    
+        -- If we run code that want to know FACTION we need to wait until Entering World etc..
+        f:SetScript('OnEvent', function()
+		
+            if event == 'PLAYER_ENTERING_WORLD' then
+                
+                SpellBookFrame.Material = SpellBookFrame:CreateTexture(nil, 'OVERLAY', nil, 7)
+                
+                if(UnitFactionGroup("player") == "Horde") then
+		            SpellBookFrame.Material:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_Horde")
+	            else
+		            SpellBookFrame.Material:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_Alliance")
+	            end
+                SpellBookFrame.Material:SetWidth(544) -- 300
+                SpellBookFrame.Material:SetHeight(445) -- 336
+                SpellBookFrame.Material:SetPoint('TOPLEFT', SpellBookFrame, 22, -74)
+                SpellBookFrame.Material:SetVertexColor(.9, .9, .9)
+			end
+        end)
     end
 
 	-- TABARD

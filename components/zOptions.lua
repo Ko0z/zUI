@@ -632,10 +632,8 @@ end
 
 			f:SetScript("OnShow", function()
 				this.indexed = true
-				--1,0.82,0
 				this.button.text:SetTextColor(1,0.82,0,1) 
 				this.button.bg:SetTexture(1,1,1,.05)
-				--this.button.bg:SetGradientAlpha("HORIZONTAL", 0,0,0,0,  1,1,1,.05)
 			end)
 
 			f:SetScript("OnHide", function()
@@ -695,16 +693,13 @@ end
 								tiled      = false,
 								insets     = {left = 1, right = 1, top = 1, bottom = 1}})
 		zUI.gui:SetBackdropColor(0, 0, 0, 0.96)
-		--zUI.gui:SetBackdropBorderColor(.2, .2, .2)
 		zUI.gui:SetMovable(true)
 		zUI.gui:SetUserPlaced(true)
 		zUI.gui:RegisterForDrag'LeftButton' 
 		zUI.gui:EnableMouse(true)
 		zUI.gui:SetScript("OnMouseDown",function() this:StartMoving() end)
 		zUI.gui:SetScript("OnMouseUp",function() this:StopMovingOrSizing() end)
-		--zUI.gui:SetScript("OnEscapePressed", function(self)
-		--			this:Hide()
-		--		end)
+		
 		tinsert(UISpecialFrames, "zOptionsGUI")
 		
 		zStyle_Button(zUI.gui) --square borders.
@@ -719,21 +714,6 @@ end
 		zUI.gui:SetScript("OnShow",function()
 			zUI.gui.settingChanged = zUI.gui.delaySettingChanged
 			zUI.gui.delaySettingChanged = nil
-
-            --if zUI.gui.frames["About"] then
-            --    zPrint("TEEEESst");
-            --    local f = UnitFactionGroup("player");
-            --    if(f) then
-			--	    zUI.gui.frames["About"].area.logo:SetTexture("Interface\\AddOns\\zUI\\img\\"..f.."-Logo")
-			--    else
-			--	    zUI.gui.frames["About"].area.logo:SetTexture("Interface\\AddOns\\zUI\\img\\Horde-Logo")
-			--    end
-            --end
-
-			-- exit unlock mode
-			--if zUI.unlock and zUI.unlock:IsShown() then
-			--	zUI.unlock:Hide()
-			--end
 
 			-- exit keybind mode
 			if zUI.zKeybind and zUI.zKeybind:IsShown() then
@@ -772,12 +752,6 @@ end
 		zUI.gui.frames.area = CreateFrame("Frame", nil, zUI.gui)
 		zUI.gui.frames.area:SetPoint("TOPLEFT", 7, -25)
 		zUI.gui.frames.area:SetPoint("BOTTOMRIGHT", -7, 37)
-		--CreateBackdrop(zUI.gui.frames.area)
-		
-		--zUI.gui.frames.area:SetBackdrop({bgFile     = [[Interface\ChatFrame\ChatFrameBackground]],
-		--						tiled      = false,
-		--						insets     = {left = 10, right = 10, top = -1, bottom = -1}})
-		--zUI.gui.frames.area:SetBackdropColor(0, 0, 0, 0.5)
 		
 		zStyle_Button(zUI.gui.frames.area)
 		zSkinColor(zUI.gui.frames.area,0.2,0.2,0.2,1);
@@ -792,9 +766,6 @@ end
 		end)
 	end
 
-	
-
-
 	do -- Generate Config UI
 		CreateGUIEntry("About", nil, function()
 
@@ -806,17 +777,13 @@ end
 				hasEditBox      = 1,
 				maxLetters      = 1024,
 				hasWideEditBox	= 1,
-				--editBoxWidth    = 350,
 				whileDead       = true,
 				hideOnEscape    = true,
 				OnShow = function()
 					(this.icon or getglobal(this:GetName()..'AlertIcon')):Hide()
 
-					--local editBox = this.editBox or _G[this:GetName()..'EditBox']
-					--local editBox = this.editBox or getglobal(this:GetName()..'EditBox')
 					local editBox = this.editBox or getglobal(this:GetName()..'WideEditBox')
 					editBox:SetText(currentURL)
-					--editBox:SetTexture("");
 					editBox:SetWidth(240)
 					editBox:SetFocus()
 					editBox:HighlightText(0)
@@ -854,8 +821,7 @@ end
 			this.bugs:SetWidth(300)
 			this.bugs:SetJustifyH("LEFT")
 			this.bugs:SetText("If you find any bugs, please report them to the addon issues section on the github page.")
-			--this.versionc:SetText(T["Version"] .. ":")
-
+			
 			local gitlab = CreateFrame("Button", nil, this, "UIPanelButtonTemplate")
 			gitlab:SetPoint("TOPLEFT", 160, -225)
 			gitlab:SetWidth(100)
@@ -866,112 +832,13 @@ end
 				StaticPopup_Show("URL_GITLAB_COPY_DIALOG")
 			end)
 
-			--zUI.gui.hoverbind = CreateFrame("Button", nil, zUI.gui, "UIPanelButtonTemplate")
-			--zUI.gui.hoverbind:SetPoint("LEFT", zUI.gui.frames.area, "BOTTOMRIGHT", -108, -18)
-			--zUI.gui.hoverbind:SetWidth(110)
-			--zUI.gui.hoverbind:SetHeight(25)
-			--zUI.gui.hoverbind:SetText("Keybind")
-			--zUI.gui.hoverbind:SetScript("OnClick", function()
-			--	if zUI.zKeybind then zUI.zKeybind:Show() end
-			--end)
-
-			-- version
-			--this.versionc = this:CreateFontString("Status", "LOW", "GameFontWhite")
-			--this.versionc:SetFont(STANDARD_TEXT_FONT, C.global.font_size)
-			--this.versionc:SetPoint("TOPLEFT", 150, -170)
-			--this.versionc:SetWidth(200)
-			--this.versionc:SetJustifyH("LEFT")
-			--this.versionc:SetText(T["Version"] .. ":")
-
-			--this.version = this:CreateFontString("Status", "LOW", "GameFontWhite")
-			--this.version:SetFont(STANDARD_TEXT_FONT, C.global.font_size)
-			--this.version:SetPoint("TOPRIGHT", 375, -170)
-			--this.version:SetWidth(200)
-			--this.version:SetJustifyH("RIGHT")
-
-			--this.update = this:CreateFontString("Status", "LOW", "GameFontWhite")
-			--this.update:SetFont(STANDARD_TEXT_FONT, C.global.font_size)
-			--this.update:SetPoint("TOPLEFT", 200, -140)
-			--this.update:SetPoint("TOPRIGHT", 375, -140)
-			--this.update:SetJustifyH("CENTER")
-			--this.update:SetTextColor(.2,1,.8)
-			--
-			--this.screenc = this:CreateFontString("Status", "LOW", "GameFontWhite")
-			--this.screenc:SetFont(STANDARD_TEXT_FONT, C.global.font_size)
-			--this.screenc:SetPoint("TOPLEFT", 200, -200)
-			--this.screenc:SetWidth(200)
-			--this.screenc:SetJustifyH("LEFT")
-			--this.screenc:SetText(T["Resolution"] .. ":")
-			--
-			--this.screen = this:CreateFontString("Status", "LOW", "GameFontWhite")
-			--this.screen:SetFont(STANDARD_TEXT_FONT, C.global.font_size)
-			--this.screen:SetPoint("TOPRIGHT", 375, -200)
-			--this.screen:SetWidth(200)
-			--this.screen:SetJustifyH("RIGHT")
-			--
-			--this.scalec = this:CreateFontString("Status", "LOW", "GameFontWhite")
-			--this.scalec:SetFont(STANDARD_TEXT_FONT, C.global.font_size)
-			--this.scalec:SetPoint("TOPLEFT", 200, -220)
-			--this.scalec:SetWidth(200)
-			--this.scalec:SetJustifyH("LEFT")
-			--this.scalec:SetText(T["Scaling"] .. ":")
-			--
-			--this.scale = this:CreateFontString("Status", "LOW", "GameFontWhite")
-			--this.scale:SetFont(STANDARD_TEXT_FONT, C.global.font_size)
-			--this.scale:SetPoint("TOPRIGHT", 375, -220)
-			--this.scale:SetWidth(200)
-			--this.scale:SetJustifyH("RIGHT")
-			--
-			--this.clientc = this:CreateFontString("Status", "LOW", "GameFontWhite")
-			--this.clientc:SetFont(STANDARD_TEXT_FONT, C.global.font_size)
-			--this.clientc:SetPoint("TOPLEFT", 200, -250)
-			--this.clientc:SetWidth(200)
-			--this.clientc:SetJustifyH("LEFT")
-			--this.clientc:SetText(T["Gameclient"] .. ":")
-			--
-			--this.client = this:CreateFontString("Status", "LOW", "GameFontWhite")
-			--this.client:SetFont(STANDARD_TEXT_FONT, C.global.font_size)
-			--this.client:SetPoint("TOPRIGHT", 375, -250)
-			--this.client:SetWidth(200)
-			--this.client:SetJustifyH("RIGHT")
-			--
-			--this.langc = this:CreateFontString("Status", "LOW", "GameFontWhite")
-			--this.langc:SetFont(STANDARD_TEXT_FONT, C.global.font_size)
-			--this.langc:SetPoint("TOPLEFT", 200, -270)
-			--this.langc:SetWidth(200)
-			--this.langc:SetJustifyH("LEFT")
-			--this.langc:SetText(T["Language"] .. ":")
-			--this.lang = this:CreateFontString("Status", "LOW", "GameFontWhite")
-			--this.lang:SetFont(STANDARD_TEXT_FONT, C.global.font_size)
-			--this.lang:SetPoint("TOPRIGHT", 375, -270)
-			--this.lang:SetWidth(200)
-			--this.lang:SetJustifyH("RIGHT")
-			--
-			---- info updater
-			--local f = CreateFrame("Frame", nil, this)
-			--f:SetScript("OnUpdate", function()
-			--	if ( this.tick or 0) > GetTime() then return else this.tick = GetTime() + 1 end
-			--
-			--	local parent = this:GetParent()
-			--	local localversion  = tonumber(zUI.version.major*10000 + zUI.version.minor*100 + zUI.version.fix)
-			--	--local remoteversion = tonumber(zUI_init.updateavailable) or 0
-			--	--if localversion < remoteversion then
-			--	--  parent.update:SetText("|cffffffff[|r!|cffffffff] " .. T["A new version is available"])
-			--	--end
-			--
-			--	--parent.version:SetText(zUI.version.string)
-			--	parent.screen:SetText(GetCVar("gxResolution"))
-			--	parent.scale:SetText(round(UIParent:GetEffectiveScale(),2))
-			--	parent.client:SetText(GetBuildInfo() .. " (" .. GetLocale() .. ")")
-			--	parent.lang:SetText(lang)
-			--end)
 		end)
 
 		CreateGUIEntry("General", nil, function()
 			CreateConfig(nil, T["Auto Hide Micro Menu"], C.global, "microbuttons_auto_hide", "checkbox")
 			CreateConfig(nil, T["Show Endcaps (Gryphons)"], C.actionbars, "endcap", "checkbox")
 			CreateConfig(nil, T["Enable Global Dark Mode"], C.global, "darkmode", "checkbox")
-			CreateConfig(nil, T["Turtle Mail Fix"], C.global, "tmail", "checkbox")
+			--CreateConfig(nil, T["Turtle Mail Fix"], C.global, "tmail", "checkbox")
 			
 			CreateConfig(nil, T["Quality of Life"], nil, nil, "header")
 			CreateConfig(nil, T["Auto Dismount"], C.quality, "auto_dismount", "checkbox")
@@ -1000,7 +867,6 @@ end
 			CreateConfig(nil, T["Improved Pet Frame"], C.unitframes, "improvedpet", "checkbox")
 			
 			CreateConfig(nil, T["Text"], nil, nil, "header")
-			--CreateConfig(nil, T["Force Show Hp/Mp (Ignore 'Status Bar Text' Interface Option)"], C.unitframes, "forceshowtext", "checkbox")
 			CreateConfig(nil, T["Show Percentage"], C.unitframes, "percentages", "checkbox")
 			CreateConfig(nil, T["Format HP/MP-Text (1000 = 1k)"], C.unitframes, "trueformat", "checkbox")
 			CreateConfig(nil, T["Gradient Colored HP-Text"], C.unitframes, "coloredtext", "checkbox")
@@ -1067,13 +933,12 @@ end
 			CreateConfig(nil, T["Minimap"], nil, nil, "header")
 			CreateConfig(nil, T["Square Minimap"], C.minimap, "square", "checkbox")
 			CreateConfig(nil, T["Hide Minimap Button"], C.minimap, "button_hide", "checkbox")
-			--CreateConfig(nil, T["Hide Clock"], C.minimap, "hide_clock", "checkbox")
 		end)
 
         CreateGUIEntry("Skins", nil, function()
 			CreateConfig(nil, T["Bags"], C.skins, "bags", "checkbox")
 			CreateConfig(nil, T["Paperdoll"], C.skins, "paperdoll", "checkbox")
-			CreateConfig(nil, T["Inspect - Currently Broken"], C.skins, "inspect", "checkbox")
+			CreateConfig(nil, T["Inspect - Currently Broken on Turtle WoW"], C.skins, "inspect", "checkbox")
 			CreateConfig(nil, T["Bank"], C.skins, "bank", "checkbox")
 			CreateConfig(nil, T["Auction"], C.skins, "auction", "checkbox")
 			CreateConfig(nil, T["Aura"], C.skins, "aura", "checkbox")

@@ -7,8 +7,6 @@ zUI:RegisterComponent("zNameplates", function ()
 	local font = STANDARD_TEXT_FONT
 	local font_size = C.nameplates.font_size
 
-	C.nameplates["showdebuffs"] = "1";
-
 	zUI.nameplates = CreateFrame("Frame", nil, UIParent)
 
 	-- catch all nameplates
@@ -191,7 +189,7 @@ zUI:RegisterComponent("zNameplates", function ()
 		this.raidicon:SetTexture("Interface\\AddOns\\zUI\\img\\raidicons")
 
 		-- add debuff frames
-		if C.nameplates["showdebuffs"] == "1" then
+		if C.nameplates.showdebuffs == "1" then
 			if not this.debuffs then this.debuffs = {} end
 			for j=1, 16, 1 do
 				if this.debuffs[j] == nil then
@@ -641,7 +639,7 @@ zUI:RegisterComponent("zNameplates", function ()
 		end
 
 		-- update debuffs
-		if this.debuffs and zUI.nameplates.debuffs and C.nameplates["showdebuffs"] == "1" then
+		if this.debuffs and zUI.nameplates.debuffs and C.nameplates.showdebuffs == "1" then
 			if UnitExists("target") and healthbar:GetAlpha() == 1 then
 				local j = 1
 				local k = 1
@@ -689,10 +687,11 @@ zUI:RegisterComponent("zNameplates", function ()
 
 	end
 
-	zUI.nameplates:RegisterEvent("PLAYER_TARGET_CHANGED")
+    zUI.nameplates:RegisterEvent("PLAYER_TARGET_CHANGED")
 	zUI.nameplates:RegisterEvent("UNIT_AURA")
 	zUI.nameplates:SetScript("OnEvent", function()
 		if not arg1 or arg1 == "target" then
+            
 			zUI.nameplates.debuffs = {}
 			for i = 1, 16 do
 				if not UnitDebuff("target", i) then return end

@@ -67,7 +67,7 @@ zUI:RegisterComponent("zActionbars", function ()
 		zUI.zBars.xpbg.t:SetTexture(0,0,0,0.75);
 		--zUI.zBars.xpbg:Hide();
 
-			-----------------------==[[ ExhaustionTick_Update ]]==---------------------------------------BFA------->
+		-----------------------==[[ ExhaustionTick_Update ]]==---------------------------------------BFA------->
 		function zExhaustionTick_Update()
 			local playerCurrXP = UnitXP("player");
 			local playerMaxXP = UnitXPMax("player");
@@ -337,18 +337,14 @@ zUI:RegisterComponent("zActionbars", function ()
 
 		MultiBarLeft:ClearAllPoints();
 		MultiBarLeft:SetPoint("BOTTOMRIGHT", -7, 98);
+
 		-- since the MultiBarRight always gonna be horisontal in this layout, we can form it initially.
 		for i = 1, 12 do
 			local bu = _G['MultiBarRightButton'..i]
 			bu:ClearAllPoints()
 			if i == 1 then
-				--if (MultiBarBottomLeft:IsShown()) then
 					bu:SetFrameStrata'LOW'
-					--bu:SetPoint('LEFT', MultiBarRightButton12, 'RIGHT', 12, 0)
 					bu:SetPoint('LEFT', MultiBarBottomLeftButton12, 'RIGHT', 6, 0)
-				--else
-					--bu:SetPoint('LEFT', MultiBarBottomLeftButton12, 'RIGHT', 6, 0)
-				--end
 			else
 				local previous = _G['MultiBarRightButton'..i - 1]
 				bu:SetPoint('LEFT', previous, 'RIGHT', 6, 0)
@@ -362,10 +358,9 @@ zUI:RegisterComponent("zActionbars", function ()
 		--DEFAULT_CHAT_FRAME:AddMessage(xOfs)
 		--DEFAULT_CHAT_FRAME:AddMessage(yOfs)
 	end
-	--function zUI:zExperiment_OnLoad()
+	
 	local function LoadActionBarElite()
-		--DEFAULT_CHAT_FRAME:AddMessage("<zExperiment> Loaded!")
-
+		
 		for i = 0, 3 do --for loop, hides MainMenuBarTexture (0-3)
 		   _G["MainMenuBarTexture" .. i]:Hide()
 		end
@@ -580,12 +575,8 @@ zUI:RegisterComponent("zActionbars", function ()
 		MicroEnter:SetPoint("BOTTOMRIGHT", UIParent, 0, 0);
 		MicroEnter:SetWidth(200);
 		MicroEnter:SetHeight(70);
-		--MicroEnter.tex = MicroEnter:CreateTexture(nil,"ARTWORK");
-		--MicroEnter.tex:SetAllPoints(MicroEnter);
-		--MicroEnter.tex:SetTexture(0,1,0,0.6);
 		MicroEnter:EnableMouse(true);
-		MicroEnter:SetScript("OnEnter", function() 
-			--zPrint("Enter");
+		MicroEnter:SetScript("OnEnter", function()
 			zUI.zBars.mma:SetPoint("BOTTOMRIGHT",0,0)
 			MicroLeave:Show();
 		end)
@@ -593,12 +584,8 @@ zUI:RegisterComponent("zActionbars", function ()
 		zUI.zBars.Leave = CreateFrame("Frame", "MicroLeave", UIParent);
 		MicroLeave:SetFrameStrata("BACKGROUND");
 		MicroLeave:SetAllPoints(UIParent);
-		--MicroLeave.tex = MicroLeave:CreateTexture(nil,"ARTWORK");
-		--MicroLeave.tex:SetAllPoints(MicroLeave);
-		--MicroLeave.tex:SetTexture(1,0,0,0.6);
 		MicroLeave:EnableMouse(true);
-		MicroLeave:SetScript("OnEnter", function() 
-			--zPrint("Leave");
+		MicroLeave:SetScript("OnEnter", function()
 			zUI.zBars.mma:SetPoint("BOTTOMRIGHT",196,0)
 			this:Hide();
 		end)

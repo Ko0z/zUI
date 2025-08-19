@@ -80,10 +80,6 @@ function zUI:UpdateFonts()
 
   zUI.font_default = default
 
-  zUI.font_default_size = default_size
-  zUI.font_combat_size = combat_size
-  zUI.font_unit_size = unit_size
-
   STANDARD_TEXT_FONT = default
   DAMAGE_TEXT_FONT   = combat
   NAMEPLATE_FONT     = default
@@ -169,7 +165,7 @@ zUI:SetScript("OnEvent", function()
 
 		-- ADDON LOADED, READY FOR ACTION
 		--zPrint("Core initiating component load sequence.")
-		zPrint("Thank's for using zUI, type /zui for options frame.");
+		zPrint("Thank's for using zUI, type /zui for options.");
 		zPrint("/kb to bind your keys.");
 		zPrint("/calc to show the calculator.");
 

@@ -1,22 +1,21 @@
 # zUI
-An upcoming UI for Classic World of Warcraft. Built on the 1.12.1 client but will later be modified to be compatible with 1.13 and beyond!
-This addon aims to preserve the blizzard look/design but with a modern touch and with some nice features added.
+This addon aims to preserve the blizzard look/design but with a modern touch, some quality of life features and as lightweight as possible.
 
-<b>TurtleWoW compatible.</b>
+<b>Turtle WoW compatible.</b>
 <img src="https://i.imgur.com/R2FI64k.png" align="right" width="28%">
 ## Third-Party Addon Support
 
 - Healcomm support, https://github.com/Aviana/HealComm --->
 - MobHealth support, http://addons.us.to/addon/mobhealth
-- 
+- TurteMail
 
-## Older Screenshots
-<img src="https://i.imgur.com/4TwwTnP.png" align="right" width="48%">
-<img src="https://i.imgur.com/hSGbk0m.png" width="48%">
-<img src="https://i.imgur.com/scZmqWO.png" align="right" width="48%">
-<img src="https://i.imgur.com/sFAAYis.png" width="48%">
+## Screenshots
 
-## More Screenshots
+<img src="https://github.com/user-attachments/assets/ff88f139-0a02-41df-8287-e51d3fbb4a18" align="right" width="49%">
+<img src="https://i.imgur.com/hSGbk0m.png" width="49%">
+<img src="https://i.imgur.com/scZmqWO.png" align="right" width="49%">
+<img src="https://i.imgur.com/sFAAYis.png" width="49%">
+
 <img src="https://i.imgur.com/s3PJ4Z4.png" align="right" width="48%">
 <img src="https://i.imgur.com/7wnHxOw.png" width="48%">
 <img src="https://i.imgur.com/CvA4p9c.png" align="right" width="48%">
@@ -29,15 +28,6 @@ This addon aims to preserve the blizzard look/design but with a modern touch and
 
 <img src="https://i.imgur.com/eUQKn0T.png" align="center">
 
-## Heritage
-This addon started out as a fork of Shagu's pfUI. The general idea at first was just to tweak some things to have it look exactly as I wanted, and as time moved on I started to add other features with the purpose of having the most crucial features under the same "roof" and as light-weight as possible. I've always wanted to preserve the blizzard UI in some ways and I really liked the look of Modernist's modUI which is the foundation of the art decisions made here. So these guys deserve a big thank you becuase they are the reason this addon exist! Please check out their work and leave a star www.gitlab.com/Shagu , www.github.com/obble
-## Special thanks to
-Shagu, www.gitlab.com/Shagu
-Modernist, www.github.com/obble
-EinBaum, www.github.com/EinBaum
-millanzarreta, Kouri82 https://wow.curseforge.com/projects/losecontrol
-MrFIXIT, https://www.curseforge.com/wow/addons/xcalc
-
 ## Features
 There are a lot of different features in this UI and the user can choose to disable any component that they dont want to use without 
 having any issues becuase of it. 
@@ -45,12 +35,12 @@ All the components work independently and the user can choose to disable anythin
 ### Theme
 - Change color on almost any frame, bar or text.
 - Hide end caps option (gryphons)
-- Move almost any frame to your liking by "Shift-click + drag"
 - Global dark theme with some new background textures.
 - Quality colored borders on gear/items in bag/bank/character etc
 - Clock under minimap, scroll on minimap to zoom in our out
 ### Unitframes
 - Compact or Extended Unitframes
+- Move by holding [Left-Shift] click and drag
 - Class portraits
 - Rogue energy bar
 - Druid extra mana bar while shapeshifted
@@ -98,8 +88,21 @@ All the components work independently and the user can choose to disable anythin
 - CC-indicator when loss of control, heavily inspired from LoseControl, prioritizing your worst debuff
 - Circular action menu possible, remember to bind a key to this in blizzard "Keybinds". I use this to see all my portals on a mage for example on "Middle mouse" -click. RingMenu inspired
 - Sell values included on all items at all times
-- TODO: Sell all grey's button, Automatic quest accept, Add better character stats
 
-### TurtleWoW Hp/Mp duplicate fix
+### Turtle WoW Hp/Mp duplicate fix
 - This addon will hide TurtleWoW status text on target frame automatically
 
+## Commands
+- /zui - Open zUI configs
+- /kb - Go into keybind mode (hover mouse over button and press key to set)
+- /calc - Open the calculator
+- /rl - Reload addons
+
+## Heritage
+This addon started out as a fork of Shagu's pfUI. The general idea at first was just to tweak some things to have it look exactly as I wanted, and as time moved on I started to add other features with the purpose of having the most crucial features under the same "roof" and as light-weight as possible. I've always wanted to preserve the blizzard UI in some ways and I really liked the look of Modernist's modUI which is the foundation of the art decisions made here. So these guys deserve a big thank you because they are the reason this addon exist! Please check out their work and leave a star www.gitlab.com/Shagu , www.github.com/obble
+## Special thanks to
+Shagu, www.gitlab.com/Shagu
+Modernist, www.github.com/obble
+EinBaum, www.github.com/EinBaum
+millanzarreta, Kouri82 https://wow.curseforge.com/projects/losecontrol
+MrFIXIT, https://www.curseforge.com/wow/addons/xcalc
