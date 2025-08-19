@@ -4,8 +4,6 @@ zUI:RegisterComponent("zOptions", function ()
 ZUI_MINIMAPBUTTON_LINE1 = "Click to toggle Options"
 ZUI_MINIMAPBUTTON_LINE2 = "Right-click and drag"
 
-local faction = UnitFactionGroup("player");
-
 zUI.MinimapButtonFrame = CreateFrame("frame", "zMiniMapButtonFrame", Minimap);
 zMiniMapButtonFrame:EnableMouse(true);
 zMiniMapButtonFrame:SetFrameStrata("LOW");
@@ -722,6 +720,16 @@ end
 			zUI.gui.settingChanged = zUI.gui.delaySettingChanged
 			zUI.gui.delaySettingChanged = nil
 
+            --if zUI.gui.frames["About"] then
+            --    zPrint("TEEEESst");
+            --    local f = UnitFactionGroup("player");
+            --    if(f) then
+			--	    zUI.gui.frames["About"].area.logo:SetTexture("Interface\\AddOns\\zUI\\img\\"..f.."-Logo")
+			--    else
+			--	    zUI.gui.frames["About"].area.logo:SetTexture("Interface\\AddOns\\zUI\\img\\Horde-Logo")
+			--    end
+            --end
+
 			-- exit unlock mode
 			--if zUI.unlock and zUI.unlock:IsShown() then
 			--	zUI.unlock:Hide()
@@ -822,8 +830,9 @@ end
 			}
 
 			this.logo = this:CreateTexture(nil, 'OVERLAY', nil, 7)
+
+            local faction = UnitFactionGroup("player");
 			if(faction) then
-				--this.logo:SetTexture("Interface\\AddOns\\zUI\\img\\Alliance-Logo")
 				this.logo:SetTexture("Interface\\AddOns\\zUI\\img\\"..faction.."-Logo")
 			else
 				this.logo:SetTexture("Interface\\AddOns\\zUI\\img\\Horde-Logo")
@@ -831,17 +840,6 @@ end
 			this.logo:SetWidth(128)
 			this.logo:SetHeight(128)
 			this.logo:SetPoint('TOPLEFT', 150, 0)
-
-			--QuestLogFrame.Material = QuestLogFrame:CreateTexture(nil, 'OVERLAY', nil, 7)
-			--if(faction) then
-			--	QuestLogFrame.Material:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_" .. faction)
-			--else
-			--	QuestLogFrame.Material:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_Horde")
-			--end
-			--QuestLogFrame.Material:SetWidth(514)
-			--QuestLogFrame.Material:SetHeight(354)
-			--QuestLogFrame.Material:SetPoint('TOPLEFT', QuestLogDetailScrollFrame)
-			--QuestLogFrame.Material:SetVertexColor(.9, .9, .9)
 
 			this.welcome = this:CreateFontString("Status", "LOW", "GameFontWhite")
 			this.welcome:SetFont(STANDARD_TEXT_FONT, C.global.font_size)
@@ -973,7 +971,8 @@ end
 			CreateConfig(nil, T["Auto Hide Micro Menu"], C.global, "microbuttons_auto_hide", "checkbox")
 			CreateConfig(nil, T["Show Endcaps (Gryphons)"], C.actionbars, "endcap", "checkbox")
 			CreateConfig(nil, T["Enable Global Dark Mode"], C.global, "darkmode", "checkbox")
-
+			CreateConfig(nil, T["Turtle Mail Fix"], C.global, "tmail", "checkbox")
+			
 			CreateConfig(nil, T["Quality of Life"], nil, nil, "header")
 			CreateConfig(nil, T["Auto Dismount"], C.quality, "auto_dismount", "checkbox")
 			CreateConfig(nil, T["Auto Stance-Switch"], C.quality, "auto_stance", "checkbox")
@@ -984,6 +983,7 @@ end
 			CreateConfig(nil, T["Swingtimer for all classes"], C.quality.swingtimer, "enable_for_all", "checkbox")
 			CreateConfig(nil, T["Swingtimer Color"], C.swingtimer, "color", "color")
 		end)
+		
 		CreateGUIEntry("Actionbars", nil, function()
 			CreateConfig(nil, T["Enable BFA-Style"], C.actionbars, "bfa_style", "checkbox")
 			CreateConfig(nil, T["Enable Square Style"], C.actionbars, "squarebuttons", "checkbox")
@@ -1032,6 +1032,10 @@ end
 
 		CreateGUIEntry("Nameplates", nil, function()
 			
+			CreateConfig(nil, T["Font Size"], C.nameplates, "font_size", "text")
+			CreateConfig(nil, T["Name X Offset"], C.nameplates, "name_x_offset", "text")
+			CreateConfig(nil, T["Name Y Offset"], C.nameplates, "name_y_offset", "text")
+			CreateConfig(nil, T["Combo Point Y Offset"], C.nameplates, "combo_y_offset", "text")
 			CreateConfig(nil, T["Debuffs"], C.nameplates, "showdebuffs", "checkbox")
 			CreateConfig(nil, T["Castbars"], C.nameplates, "showcastbar", "checkbox")
 			CreateConfig(nil, T["Castbar Color"], C.nameplates, "castbarcolor", "color")
@@ -1064,6 +1068,34 @@ end
 			CreateConfig(nil, T["Square Minimap"], C.minimap, "square", "checkbox")
 			CreateConfig(nil, T["Hide Minimap Button"], C.minimap, "button_hide", "checkbox")
 			--CreateConfig(nil, T["Hide Clock"], C.minimap, "hide_clock", "checkbox")
+		end)
+
+        CreateGUIEntry("Skins", nil, function()
+			CreateConfig(nil, T["Bags"], C.skins, "bags", "checkbox")
+			CreateConfig(nil, T["Paperdoll"], C.skins, "paperdoll", "checkbox")
+			CreateConfig(nil, T["Inspect - Currently Broken"], C.skins, "inspect", "checkbox")
+			CreateConfig(nil, T["Bank"], C.skins, "bank", "checkbox")
+			CreateConfig(nil, T["Auction"], C.skins, "auction", "checkbox")
+			CreateConfig(nil, T["Aura"], C.skins, "aura", "checkbox")
+			CreateConfig(nil, T["Crafting"], C.skins, "crafting", "checkbox")
+			CreateConfig(nil, T["Macro"], C.skins, "macro", "checkbox")
+			CreateConfig(nil, T["Mail"], C.skins, "mail", "checkbox")
+			CreateConfig(nil, T["Merchant"], C.skins, "merchant", "checkbox")
+			CreateConfig(nil, T["Spellbook"], C.skins, "spellbook", "checkbox")
+			CreateConfig(nil, T["Talents"], C.skins, "talents", "checkbox")
+			CreateConfig(nil, T["Trade"], C.skins, "trade", "checkbox")
+			CreateConfig(nil, T["Quest"], C.skins, "quest", "checkbox")
+			CreateConfig(nil, T["Action Buttons"], C.skins, "action_buttons", "checkbox")
+			CreateConfig(nil, T["Honor"], C.skins, "honor", "checkbox")
+			CreateConfig(nil, T["Reputation"], C.skins, "reputation", "checkbox")
+			CreateConfig(nil, T["Skills"], C.skins, "skills", "checkbox")
+			CreateConfig(nil, T["Taxi"], C.skins, "taxi", "checkbox")
+			CreateConfig(nil, T["Tabard"], C.skins, "tabard", "checkbox")
+			CreateConfig(nil, T["Raid Info"], C.skins, "raidinfo", "checkbox")
+			CreateConfig(nil, T["Social"], C.skins, "social", "checkbox")
+			CreateConfig(nil, T["Guild"], C.skins, "guild", "checkbox")
+			CreateConfig(nil, T["Wardrobe"], C.skins, "wardrobe", "checkbox")
+			CreateConfig(nil, T["Tooltip"], C.skins, "tooltip", "checkbox")
 		end)
 
 		CreateGUIEntry(T["Components"], nil, function()

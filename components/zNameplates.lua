@@ -220,8 +220,7 @@ zUI:RegisterComponent("zNameplates", function ()
 		-- combopoints
 		if C.nameplates.cpdisplay == "1" then
 			local combo_size = 12
-			local offset = 5 + C.nameplates.heightcast + C.nameplates.heighthealth + C.appearance.border.default*2
-
+			
 			if not this.combopoints then
 				this.combopoints = CreateFrame("Frame", nil, this.nameplate)
 				for point=1, 5 do
@@ -234,7 +233,7 @@ zUI:RegisterComponent("zNameplates", function ()
 					--CreateBackdrop(this.combopoints["combopoint" .. point])
 					
 					--this.combopoints["combopoint" .. point]:SetPoint("BOTTOMRIGHT", this.nameplate, "BOTTOMRIGHT", -(point - 1) * (combo_size + C.appearance.border.default*3) - offset, -C.appearance.border.default*3)
-					this.combopoints["combopoint" .. point]:SetPoint("TOPLEFT", this.nameplate, "TOPLEFT", (point + 1) * (combo_size / 2 + C.appearance.border.default*3) + 18 , C.appearance.border.default*3 - 16)
+					this.combopoints["combopoint" .. point]:SetPoint("TOPLEFT", this.nameplate, "TOPLEFT", (point + 1) * (combo_size / 2 + C.appearance.border.default*3) + 18 , C.appearance.border.default*3 - 16 + C.nameplates.combo_y_offset)
 					
 					local bg = this.combopoints["combopoint" .. point]:CreateTexture(nil, "BACKGROUND")
 					bg:SetTexture("Interface\\ComboFrame\\ComboPoint");
@@ -596,13 +595,13 @@ zUI:RegisterComponent("zNameplates", function ()
 			local cp = GetComboPoints("target")
 			if GetUnitName("target") == unitname and healthbar:GetAlpha() == 1 and cp > 0 then
 				name:ClearAllPoints()
-				name:SetPoint("TOP", this.nameplate, "TOP", 0, 3)
+				name:SetPoint("TOP", this.nameplate, "TOP", C.nameplates["name_x_offset"], C.nameplates["name_y_offset"] + 5)
 				for point=1, cp do
 					combopoints["combopoint" .. point]:Show()
 				end
 			else
 				name:ClearAllPoints()
-				name:SetPoint("TOP", this.nameplate, "TOP", 0, -2)
+				name:SetPoint("TOP", this.nameplate, "TOP", C.nameplates["name_x_offset"], C.nameplates["name_y_offset"])
 			end
 		end
 

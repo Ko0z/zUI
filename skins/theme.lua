@@ -1,8 +1,6 @@
 -- Credist to Modernist, modUI
 zUI:RegisterSkin("Theme", function () --modui inspired
 	
-	local faction = UnitFactionGroup("player");
-
 	ZUI_COLOURELEMENTS_FOR_UI = {}
 	ZUI_COLOURELEMENTS_BORDER_FOR_UI = {}
 
@@ -132,15 +130,19 @@ zUI:RegisterSkin("Theme", function () --modui inspired
 	end
 
 	-- BAGS
-    for i = 1, 12 do
-        local bagName = 'ContainerFrame'..i
-        local _, a, b, _, c, _, d = _G[bagName]:GetRegions()
-        for _, v in pairs({a, b, c, d}) do table.insert(ZUI_COLOURELEMENTS_FOR_UI, v) end
+    if C.skins.bags == "1" then
+        for i = 1, 12 do
+            local bagName = 'ContainerFrame'..i
+            local _, a, b, _, c, _, d = _G[bagName]:GetRegions()
+            for _, v in pairs({a, b, c, d}) do table.insert(ZUI_COLOURELEMENTS_FOR_UI, v) end
+        end
     end
 
 	-- BANK
-    local _, a = BankFrame:GetRegions()
-    for _, v in pairs({a}) do table.insert(ZUI_COLOURELEMENTS_FOR_UI, v) end
+    if C.skins.bank == "1" then
+        local _, a = BankFrame:GetRegions()
+        for _, v in pairs({a}) do table.insert(ZUI_COLOURELEMENTS_FOR_UI, v) end
+    end
 
 	-- LETTER
     local _, a, b, c, d = ItemTextFrame:GetRegions()
@@ -159,73 +161,91 @@ zUI:RegisterSkin("Theme", function () --modui inspired
 
 	--------------------------------------------------------------------------->
 	-- PAPERDOLL
-    local a, b, c, d, _, e = PaperDollFrame:GetRegions()
-    for _, v in pairs({a, b, c, d, e}) do
-        table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
-    end
-
-	-- REPUTATION
-    table.insert(ZUI_COLOURELEMENTS_BORDER_FOR_UI, ReputationDetailFrame)
-    local a, b, c, d = ReputationFrame:GetRegions()
-    for _, v in pairs({a, b, c, d}) do
-        table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
-    end
-    for i = 1, 15 do
-        local a, b = _G['ReputationBar'..i]:GetRegions()
-        for _, v in pairs({a, b}) do
+    if C.skins.paperdoll == "1" then
+        local a, b, c, d, _, e = PaperDollFrame:GetRegions()
+        for _, v in pairs({a, b, c, d, e}) do
             table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
         end
     end
 
-	-- SKILL
-    local a, b, c, d = SkillFrame:GetRegions()
-    for _, v in pairs({a, b, c ,d}) do
-        table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
+	-- REPUTATION
+    if C.skins.reputation == "1" then
+        table.insert(ZUI_COLOURELEMENTS_BORDER_FOR_UI, ReputationDetailFrame)
+        local a, b, c, d = ReputationFrame:GetRegions()
+        for _, v in pairs({a, b, c, d}) do
+            table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
+        end
+        for i = 1, 15 do
+            local a, b = _G['ReputationBar'..i]:GetRegions()
+            for _, v in pairs({a, b}) do
+                table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
+            end
+        end
     end
-    for _, v in pairs({ReputationDetailCorner, ReputationDetailDivider}) do
-        table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
+
+	-- SKILL
+    if C.skins.skills == "1" then
+        local a, b, c, d = SkillFrame:GetRegions()
+        for _, v in pairs({a, b, c ,d}) do
+            table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
+        end
+        for _, v in pairs({ReputationDetailCorner, ReputationDetailDivider}) do
+            table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
+        end
     end
 
 	-- HONOR
-    local a, b, c, d = HonorFrame:GetRegions()
-    for _, v in pairs({a, b, c, d}) do
-        table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
+    if C.skins.honor == "1" then
+        local a, b, c, d = HonorFrame:GetRegions()
+        for _, v in pairs({a, b, c, d}) do
+            table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
+        end
     end
+
 	--------------------------------------------------------------------------->
 
 	-- MERCHANT
-    local _, a, b, c, d, _, _, _, e, f, g, h, j, k = MerchantFrame:GetRegions()
-    for _, v in pairs({a, b, c ,d, e, f, g, h, j, k}) do
-        table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
+    if C.skins.merchant == "1" then
+        local _, a, b, c, d, _, _, _, e, f, g, h, j, k = MerchantFrame:GetRegions()
+        for _, v in pairs({a, b, c ,d, e, f, g, h, j, k}) do
+            table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
+        end
+	    table.insert(ZUI_COLOURELEMENTS_FOR_UI, MerchantBuyBackItemNameFrame)
     end
-	table.insert(ZUI_COLOURELEMENTS_FOR_UI, MerchantBuyBackItemNameFrame)
 
 	-- MAIL
-    local _, a, b, c, d = OpenMailFrame:GetRegions()
-    for _, v in pairs({a, b, c, d}) do
-        table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
-    end
-	local _, a, b, c, d = MailFrame:GetRegions()
-    for _, v in pairs({a, b, c, d}) do
-        table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
-    end
+    if C.skins.mail == "1" then
+        local _, a, b, c, d = OpenMailFrame:GetRegions()
+        for _, v in pairs({a, b, c, d}) do
+            table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
+        end
+	    local _, a, b, c, d = MailFrame:GetRegions()
+        for _, v in pairs({a, b, c, d}) do
+            table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
+        end
 
-	MailFrame.Material = MailFrame:CreateTexture(nil, 'OVERLAY', nil, 7)
-	if(faction) then
-		MailFrame.Material:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_" .. faction)
-	else
-		MailFrame.Material:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_Horde")
-	end
-	MailFrame.Material:SetWidth(551) MailFrame.Material:SetHeight(450)
-	MailFrame.Material:SetPoint('TOPLEFT', MailFrame, 23, -74)
-	MailFrame.Material:SetVertexColor(.9, .9, .9)
+	    MailFrame.Material = MailFrame:CreateTexture(nil, 'OVERLAY', nil, 7)
+	    MailFrame.Material:SetWidth(551) MailFrame.Material:SetHeight(450)
+	    MailFrame.Material:SetPoint('TOPLEFT', MailFrame, 23, -74)
+	    MailFrame.Material:SetVertexColor(.9, .9, .9)
 
-	SendMailPackageButton:SetScript('OnShow', function()
-		if MailFrame.Material:IsShown() then MailFrame.Material:Hide() end
-	end)
-	SendMailPackageButton:SetScript('OnHide', function()
-		if MailFrame:IsShown() then MailFrame.Material:Show() end
-	end)
+        MailFrame:SetScript('OnShow', function()
+            zPrint("MailFrame:OnShow");
+            local faction = UnitFactionGroup("player");
+            if(faction) then
+		        MailFrame.Material:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_" .. faction)
+	        else
+		        MailFrame.Material:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_Horde")
+	        end
+	    end)
+
+	    SendMailPackageButton:SetScript('OnShow', function()
+		    if MailFrame.Material:IsShown() then MailFrame.Material:Hide() end
+	    end)
+	    SendMailPackageButton:SetScript('OnHide', function()
+		    if MailFrame:IsShown() then MailFrame.Material:Show() end
+	    end)
+    end
 
 	-- BREATH TIMER, EXHAUSTION etc... (MirrorTimer)
     for i = 1, MIRRORTIMER_NUMTIMERS do
@@ -241,117 +261,155 @@ zUI:RegisterSkin("Theme", function () --modui inspired
     end
 
 	-- QUEST
-    for _, v in pairs({
-        QuestFrameGreetingPanel,
-        QuestFrameDetailPanel,
-        QuestFrameProgressPanel,
-        QuestFrameRewardPanel,
-        GossipFrameGreetingPanel}) do
-        local a, b, c, d = v:GetRegions()
-        for _, j in pairs({a, b, c, d}) do table.insert(ZUI_COLOURELEMENTS_FOR_UI, j) end
+    if C.skins.quest == "1" then
+
+        local faction = UnitFactionGroup("player");
+
+        for _, v in pairs({
+            QuestFrameGreetingPanel,
+            QuestFrameDetailPanel,
+            QuestFrameProgressPanel,
+            QuestFrameRewardPanel,
+            GossipFrameGreetingPanel}) do
+            local a, b, c, d = v:GetRegions()
+
+            for _, j in pairs({a, b, c, d}) do table.insert(ZUI_COLOURELEMENTS_FOR_UI, j) end
 	
-        v.Material = v:CreateTexture(nil, 'OVERLAY', nil, 7)
-		if(faction) then
-			v.Material:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_" .. faction)
-		else
-			v.Material:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_Horde")
-		end
-        v.Material:SetWidth(511)
-        v.Material:SetHeight(418)
-        v.Material:SetPoint('TOPLEFT', v, 24, -82)
-        v.Material:SetVertexColor(.9, .9, .9)
+            v.Material = v:CreateTexture(nil, 'OVERLAY', nil, 7)
+            
+            if(faction) then
+			    v.Material:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_" .. faction)
+		    else
+			    v.Material:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_Horde")
+		    end
+
+            v.Material:SetWidth(511)
+            v.Material:SetHeight(418)
+            v.Material:SetPoint('TOPLEFT', v, 24, -82)
+            v.Material:SetVertexColor(.9, .9, .9)
 	
-        if v == GossipFrameGreetingPanel or v == QuestFrameGreetingPanel then
-            v.Corner = v:CreateTexture(nil, 'OVERLAY', nil, 7)
-            v.Corner:SetTexture[[Interface\QuestFrame\UI-Quest-BotLeftPatch]]
-            v.Corner:SetWidth(132)
-            v.Corner:SetHeight(64)
-            v.Corner:SetPoint('BOTTOMLEFT', v, 21, 68)
-            table.insert(ZUI_COLOURELEMENTS_FOR_UI, v.Corner)
+            if v == GossipFrameGreetingPanel or v == QuestFrameGreetingPanel then
+                v.Corner = v:CreateTexture(nil, 'OVERLAY', nil, 7)
+                v.Corner:SetTexture[[Interface\QuestFrame\UI-Quest-BotLeftPatch]]
+                v.Corner:SetWidth(132)
+                v.Corner:SetHeight(64)
+                v.Corner:SetPoint('BOTTOMLEFT', v, 21, 68)
+                table.insert(ZUI_COLOURELEMENTS_FOR_UI, v.Corner)
+            end
         end
+
+	    -- QUEST LOG
+        local _, _, a, b, c, d = QuestLogFrame:GetRegions()
+        for _, v in pairs({a, b, c, d}) do
+            table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
+        end
+
+        local qlMaterial = QuestLogDetailScrollFrame.Material or QuestLogDetailScrollFrame:CreateTexture(nil, "BACKGROUND")
+        
+        -- zUI QuestLog texture transparency size: x-211, y-103
+        -- See SetPoint() below. Shorten height by 2px
+        local qlFrameX = QuestLogDetailScrollChildFrame:GetWidth() + 211
+        local qlFrameY = QuestLogDetailScrollChildFrame:GetHeight() + 101
+
+        QuestLogDetailScrollFrame:SetScript('OnShow', function()
+            
+            local faction = UnitFactionGroup("player");
+            if(faction) then
+		        qlMaterial:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_" .. faction)
+	        else
+		        qlMaterial:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_Horde")
+	        end
+	    end)
+
+        qlMaterial:SetWidth(qlFrameX)
+        qlMaterial:SetHeight(qlFrameY)
+        qlMaterial:SetPoint("TOPLEFT", 0, 2) -- offset 2px for better alignment
+        qlMaterial:SetVertexColor(.9, .9, .9)
     end
-
-	-- QUEST LOG
-    local _, _, a, b, c, d = QuestLogFrame:GetRegions()
-    for _, v in pairs({a, b, c, d}) do
-        table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
-    end
-
-    local qlMaterial = QuestLogDetailScrollFrame.Material or QuestLogDetailScrollFrame:CreateTexture(nil, "BACKGROUND")
-    local qlTexture = "Interface\\AddOns\\zUI\\img\\QuestBG_"
-
-    -- zUI QuestLog texture transparency size: x-211, y-103
-    -- See SetPoint() below. Shorten height by 2px
-    local qlFrameX = QuestLogDetailScrollChildFrame:GetWidth() + 211
-    local qlFrameY = QuestLogDetailScrollChildFrame:GetHeight() + 101
-
-    qlMaterial:SetTexture(qlTexture .. (faction or "Horde"))
-    qlMaterial:SetWidth(qlFrameX)
-    qlMaterial:SetHeight(qlFrameY)
-    qlMaterial:SetPoint("TOPLEFT", 0, 2) -- offset 2px for better alignment
-    qlMaterial:SetVertexColor(.9, .9, .9)
 
         -- QUEST TIMER
     table.insert(ZUI_COLOURELEMENTS_BORDER_FOR_UI, QuestTimerFrame)
     table.insert(ZUI_COLOURELEMENTS_FOR_UI, QuestTimerHeader)
 
 	-- RAIDINFO
-    local _, _, a = RaidInfoFrame:GetRegions()
-    for _, v in pairs({a}) do
-        table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
+    if C.skins.raidinfo == "1" then
+        local _, _, a = RaidInfoFrame:GetRegions()
+        for _, v in pairs({a}) do
+            table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
+        end
     end
 
-	    -- SOCIAL
-    local _, a, b, c, d = FriendsFrame:GetRegions()
-    for _, v in pairs({a, b, c, d}) do
-        table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
+	-- SOCIAL
+    if C.skins.social == "1" then
+        local _, a, b, c, d = FriendsFrame:GetRegions()
+        for _, v in pairs({a, b, c, d}) do
+            table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
+        end
     end
 
-    local a = ({GuildMemberDetailFrame:GetRegions()})
-    table.insert(ZUI_COLOURELEMENTS_FOR_UI, a[20])
-    table.insert(ZUI_COLOURELEMENTS_BORDER_FOR_UI, GuildMemberDetailFrame)
-    table.insert(ZUI_COLOURELEMENTS_FOR_UI, GuildMemberDetailCorner)
-
-	    -- SPELLBOOK
-    local _, a, b, c, d = SpellBookFrame:GetRegions()
-    for _, v in pairs({a, b, c, d}) do
-        table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
+    if C.skins.guild == "1" then
+        local a = ({GuildMemberDetailFrame:GetRegions()})
+        table.insert(ZUI_COLOURELEMENTS_FOR_UI, a[20])
+        table.insert(ZUI_COLOURELEMENTS_BORDER_FOR_UI, GuildMemberDetailFrame)
+        table.insert(ZUI_COLOURELEMENTS_FOR_UI, GuildMemberDetailCorner)
     end
 
-	-- TODO once again find that texture... Found an old blizzard test image lol, 
-	SpellBookFrame.Material = SpellBookFrame:CreateTexture(nil, 'OVERLAY', nil, 7)
-	if(faction) then
-		SpellBookFrame.Material:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_" .. faction)
-	else
-		SpellBookFrame.Material:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_Horde")
-	end
-    SpellBookFrame.Material:SetWidth(544) -- 300
-    SpellBookFrame.Material:SetHeight(445) -- 336
-    SpellBookFrame.Material:SetPoint('TOPLEFT', SpellBookFrame, 22, -74)
-    SpellBookFrame.Material:SetVertexColor(.9, .9, .9)
+	-- SPELLBOOK
+    if C.skins.spellbook == "1" then
+        local _, a, b, c, d = SpellBookFrame:GetRegions()
+        for _, v in pairs({a, b, c, d}) do
+            table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
+        end
+
+	    -- TODO once again find that texture... Found an old blizzard test image lol, 
+	    SpellBookFrame.Material = SpellBookFrame:CreateTexture(nil, 'OVERLAY', nil, 7)
+        SpellBookFrame.Material:SetWidth(544) -- 300
+        SpellBookFrame.Material:SetHeight(445) -- 336
+        SpellBookFrame.Material:SetPoint('TOPLEFT', SpellBookFrame, 22, -74)
+        SpellBookFrame.Material:SetVertexColor(.9, .9, .9)
+
+        SpellBookFrame:SetScript('OnShow', function()
+            zPrint("SpellBookFrame:OnShow");
+            local faction = UnitFactionGroup("player");
+            if(faction) then
+		        SpellBookFrame.Material:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_" .. faction)
+	        else
+		        SpellBookFrame.Material:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_Horde")
+	        end
+	    end)
+
+    end
 
 	-- TABARD
-    local _, a, b, c, d = TabardFrame:GetRegions()
-    for _, v in pairs({a, b, c, d, e}) do
-        table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
+    if C.skins.tabard == "1" then
+        local _, a, b, c, d = TabardFrame:GetRegions()
+        for _, v in pairs({a, b, c, d, e}) do
+            table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
+        end
     end
 
 	-- TAXI
-    local _, a, b, c, d = TaxiFrame:GetRegions()
-    for _, v in pairs({a, b, c, d}) do
-        table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
+    if C.skins.taxi == "1" then
+        local _, a, b, c, d = TaxiFrame:GetRegions()
+        for _, v in pairs({a, b, c, d}) do
+            table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
+        end
     end
 
 	-- TRADE
-    local _, _, a, b, c, d = TradeFrame:GetRegions()
-    for _, v in pairs({a, b, c, d, e}) do
-        table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
+    if C.skins.trade == "1" then
+        local _, _, a, b, c, d = TradeFrame:GetRegions()
+        for _, v in pairs({a, b, c, d, e}) do
+            table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
+        end
     end
 
 	-- WARDROBE
-    local _, a, b, c, d = DressUpFrame:GetRegions()
-    for _, v in pairs({a, b, c, d, e}) do
-        table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
+    if C.skins.wardrobe == "1" then
+        local _, a, b, c, d = DressUpFrame:GetRegions()
+        for _, v in pairs({a, b, c, d, e}) do
+            table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
+        end
     end
 
 	-- WORLDMAP
