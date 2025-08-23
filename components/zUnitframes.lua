@@ -2,9 +2,20 @@ zUI:RegisterComponent("zUnitframes", function ()
 	zUI.zUnitframes = CreateFrame("Frame", "zUnitframes", UIParent);
 	
 	for _, v in pairs({ PlayerFrame, TargetFrame, PartyMemberFrame1 }) do
-        v:SetUserPlaced(true) v:SetMovable(true) v:EnableMouse(true)
-        v:SetScript('OnDragStart', function() if IsShiftKeyDown() then this:StartMoving() end end)
-        v:SetScript('OnDragStop',  function() this:StopMovingOrSizing() end)
+        v:SetUserPlaced(true) 
+        v:SetMovable(true) 
+        v:EnableMouse(true)
+
+        v:SetScript('OnDragStart', function() 
+            if IsShiftKeyDown() then 
+                this:StartMoving() 
+            end 
+        end)
+
+        v:SetScript('OnDragStop',  function() 
+            this:StopMovingOrSizing()
+        end)
+
         v:RegisterForDrag'LeftButton'
     end
 

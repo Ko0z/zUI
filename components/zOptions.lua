@@ -854,7 +854,7 @@ end
 		CreateGUIEntry("Actionbars", nil, function()
 			CreateConfig(nil, T["Enable BFA-Style"], C.actionbars, "bfa_style", "checkbox")
 			CreateConfig(nil, T["Enable Square Style"], C.actionbars, "squarebuttons", "checkbox")
-			CreateConfig(nil, T["Swap pet and shapeshift actionbars"], C.actionbars, "swap_pet_shapeshift_actionbar", "checkbox")
+			--CreateConfig(nil, T["Swap pet and shapeshift actionbars"], C.actionbars, "swap_pet_shapeshift_actionbar", "checkbox")
 			CreateConfig(nil, T["Hotkey Text Color"], C.hotkeys, "color", "color")
 			CreateConfig(nil, T["Use Blizzard Hotkey Font"], C.hotkeys, "blizzard_font", "checkbox")
 			CreateConfig(nil, T["Action Button Border Color"], C.skin, "dark", "color")
@@ -865,7 +865,7 @@ end
 			CreateConfig(nil, T["Class Portraits"], C.unitframes, "classportraits", "checkbox")
 			CreateConfig(nil, T["Show Status Glow Effect"], C.unitframes, "statusglow", "checkbox")
 			CreateConfig(nil, T["Improved Pet Frame"], C.unitframes, "improvedpet", "checkbox")
-			CreateConfig(nil, T["Hide Pet Happiness Icon (Shown by hp bar color)"], C.unitframes, "hide_pet_happiness_icon", "checkbox")
+			CreateConfig(nil, T["Hide Pet Happiness Icon (Shown by pet hp bar color)"], C.unitframes, "hide_pet_happiness_icon", "checkbox")
 
 			CreateConfig(nil, T["Text"], nil, nil, "header")
 			CreateConfig(nil, T["Show Percentage"], C.unitframes, "percentages", "checkbox")
@@ -962,6 +962,10 @@ end
 			CreateConfig(nil, T["Guild"], C.skins, "guild", "checkbox")
 			CreateConfig(nil, T["Wardrobe"], C.skins, "wardrobe", "checkbox")
 			CreateConfig(nil, T["Tooltip"], C.skins, "tooltip", "checkbox")
+		end)
+
+        CreateGUIEntry("Raid", nil, function()
+			CreateConfig(nil, T["To move raid frames: hold left-shift + click and drag on any group text"], nil, nil, "header")
 		end)
 
 		CreateGUIEntry(T["Components"], nil, function()

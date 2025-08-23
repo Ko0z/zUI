@@ -41,8 +41,8 @@ if IsAddOnLoaded'HealComm' then HealComm = AceLibrary'HealComm-1.0' end -- if th
 	
 local cache = function(num)
     if num < 1 then
-        for i = 1,  8 do _G['modraid_grp'..i]:Hide() end
-        for i = 1, 40 do _G['modraid'..i]:Hide() end
+        for i = 1,  8 do _G['zraid_grp'..i]:Hide() end
+        for i = 1, 40 do _G['zraid'..i]:Hide() end
     elseif RAID_SUBGROUP_LISTS then
         for i = 1,  8 do roster[i] = {} end
         for i = 1,  8 do
@@ -60,7 +60,7 @@ end
 
 local format = function(index)
     for i = 1, 8 do
-        local header = _G['modraid_grp'..i]
+        local header = _G['zraid_grp'..i]
         if getn(roster[i]) > 0 then
             header:Show() header.text:SetText('[ '..i..' ]')
         else
@@ -80,7 +80,7 @@ end
 
 local arrange = function(index)
     for i = 1, 8 do
-        local header = _G['modraid_grp'..i]
+        local header = _G['zraid_grp'..i]
         for j = 1, getn(roster[i]) do
             local raid = bu[index]
             if j == 1 then
@@ -416,7 +416,7 @@ local unflag = function(t, index)
 end
 
 local clearflag = function()
-    for i = 1, 40 do _G['modraid'..i].flag:Hide() end
+    for i = 1, 40 do _G['zraid'..i].flag:Hide() end
 end
 
 local ToggleTank = function(unit)
@@ -428,13 +428,68 @@ local ToggleTank = function(unit)
 end
 
 local CreateUnits = function()
+    local RaidUnitContainer = CreateFrame("Frame", "RaidUnitContainer", UIParent)
+    local RaidUnitContainer2 = CreateFrame("Frame", "RaidUnitContainer2", RaidUnitContainer)
+
+    RaidUnitContainer:SetFrameLevel(0)
+    RaidUnitContainer:SetWidth(300)
+    RaidUnitContainer:SetHeight(16)
+    RaidUnitContainer:SetPoint("TOPLEFT", UIParent, 5, -200);
+
+    -- DEBUG DRAG BOX 1
+    --RaidUnitContainer.texture = RaidUnitContainer:CreateTexture("RaidContainerTexture","BACKGROUND")
+    --RaidUnitContainer.texture:SetPoint("TOPLEFT", RaidUnitContainer, "TOPLEFT", 0, 0);
+    --RaidUnitContainer.texture:SetWidth(RaidUnitContainer:GetWidth())
+    --RaidUnitContainer.texture:SetHeight(RaidUnitContainer:GetHeight())
+    --RaidUnitContainer.texture:SetTexture(0,0,0,0.75);
+	
+    RaidUnitContainer:SetMovable(true)
+    RaidUnitContainer:RegisterForDrag'LeftButton' 
+    RaidUnitContainer:EnableMouse(true)
+	RaidUnitContainer:SetClampedToScreen(true)
+    RaidUnitContainer:SetUserPlaced(true)
+
+    RaidUnitContainer:SetScript('OnDragStart', function() 
+        if IsShiftKeyDown() then 
+            this:StartMoving() 
+        end 
+    end)
+
+    RaidUnitContainer:SetScript('OnDragStop',  function() this:StopMovingOrSizing() end)
+
+    RaidUnitContainer2:SetFrameLevel(0)
+    RaidUnitContainer2:SetWidth(300)
+    RaidUnitContainer2:SetHeight(16)
+    RaidUnitContainer2:SetPoint("TOPLEFT", RaidUnitContainer, 0, -192);
+
+    -- DEBUG DRAG BOX 2
+    --RaidUnitContainer2.texture = RaidUnitContainer:CreateTexture("RaidContainerTexture","BACKGROUND")
+    --RaidUnitContainer2.texture:SetPoint("CENTER", RaidUnitContainer2, 0, 0);
+    --RaidUnitContainer2.texture:SetWidth(300)
+    --RaidUnitContainer2.texture:SetHeight(16)
+    --RaidUnitContainer2.texture:SetTexture(0,0,0,0.75);
+	
+    RaidUnitContainer2:RegisterForDrag'LeftButton' 
+    RaidUnitContainer2:EnableMouse(true)
+
+    RaidUnitContainer2:SetScript('OnDragStart', function() 
+        if IsShiftKeyDown() then 
+            RaidUnitContainer:StartMoving() 
+        end 
+    end)
+
+    RaidUnitContainer2:SetScript('OnDragStop',  function() RaidUnitContainer:StopMovingOrSizing() end)
+
+    RaidUnitContainer:Hide()
+    RaidUnitContainer2:Hide()
+
     for i = 1, 8 do
-        local header = CreateFrame('Button', 'modraid_grp'..i, UIParent)
+        local header = CreateFrame('Button', 'zraid_grp'..i, RaidUnitContainer)
+        header:SetFrameLevel(0)
+        header:EnableMouse(false)
         header:SetWidth(32) header:SetHeight(12)
-        header:SetMovable(true) header:SetUserPlaced(true)
-        header:RegisterForDrag'LeftButton' header:EnableMouse(true)
-		header:SetClampedToScreen(true)
-        header:Hide()
+        
+        --header:Hide()
 
         header.text = header:CreateFontString(nil, 'OVERLAY', 'GameFontNormalSmall')
         header.text:SetPoint('CENTER', header)
@@ -444,19 +499,16 @@ local CreateUnits = function()
         if i == 1 then
             if left2right then
                 --header:SetPoint('TOPLEFT', Minimap, 'BOTTOMLEFT', -138, -50)
-                header:SetPoint('LEFT', 20, 20)
+                header:SetPoint('TOPLEFT', 20, 0)
             else
                 header:SetPoint('TOPRIGHT', Minimap, 'BOTTOMRIGHT', -53, -50)
             end
         elseif i == (xx + 1) then
-            header:SetPoint('TOPLEFT',  _G['modraid_grp'..(i - xx)], 'BOTTOMLEFT', 0, -180)
+            header:SetPoint('TOPLEFT',  _G['zraid_grp'..(i - xx)], 'BOTTOMLEFT', 0, -180)
         else
             -- changed: might be an issue w/ logic?
-            header:SetPoint(left2right and 'LEFT' or 'RIGHT', _G['modraid_grp'..(i - 1)], left2right and 'RIGHT' or 'LEFT', showdebuffs and (left2right and 44 or -44) or (left2right and 32 or -32), 0)
+            header:SetPoint(left2right and 'LEFT' or 'RIGHT', _G['zraid_grp'..(i - 1)], left2right and 'RIGHT' or 'LEFT', showdebuffs and (left2right and 44 or -44) or (left2right and 32 or -32), 0)
         end
-
-        header:SetScript('OnDragStart', function() this:StartMoving() end)
-        header:SetScript('OnDragStop',  function() this:StopMovingOrSizing() end)
     end
 
     for i = 1, 40 do
@@ -469,7 +521,7 @@ local CreateUnits = function()
 			--['modRaidLeft2Right']     = 1,
 
 
-        bu[i] = CreateFrame('Button', 'modraid'..i, UIParent)
+        bu[i] = CreateFrame('Button', 'zraid'..i, UIParent)
         bu[i]:RegisterForClicks('LeftButtonUp', 'RightButtonUp')
         --bu[i]:SetWidth(db['modRaidX'] and db['modRaidX'] or 53)
         --bu[i]:SetHeight(db['modRaidY'] and db['modRaidY'] or 24)
@@ -648,11 +700,15 @@ Minimap.raid:SetScript('OnClick', function()
     local t = this.text:GetText()
     if t == '+' then
         this.text:SetText'-'
+        RaidUnitContainer:Show()
+        RaidUnitContainer2:Show()
         rosterupdate()
     elseif t == '-' then
         this.text:SetText'+'
-        for i = 1,  8 do _G['modraid_grp'..i]:Hide() end
+        for i = 1,  8 do _G['zraid_grp'..i]:Hide() end
         for i = 1, 40 do bu[i]:Hide() end
+        RaidUnitContainer:Hide()
+        RaidUnitContainer2:Hide()
     end
 end)
 
@@ -666,7 +722,7 @@ f:SetScript('OnEvent', function()
         if not MODUI_RAID_XY then
             MODUI_RAID_XY = {'TOP', Minimap, 'BOTTOM', 2, -70}
         end
-    elseif event == 'PLAYER_LOGIN' then
+        -- To be able to save frame positions between sessions, the frames must be created before "PLAYER_LOGIN" event
         CreateUnits()
     elseif (event == 'PLAYER_ENTERING_WORLD' and UnitInRaid'player')
     or (event == 'CHAT_MSG_SYSTEM' and string.find(arg1, 'You have joined a raid group')) then
@@ -681,9 +737,18 @@ f:SetScript('OnEvent', function()
         f:UnregisterEvent'PLAYER_ENTERING_WORLD'
     elseif event == 'RAID_ROSTER_UPDATE' then
         if Minimap.raid.text:GetText() == '-' then rosterupdate() end
-        if GetNumRaidMembers() < 1 or not UnitInRaid'player' then
-            for i = 1, 8 do _G['modraid_grp'..i]:Hide() end
-            Minimap.raid:Hide() f.reset = true
+        local numRaidMembers = GetNumRaidMembers()
+        if numRaidMembers < 1 or not UnitInRaid'player' then
+            for i = 1, 8 do 
+                _G['zraid_grp'..i]:Hide() 
+            end
+            Minimap.raid:Hide() 
+            RaidUnitContainer:Hide()
+            RaidUnitContainer2:Hide()
+            f.reset = true
+        elseif numRaidMembers > 0 and UnitInRaid'player' then
+            RaidUnitContainer:Show()
+            RaidUnitContainer2:Show()
         end
     elseif event == 'CHAT_MSG_BG_SYSTEM_ALLIANCE' or event == 'CHAT_MSG_BG_SYSTEM_HORDE' then
         local s = arg1
