@@ -11,10 +11,10 @@ This addon aims to preserve the blizzard look/design but with a modern touch, so
 
 ## Screenshots
 
-<img src="https://github.com/user-attachments/assets/ff88f139-0a02-41df-8287-e51d3fbb4a18" align="right" width="49%">
-<img src="https://i.imgur.com/hSGbk0m.png" width="49%">
-<img src="https://i.imgur.com/scZmqWO.png" align="right" width="49%">
-<img src="https://i.imgur.com/sFAAYis.png" width="49%">
+<img src="https://github.com/user-attachments/assets/ff88f139-0a02-41df-8287-e51d3fbb4a18" align="right" width="48%">
+<img src="https://i.imgur.com/hSGbk0m.png" width="48%">
+<img src="https://i.imgur.com/scZmqWO.png" align="right" width="48%">
+<img src="https://i.imgur.com/sFAAYis.png" width="48%">
 
 <img src="https://i.imgur.com/s3PJ4Z4.png" align="right" width="48%">
 <img src="https://i.imgur.com/7wnHxOw.png" width="48%">
