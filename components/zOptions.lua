@@ -838,7 +838,7 @@ end
 			CreateConfig(nil, T["Auto Hide Micro Menu"], C.global, "microbuttons_auto_hide", "checkbox")
 			CreateConfig(nil, T["Show Endcaps (Gryphons)"], C.actionbars, "endcap", "checkbox")
 			CreateConfig(nil, T["Enable Global Dark Mode"], C.global, "darkmode", "checkbox")
-			--CreateConfig(nil, T["Turtle Mail Fix"], C.global, "tmail", "checkbox")
+			CreateConfig(nil, T["Hide Shapeshift Buttons"], C.global, "hide_shapeshift_frame", "checkbox")
 			
 			CreateConfig(nil, T["Quality of Life"], nil, nil, "header")
 			CreateConfig(nil, T["Auto Dismount"], C.quality, "auto_dismount", "checkbox")
@@ -854,7 +854,7 @@ end
 		CreateGUIEntry("Actionbars", nil, function()
 			CreateConfig(nil, T["Enable BFA-Style"], C.actionbars, "bfa_style", "checkbox")
 			CreateConfig(nil, T["Enable Square Style"], C.actionbars, "squarebuttons", "checkbox")
-			
+			CreateConfig(nil, T["Swap pet and shapeshift actionbars"], C.actionbars, "swap_pet_shapeshift_actionbar", "checkbox")
 			CreateConfig(nil, T["Hotkey Text Color"], C.hotkeys, "color", "color")
 			CreateConfig(nil, T["Use Blizzard Hotkey Font"], C.hotkeys, "blizzard_font", "checkbox")
 			CreateConfig(nil, T["Action Button Border Color"], C.skin, "dark", "color")
@@ -865,7 +865,8 @@ end
 			CreateConfig(nil, T["Class Portraits"], C.unitframes, "classportraits", "checkbox")
 			CreateConfig(nil, T["Show Status Glow Effect"], C.unitframes, "statusglow", "checkbox")
 			CreateConfig(nil, T["Improved Pet Frame"], C.unitframes, "improvedpet", "checkbox")
-			
+			CreateConfig(nil, T["Hide Pet Happiness Icon (Shown by hp bar color)"], C.unitframes, "hide_pet_happiness_icon", "checkbox")
+
 			CreateConfig(nil, T["Text"], nil, nil, "header")
 			CreateConfig(nil, T["Show Percentage"], C.unitframes, "percentages", "checkbox")
 			CreateConfig(nil, T["Format HP/MP-Text (1000 = 1k)"], C.unitframes, "trueformat", "checkbox")

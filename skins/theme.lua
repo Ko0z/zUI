@@ -31,10 +31,12 @@ zUI:RegisterSkin("Theme", function () --modui inspired
 		Disable_BagButtons();
 		UpdateMicroButtons();
 		
-		-- customize
-		UIOptionsBlackground:Hide() -- removes black sideos for UIOptions (Interface)
-		--BlackoutWorld:Hide(); -- removes black sideos for map
+        -- Turtle WoW has removed this frame, causing errors if playing on another server
+        if (not Turtle_ChallengesCache) then
+		    UIOptionsBlackground:Hide() -- removes black sideos for UIOptions (Interface)
+		end
 
+        -- customize
 		UIOptionsFrame:SetMovable(true)
 		UIOptionsFrame:EnableMouse(true)
 		UIOptionsFrame:SetScale(.8)

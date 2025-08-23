@@ -3,6 +3,12 @@ zUI:RegisterComponent("zActionbars", function ()
 	UIPARENT_MANAGED_FRAME_POSITIONS["CastingBarFrame"] = {baseY = 70, bottomEither = 50, pet = 50, reputation = 19}; -- {baseY = 60, bottomEither = 40, pet = 40, reputation = 9};
 
 	zUI.zBars = CreateFrame("Frame", nil, UIParent);
+
+    -- Useful for example to remove Turtle WoW added Shapeshift bar on Hunters
+    local function Before_UIParent_ManageFramePositions()
+        ShapeshiftBarFrame:Hide()
+    end
+
 	-- BFA
 	local function LoadActionBarBFA()
 		----------------------==[ zUI.zBars.ActionBarArtSmall-Frame ]==----------------------------------------------->
@@ -246,6 +252,7 @@ zUI:RegisterComponent("zActionbars", function ()
 
 		local function Update_ActionBarsBFA()
 			--Bottom Left Bar:
+
 			if MultiBarBottomLeft:IsShown() then
 				PetActionButton1:SetPoint("TOP",PetActionBarFrame,"LEFT",51,4)
 				--StanceButton1:SetPoint("LEFT",StanceBarFrame,2,-4)
@@ -255,6 +262,7 @@ zUI:RegisterComponent("zActionbars", function ()
 				--StanceButton1:SetPoint("LEFT",StanceBarFrame,12,-2)
 				ShapeshiftButton1:SetPoint("LEFT",ShapeshiftBarFrame,12,-2)
 			end
+
 			--Right Bar:
 			if MultiBarRight:IsShown() then
 				--do
@@ -280,7 +288,9 @@ zUI:RegisterComponent("zActionbars", function ()
 			end
 		end
 
-		--UIParent_ManageFramePositions(); -- better to hook??
+        if (C.global.hide_shapeshift_frame == "1") then
+            hooksecurefunc("UIParent_ManageFramePositions", Before_UIParent_ManageFramePositions, false);
+        end
 
 		HookScript(MultiBarBottomLeft,'OnShow', Update_ActionBarsBFA)
 		HookScript(MultiBarBottomLeft,'OnHide', Update_ActionBarsBFA)
@@ -521,6 +531,10 @@ zUI:RegisterComponent("zActionbars", function ()
 				end
 			end
 		end
+
+        if (C.global.hide_shapeshift_frame == "1") then
+            hooksecurefunc("UIParent_ManageFramePositions", Before_UIParent_ManageFramePositions, false);
+        end
 
 		hooksecurefunc("UIParent_ManageFramePositions",Update_ActionLayout,true);
 

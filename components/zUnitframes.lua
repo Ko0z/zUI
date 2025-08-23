@@ -64,8 +64,13 @@ zUI:RegisterComponent("zUnitframes", function ()
 
 	function zPetFrame_OnUpdate(elapsed)
 		if (C.unitframes.improvedpet == "1") then
-			PetFrameTexture:SetTexture("Interface\\TargetingFrame\\UI-TargetofTargetFrame"); -- no need to set texture every frame?
-			PetFrameHappiness:Hide()
+            -- no need to set texture every frame? Edit: Even Blizzard original UI set this every update..
+			PetFrameTexture:SetTexture("Interface\\TargetingFrame\\UI-TargetofTargetFrame"); 
+			if (C.unitframes.hide_pet_happiness_icon == "1") then
+                PetFrameHappiness:Hide()
+            else
+                PetFrameHappiness:SetPoint("LEFT", PetFrame, "LEFT", 44, 0)
+            end
 
 			local happiness, damagePercentage, loyaltyRate = GetPetHappiness()
 			local pp = UnitPowerType'pet'

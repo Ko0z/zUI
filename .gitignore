@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Turtle WoW UI Source
+Turtle-WoW-UI-Source
+
 # User-specific files
 *.suo
 *.user
