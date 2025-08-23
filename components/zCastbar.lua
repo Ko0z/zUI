@@ -21,9 +21,23 @@ zUI:RegisterComponent("zCastbar", function ()
 		zSkinColor(cb, 0.4, 0.4, 0.4);
 
 		--cb:SetHeight(C.global.font_size * 1.5)
-		cb:SetHeight(C.global.font_size + 2)
+		--cb:SetHeight(C.global.font_size + 2)
 		--cb:SetHeight(C.global.font_size)
 		cb:SetFrameStrata("MEDIUM")
+
+        cb:SetMovable(true)
+        cb:RegisterForDrag'LeftButton' 
+        cb:EnableMouse(true)
+	    cb:SetClampedToScreen(true)
+        cb:SetUserPlaced(true)
+
+        cb:SetScript('OnDragStart', function() 
+            if IsShiftKeyDown() then 
+                this:StartMoving() 
+            end 
+        end)
+
+        cb:SetScript('OnDragStop',  function() this:StopMovingOrSizing() end)
 
 		cb.unitstr = unitstr
 		cb.unitname = unitname
@@ -180,48 +194,18 @@ zUI:RegisterComponent("zCastbar", function ()
 	-- [[ zPlayerCastbar ]] --
 	if C.castbar.player.hide_zUI == "0" then
 		zUI.castbar.player = CreateCastbar("zPlayerCastbar", UIParent, "player")
-		-- WIDTH player castbar
-		local width = C.castbar.player.width ~= "-1" and C.castbar.player.width or 160
-		
-		if (C.castbar.player.above == "1") then
-			-- Over 
-			zUI.castbar.player:SetPoint('TOPLEFT', PlayerFrame, 60, 15)
-		else
-			-- Under
-			zUI.castbar.player:SetPoint('BOTTOMLEFT', PlayerFrame, 60, -30);
-		end
+		zUI.castbar.player:SetPoint('BOTTOMLEFT', PlayerFrame, 60, -30);
 
-		zUI.castbar.player:SetWidth(width)
-		
-		if C.castbar.player.height ~= "-1" then
-			zUI.castbar.player:SetHeight(C.castbar.player.height)
-		end
-
-		UpdateMovable(zUI.castbar.player)
+		zUI.castbar.player:SetWidth(C.castbar.player.castbar_width)
+		zUI.castbar.player:SetHeight(C.castbar.player.castbar_height)
 	end
 
 	-- [[ zTargetCastbar ]] --
 	if C.castbar.target.hide_zUI == "0" then
 		zUI.castbar.target = CreateCastbar("zTargetCastbar", UIParent, "target")
-
-		-- WIDTH target castbar
-		local width = C.castbar.target.width ~= "-1" and C.castbar.target.width or 160
-		-- TODO: make cast bar movable and user placed
-	
-		if (C.castbar.target.above == "1") then
-			-- Over 
-			zUI.castbar.target:SetPoint('TOPRIGHT', TargetFrame, -60, 15)
-		else
-			-- Under
-			zUI.castbar.target:SetPoint('BOTTOMRIGHT', TargetFrame, -60, -30);
-		end
+		zUI.castbar.target:SetPoint('BOTTOMRIGHT', TargetFrame, -60, -30);
 		
-		zUI.castbar.target:SetWidth(width)
-
-		if C.castbar.target.height ~= "-1" then
-			zUI.castbar.target:SetHeight(C.castbar.target.height)
-		end
-
-		UpdateMovable(zUI.castbar.target)
+		zUI.castbar.target:SetWidth(C.castbar.target.castbar_width)
+		zUI.castbar.target:SetHeight(C.castbar.target.castbar_height)
 	end
 end)

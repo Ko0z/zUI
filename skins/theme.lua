@@ -146,15 +146,6 @@ zUI:RegisterSkin("Theme", function () --modui inspired
         for _, v in pairs({a}) do table.insert(ZUI_COLOURELEMENTS_FOR_UI, v) end
     end
 
-	-- LETTER
-    local _, a, b, c, d = ItemTextFrame:GetRegions()
-    for _, v in pairs({a, b, c, d, e}) do
-        table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
-    end
-	hooksecurefunc("ItemTextFrame_OnEvent", function()
-		ItemTextPageText:SetTextColor(0.04, 0.04, 0.04, 1);
-	end, true)
-	
 	-- HELP
     local a, b, c, d, e, f, g = HelpFrame:GetRegions()
     for _, v in pairs({a, b, c, d, e, f, g}) do
@@ -214,6 +205,43 @@ zUI:RegisterSkin("Theme", function () --modui inspired
         end
 	    table.insert(ZUI_COLOURELEMENTS_FOR_UI, MerchantBuyBackItemNameFrame)
     end
+
+    -- LETTER
+    local _, a, b, c, d = ItemTextFrame:GetRegions()
+    for _, v in pairs({a, b, c, d, e}) do
+        table.insert(ZUI_COLOURELEMENTS_FOR_UI, v)
+    end
+	
+    local f = CreateFrame'Frame'
+	f:RegisterEvent'PLAYER_ENTERING_WORLD'
+
+    -- If we run code that want to know FACTION we need to wait until Entering World etc..
+    f:SetScript('OnEvent', function()
+		
+        if event == 'PLAYER_ENTERING_WORLD' then
+            for _, v in pairs({
+                ItemTextFrame}) do
+                    
+                -- It seems like the order in which this happens is very important!
+                --> CreateTexture
+                --> SetTexture
+                --> SetWidth .....
+                v.Material = v:CreateTexture(nil, 'OVERLAY', nil, 7)
+                    
+                if(UnitFactionGroup("player") == "Horde") then
+		            v.Material:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_Horde")
+	            else
+		            v.Material:SetTexture("Interface\\AddOns\\zUI\\img\\QuestBG_Alliance")
+	            end
+
+                v.Material:SetWidth(512)
+                v.Material:SetHeight(446)
+                v.Material:SetPoint('TOPLEFT', v, 22, -74)
+                v.Material:SetVertexColor(.9, .9, .9)
+            end
+		end
+
+    end) 
 
 	-- MAIL
     if C.skins.mail == "1" then

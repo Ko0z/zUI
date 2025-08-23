@@ -7,7 +7,7 @@ This addon aims to preserve the blizzard look/design but with a modern touch, so
 
 - Healcomm support, https://github.com/Aviana/HealComm --->
 - MobHealth support, http://addons.us.to/addon/mobhealth
-- TurteMail
+- TurtleMail
 
 ## Screenshots
 

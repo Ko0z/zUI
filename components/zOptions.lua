@@ -882,19 +882,22 @@ end
 		end)
 
 		CreateGUIEntry("Castbar", nil, function()
-			CreateConfig(nil, T["Hide Blizz Castbar"], C.castbar.player, "hide_blizz", "checkbox")
+			CreateConfig(nil, T["Hide Blizzard Castbar"], C.castbar.player, "hide_blizz", "checkbox")
 			CreateConfig(nil, T["Castbar Color"], C.appearance.castbar, "castbarcolor", "color")
 			CreateConfig(nil, T["Castbar Channel Color"], C.appearance.castbar, "channelcolor", "color")
 			CreateConfig(nil, T["Flat Castbar Textures"], C.castbar, "flat_texture", "checkbox")
-			
+
 			CreateConfig(nil, T["Player Castbar"], nil, nil, "header")
 			CreateConfig(nil, T["Hide Player Castbar"], C.castbar.player, "hide_zUI", "checkbox")
-			CreateConfig(nil, T["Player Castbar Above"], C.castbar.player, "above", "checkbox")
+            CreateConfig(nil, T["Player Castbar Width"], C.castbar.player, "castbar_width", "text")
+            CreateConfig(nil, T["Player Castbar Height"], C.castbar.player, "castbar_height", "text")
 
 			CreateConfig(nil, T["Target Castbar"], nil, nil, "header")
 			CreateConfig(nil, T["Hide Target Castbar"], C.castbar.target, "hide_zUI", "checkbox")
-			CreateConfig(nil, T["Target Castbar Above"], C.castbar.target, "above", "checkbox")
+            CreateConfig(nil, T["Target Castbar Width"], C.castbar.target, "castbar_width", "text")
+            CreateConfig(nil, T["Target Castbar Height"], C.castbar.target, "castbar_height", "text")
 
+            CreateConfig(nil, T["To move castbar: hold left-shift + click and drag"], nil, nil, "header")
 		end)
 
 		CreateGUIEntry("Nameplates", nil, function()
