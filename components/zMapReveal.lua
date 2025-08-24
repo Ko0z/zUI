@@ -33,11 +33,6 @@ zUI:RegisterComponent("zMapFog", function ()
     zUI.mapreveal:UpdateConfig()
   end)
 
-  local overlayData = setmetatable(zMapOverlayData, {__index = function(t,k)
-    local v = {}
-    rawset(t,k,v)
-    return v
-  end})
   -- HACK: override *known incorrect* data with hard-coded fixes.
   local errata = {
     ["Interface\\WorldMap\\Tirisfal\\BRIGHTWATERLAKE"] = {offsetX={587,584}},
@@ -74,7 +69,14 @@ zUI:RegisterComponent("zMapFog", function ()
     return textureName, textureWidth + 0, textureHeight + 0, offsetX + 0, offsetY + 0, mapPointX + 0, mapPointY + 0
   end
 
-  local function pfWorldMapFrame_Update()
+  local function zWorldMapFrame_Update()
+    -- create metatable if not yet created
+    this.overlayData = this.overlayData or setmetatable(zMapOverlayData, {__index = function(t,k)
+      local v = {}
+      rawset(t,k,v)
+      return v
+    end})
+
     local r,g,b,a = GetStringColor(C.appearance.worldmap.mapreveal_color)
     local mapFileName, textureHeight, textureWidth = GetMapInfo()
 
@@ -90,7 +92,7 @@ zUI:RegisterComponent("zMapFog", function ()
       alreadyknown[textureName] = overlayHash
     end
 
-    local zoneData = overlayData[mapFileName]
+    local zoneData = this.overlayData[mapFileName]
     local textureCount = 0
     local texturePixelWidth, textureFileWidth, texturePixelHeight, textureFileHeight
     for i, hash in ipairs(zoneData) do
@@ -156,10 +158,20 @@ zUI:RegisterComponent("zMapFog", function ()
         end
       end
     end
-    for i = textureCount + 1, NUM_WORLDMAP_OVERLAYS do
-      _G[string.format("%s%s","WorldMapOverlay",i)]:Hide()
-    end
   end
 
-  hooksecurefunc("WorldMapFrame_Update", pfWorldMapFrame_Update, true)
+    -- hook map reveal functions before and after the actual call
+  local zHookWorldMapFrame_Update = _G.WorldMapFrame_Update
+  _G.WorldMapFrame_Update = function(self)
+    -- hide all previously set textures
+    for i = 1, NUM_WORLDMAP_OVERLAYS do
+      _G[string.format("%s%s","WorldMapOverlay",i)]:Hide()
+    end
+
+    -- let the game put its explored tiles on the map
+    zHookWorldMapFrame_Update(self)
+
+    -- let the addon extend it with its own data
+    zWorldMapFrame_Update()
+  end
 end)

@@ -21,6 +21,8 @@ zUI:RegisterComponent("zMap", function ()
 	return ipairs(tmp)
 	end]])()
 
+    zUI.map = {}
+
 	function _G.ToggleWorldMap()
 		if WorldMapFrame:IsShown() then
 			WorldMapFrame:Hide()
@@ -57,6 +59,8 @@ zUI:RegisterComponent("zMap", function ()
 
 
 		UIPanelWindows["WorldMapFrame"] = { area = "center" }
+
+        WorldMapFrame:SetClampedToScreen(true)
 
 		WorldMapFrame:SetScript("OnShow", function()
 			-- default events
@@ -294,4 +298,6 @@ zUI:RegisterComponent("zMap", function ()
 			end
 		end)
 	end)
+
+    zUI.map.loader = zMapLoader
 end)
